@@ -1,0 +1,257 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+DROP SCHEMA IF EXISTS `EC_SUITS` ;
+CREATE SCHEMA IF NOT EXISTS `EC_SUITS` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+SHOW WARNINGS;
+USE `EC_SUITS` ;
+
+-- -----------------------------------------------------
+-- Table `ES_STYLES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_STYLES` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_STYLES` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `STYLE_NAME` VARCHAR(20) NOT NULL ,
+  `STYLE_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.3\nスタイル選択';
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `STYLE_ID_UNIQUE` ON `ES_STYLES` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_CATEGORIES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_CATEGORIES` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_CATEGORIES` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `CATEGORY_NAME` VARCHAR(20) NOT NULL COMMENT 'Top level of category' ,
+  `CATEGORY_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.4\n生地選択';
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `FABRIC_ID_UNIQUE` ON `ES_CATEGORIES` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_SUB_CATEGORIES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_SUB_CATEGORIES` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_SUB_CATEGORIES` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `SUB_CATEGORY_NAME` VARCHAR(20) NOT NULL COMMENT 'Second level of category' ,
+  `SUB_CATEGORY_DESC` VARCHAR(45) NULL ,
+  `CATEGORY_ID` INT NOT NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.4\n生地選択';
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `FABRIC_ID_UNIQUE` ON `ES_SUB_CATEGORIES` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_ATTRIBUTES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_ATTRIBUTES` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_ATTRIBUTES` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `ATTRIBUTE_NAME` VARCHAR(20) NOT NULL COMMENT 'Third level of category' ,
+  `ATTRIBUTE_DESC` VARCHAR(45) NULL ,
+  `SUB_CATEGORY_ID` INT NOT NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.4\n生地選択';
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `FABRIC_ID_UNIQUE` ON `ES_ATTRIBUTES` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_GENDERS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_GENDERS` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_GENDERS` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `GENDER_NAME` VARCHAR(20) NOT NULL ,
+  `GENDER_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.2\n男女選択';
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `GENDER_ID_UNIQUE` ON `ES_GENDERS` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_FABRICS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_FABRICS` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_FABRICS` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `FABRIC_NAME` VARCHAR(50) NOT NULL ,
+  `FABRIC_DESC` VARCHAR(200) NULL ,
+  `FABRIC_PRICE` DECIMAL(9,2) NOT NULL COMMENT 'Price of fabric' ,
+  `ATTRIBUTE_ID` INT NOT NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.4\n生地選択';
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `FABRIC_ID_UNIQUE` ON `ES_FABRICS` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_COLLARS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_COLLARS` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_COLLARS` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `COLLOR_NAME` VARCHAR(25) NULL ,
+  `COLLOR_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `ID_UNIQUE` ON `ES_COLLARS` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_TIES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_TIES` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_TIES` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `TIE_NAME` VARCHAR(25) NULL ,
+  `TIE_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `ID_UNIQUE` ON `ES_TIES` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_CUFFS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_CUFFS` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_CUFFS` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `CUFF_NAME` VARCHAR(25) NULL ,
+  `CUFF_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `ID_UNIQUE` ON `ES_CUFFS` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_POCKETS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_POCKETS` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_POCKETS` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `POCKET_NAME` VARCHAR(25) NULL ,
+  `POCKET_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `ID_UNIQUE` ON `ES_POCKETS` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_BUTTONS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_BUTTONS` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_BUTTONS` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `BUTTON_NAME` VARCHAR(25) NULL ,
+  `BUTTON_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `ID_UNIQUE` ON `ES_BUTTONS` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_SHIRTS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_SHIRTS` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_SHIRTS` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `SHIRT_NAME` VARCHAR(25) NULL ,
+  `SHIRT_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `ID_UNIQUE` ON `ES_SHIRTS` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `ES_SHOES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ES_SHOES` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `ES_SHOES` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `SHOES_NAME` VARCHAR(25) NULL ,
+  `SHOES_DESC` VARCHAR(45) NULL ,
+  PRIMARY KEY (`ID`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `ID_UNIQUE` ON `ES_SHOES` (`ID` ASC) ;
+
+SHOW WARNINGS;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
