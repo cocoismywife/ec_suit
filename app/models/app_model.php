@@ -32,5 +32,6 @@
  * @subpackage    cake.cake.libs.model
  */
 class AppModel extends Model {
-	var $primaryKey = 'ID';
+	var $primaryKey = 'id';
+	var $parent_name = array ();
 }

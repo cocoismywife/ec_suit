@@ -35,7 +35,7 @@
 class AppController extends Controller {
 	function beforeRender() {
 		Configure::write ( 'debug', 0 );
-		if (array_key_exists ( 'prefix', $this->params ) && $this->params ['prefix'] == 'admin') {
+		if (isset ( $this->params ['prefix'] ) && $this->params ['prefix'] == 'admin') {
 			$this->set ( 'model_name', $this->modelClass );
 		} else {
 			$this->layout = 'xml/xml';
@@ -61,6 +61,8 @@ class AppController extends Controller {
 	function view($id = null) {
 		$model = ClassRegistry::init ( $this->modelClass )->findById ( $id );
 		$this->set ( 'model', $model );
+		$this->log ( 'Method: <view>' );
+		$this->log ( $model );
 	}
 	
 	function admin_index() {
@@ -73,13 +75,26 @@ class AppController extends Controller {
 	}
 	
 	function admin_view($id) {
-		ClassRegistry::init ( $this->modelClass )->id = $id;
-		$this->set ( 'model', ClassRegistry::init ( $this->modelClass )->read () );
+		$currentModel = ClassRegistry::init ( $this->modelClass );
+		$currentModel->id = $id;
+		$model = $currentModel->read ();
+		$this->set ( 'model', $model );
+		$this->log ( 'Method: <admin_view>' );
+		$this->log ( $model );
 	}
 	
 	function admin_add() {
-		if (! empty ( $this->data )) {
-			if (ClassRegistry::init ( $this->modelClass )->save ( $this->data )) {
+		$currentModel = ClassRegistry::init ( $this->modelClass );
+		
+		if (empty ( $this->data )) {
+			foreach ( $currentModel->parent_name as $parent_name => $value ) {
+				$parentModel = ClassRegistry::init ( $currentModel->parent_name [$parent_name] );
+				$parentList = $parentModel->find ( 'list' );
+				$this->set ( "parentList", $parentList );
+				$this->log ( $parentList );
+			}
+		} else {
+			if ($currentModel->save ( $this->data )) {
 				$this->Session->setFlash ( 'Your post has been saved.' );
 				$this->redirect ( array ('action' => 'admin_all' ) );
 			}
@@ -87,11 +102,18 @@ class AppController extends Controller {
 	}
 	
 	function admin_edit($id = null) {
-		ClassRegistry::init ( $this->modelClass )->id = $id;
+		$currentModel = ClassRegistry::init ( $this->modelClass );
+		$currentModel->id = $id;
 		if (empty ( $this->data )) {
-			$this->data = ClassRegistry::init ( $this->modelClass )->read ();
+			foreach ( $currentModel->parent_name as $parent_name => $value ) {
+				$parentModel = ClassRegistry::init ( $currentModel->parent_name [$parent_name] );
+				$parentList = $parentModel->find ( 'list' );
+				$this->set ( "parentList", $parentList );
+				$this->log ( $parentList );
+			}
+			$this->data = $currentModel->read ();
 		} else {
-			if (ClassRegistry::init ( $this->modelClass )->save ( $this->data )) {
+			if ($currentModel->save ( $this->data )) {
 				$this->Session->setFlash ( 'Your post has been updated.' );
 				$this->redirect ( array ('action' => 'admin_all' ) );
 			}
@@ -104,5 +126,17 @@ class AppController extends Controller {
 			$this->Session->setFlash ( 'The post with id: ' . $id . ' has been deleted.' );
 			$this->redirect ( array ('action' => 'admin_all' ) );
 		}
+	}
+	
+	function download($id) {
+		//		Configure::write ( 'debug', 0 );
+	//		$file = ClassRegistry::init ( $this->modelClass )->findById ( $id );
+	//		
+	//		header ( 'Content-type: ' . $file ['MyFile'] ['type'] );
+	//		header ( 'Content-length: ' . $file ['MyFile'] ['size'] ); // some people reported problems with this line (see the comments), commenting out this line helped in those cases
+	//		header ( 'Content-Disposition: attachment; filename="' . $file ['MyFile'] ['name'] . '"' );
+	//		echo $file ['MyFile'] ['data'];
+	//		
+	//		exit ();
 	}
 }
