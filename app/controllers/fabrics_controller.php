@@ -1,0 +1,1 @@
+<?phpclass FabricsController extends AppController {	var $helpers = array ('Html', 'Xml', 'Javascript' );	var $components = array ('RequestHandler', 'Session' );		function admin_all() {		$this->log ( $this->modelClass );		$this->_all ();		$this->set ( 'navClass', '1' );	}		function admin_input() {		$this->set ( 'navClass', '2' );	}}
