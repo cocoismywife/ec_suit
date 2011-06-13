@@ -25,49 +25,48 @@ COMMENT = 'Page Seq.3\nスタイル選択';
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `es_categories`
+-- Table `es_big_traceries`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_categories` ;
+DROP TABLE IF EXISTS `es_big_traceries` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_categories` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(20) NOT NULL COMMENT 'Top level of category' ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.4\n生地選択';
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_sub_categories`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_sub_categories` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_sub_categories` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(20) NOT NULL COMMENT 'Second level of category' ,
-  `desc` VARCHAR(45) NULL ,
-  `category_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.4\n生地選択';
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_attributes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_attributes` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_attributes` (
+CREATE  TABLE IF NOT EXISTS `es_big_traceries` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(20) NOT NULL COMMENT 'Third level of category' ,
   `desc` VARCHAR(45) NULL ,
-  `sub_category_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.4\n生地選択';
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `es_small_traceries`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `es_small_traceries` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `es_small_traceries` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(20) NOT NULL COMMENT 'Second level of category' ,
+  `desc` VARCHAR(45) NULL ,
+  `big_tracery_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+COMMENT = 'Page Seq.4\n生地選択';
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `es_colors`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `es_colors` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `es_colors` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(20) NOT NULL COMMENT 'Top level of category' ,
+  `desc` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 COMMENT = 'Page Seq.4\n生地選択';
@@ -99,13 +98,23 @@ DROP TABLE IF EXISTS `es_fabrics` ;
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `es_fabrics` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(50) NOT NULL ,
-  `desc` VARCHAR(200) NULL ,
-  `price` DECIMAL(9,2) NOT NULL COMMENT 'Price of fabric' ,
-  `attribute_id` INT NOT NULL ,
+  `code` VARCHAR(50) NOT NULL COMMENT '生地ID' ,
+  `name` VARCHAR(200) NOT NULL COMMENT '生地名' ,
+  `price` DECIMAL(9,2) NOT NULL COMMENT '値段' ,
+  `color` INT NULL COMMENT '色' ,
+  `big_tracery` INT NULL COMMENT '柄:大カテゴリ' ,
+  `small_tracery` INT NULL COMMENT '柄:小カテゴリ' ,
+  `season` INT NULL COMMENT '季節' ,
+  `big_brand` INT NULL COMMENT 'ブランド:大カテゴリ' ,
+  `small_brand` INT NULL COMMENT 'ブランド:小カテゴリ' ,
+  `remark` TEXT NULL COMMENT '備考' ,
+  `img_id` INT NULL COMMENT '画像ID' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 COMMENT = 'Page Seq.4\n生地選択';
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `code_UNIQUE` ON `es_fabrics` (`code` ASC) ;
 
 SHOW WARNINGS;
 
@@ -325,6 +334,53 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
+-- -----------------------------------------------------
+-- Table `es_seasons`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `es_seasons` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `es_seasons` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NOT NULL ,
+  `desc` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `es_big_brands`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `es_big_brands` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `es_big_brands` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NOT NULL ,
+  `desc` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `es_small_brands`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `es_small_brands` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `es_small_brands` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NOT NULL ,
+  `desc` VARCHAR(45) NULL ,
+  `big_brand_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIG
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

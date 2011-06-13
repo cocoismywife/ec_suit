@@ -37,6 +37,7 @@ class AppController extends Controller {
 		Configure::write ( 'debug', 0 );
 		if (isset ( $this->params ['prefix'] ) && $this->params ['prefix'] == 'admin') {
 			$this->set ( 'model_name', $this->modelClass );
+			$this->layout = 'admin/default';
 		} else {
 			$this->layout = 'xml/xml';
 			$this->set ( 'root', strtolower ( Inflector::pluralize ( $this->modelKey ) ) );
@@ -75,12 +76,12 @@ class AppController extends Controller {
 	}
 	
 	function admin_view($id) {
-		$currentModel = ClassRegistry::init ( $this->modelClass );
-		$currentModel->id = $id;
-		$model = $currentModel->read ();
-		$this->set ( 'model', $model );
-		$this->log ( 'Method: <admin_view>' );
-		$this->log ( $model );
+//		$currentModel = ClassRegistry::init ( $this->modelClass );
+//		$currentModel->id = $id;
+//		$model = $currentModel->read ();
+//		$this->set ( 'model', $model );
+//		$this->log ( 'Method: <admin_view>' );
+//		$this->log ( $model );
 	}
 	
 	function admin_add() {

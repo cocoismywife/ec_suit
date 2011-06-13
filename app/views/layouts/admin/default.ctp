@@ -5,7 +5,7 @@
 <title>仕立館</title>
 <?php echo $this->Html->css('screen', null, array('media' => 'screen', 'title' => 'default')) ?>
 <!--[if IE]>
-<link rel="stylesheet" media="all" type="text/css" href="css/pro_dropline_ie.css" />
+<?php echo $this->Html->css('pro_dropline_ie', null, array('media' => 'screen')) ?>
 <![endif]-->
 
 <!--  jquery core -->
@@ -246,7 +246,7 @@ $(document).pngFix( );
 <div class="nav">
 <div class="table">
 
-<ul class="<?php echo $navClass != '2' && $navClass != '3' ? 'current' : 'select' ?>"><li><?php echo $this->Html->link('<b>生地一覧</b><!--[if IE 7]><!-->', array('action' => 'all'), array('escape' => false));?><!--<![endif]-->
+<ul class="<?php echo $navClass == '1' ? 'current' : 'select' ?>"><li><?php echo $this->Html->link('<b>生地一覧</b><!--[if IE 7]><!-->', array('action' => 'all'), array('escape' => false));?><!--<![endif]-->
 </li>
 </ul>
 
