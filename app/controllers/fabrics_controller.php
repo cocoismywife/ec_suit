@@ -1,7 +1,8 @@
 <?php
 class FabricsController extends AppController {
-	var $helpers = array ('Html', 'Xml', 'Javascript' );
+	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator' );
 	var $components = array ('RequestHandler', 'Session' );
+	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 1, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
 	function admin_all() {
 		$this->log ( $this->modelClass );
@@ -11,6 +12,7 @@ class FabricsController extends AppController {
 	
 	function _all() {
 		$list = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('fields' => array ('id', 'code', 'name' ) ) );
+		$list = $this->paginate ();
 		$this->set ( 'list', $list );
 		$this->log ( $list );
 	}
