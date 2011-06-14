@@ -37,7 +37,9 @@ class AppController extends Controller {
 		Configure::write ( 'debug', 0 );
 		if (isset ( $this->params ['prefix'] ) && $this->params ['prefix'] == 'admin') {
 			$this->set ( 'model_name', $this->modelClass );
-			$this->layout = 'admin/default';
+			if ($this->modelClass == 'Fabric') {
+				$this->layout = 'admin/default';
+			}
 		} else {
 			$this->layout = 'xml/xml';
 			$this->set ( 'root', strtolower ( Inflector::pluralize ( $this->modelKey ) ) );
@@ -76,12 +78,12 @@ class AppController extends Controller {
 	}
 	
 	function admin_view($id) {
-//		$currentModel = ClassRegistry::init ( $this->modelClass );
-//		$currentModel->id = $id;
-//		$model = $currentModel->read ();
-//		$this->set ( 'model', $model );
-//		$this->log ( 'Method: <admin_view>' );
-//		$this->log ( $model );
+		$currentModel = ClassRegistry::init ( $this->modelClass );
+		$currentModel->id = $id;
+		$model = $currentModel->read ();
+		$this->set ( 'model', $model );
+		$this->log ( 'Method: <admin_view>' );
+		$this->log ( $model );
 	}
 	
 	function admin_add() {
@@ -95,7 +97,7 @@ class AppController extends Controller {
 				$this->log ( $parentList );
 			}
 		} else {
-			if ($currentModel->save ( $this->data )) {
+			if ($currentModel->save ( $this->data, false )) {
 				$this->Session->setFlash ( 'Your post has been saved.' );
 				$this->redirect ( array ('action' => 'admin_all' ) );
 			}

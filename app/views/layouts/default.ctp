@@ -36,7 +36,36 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?></h1>
+			<table>
+				<tr>
+					<td colspan="9"><strong>For XML</strong></td>
+				</tr>
+				<tr>
+					<th><?php echo $this->Html->link('Gender', '/genders/all')?></th>
+					<th><?php echo $this->Html->link('Style', '/styles/all')?></th>
+					<th><?php echo $this->Html->link('Collar', '/collars/all')?></th>
+					<th><?php echo $this->Html->link('Pocket', '/pockets/all')?></th>
+					<th><?php echo $this->Html->link('Hem', '/hems/all')?></th>
+					<th><?php echo $this->Html->link('Button', '/buttons/all')?></th>
+					<th><?php echo $this->Html->link('Tie', '/ties/all')?></th>
+					<th><?php echo $this->Html->link('Shirt', '/shirts/all')?></th>
+					<th><?php echo $this->Html->link('Shoes', '/shoes/all')?></th>
+				</tr>
+				<tr>
+					<td colspan="9"><strong>For Administrator</strong></td>
+				</tr>
+				<tr>
+					<th><?php echo $this->Html->link('Gender', '/admin/genders/all')?></th>
+					<th><?php echo $this->Html->link('Style', '/admin/styles/all')?></th>
+					<th><?php echo $this->Html->link('Collar', '/admin/collars/all')?></th>
+					<th><?php echo $this->Html->link('Pocket', '/admin/pockets/all')?></th>
+					<th><?php echo $this->Html->link('Hem', '/admin/hems/all')?></th>
+					<th><?php echo $this->Html->link('Button', '/admin/buttons/all')?></th>
+					<th><?php echo $this->Html->link('Tie', '/admin/ties/all')?></th>
+					<th><?php echo $this->Html->link('Shirt', '/admin/shirts/all')?></th>
+					<th><?php echo $this->Html->link('Shoes', '/admin/shoes/all')?></th>
+				</tr>
+			</table>
 		</div>
 		<div id="content">
 			<?php echo $this->Session->flash(); ?>

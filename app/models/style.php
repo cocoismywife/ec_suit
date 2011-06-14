@@ -2,7 +2,7 @@
 class Style extends AppModel {
 	var $name = 'EsStyle';
 	
-	public $validate = array ('name' => array ('rule' => 'notEmpty', 'message' => 'Style Name is required' ) );
+	var $validate = array ('name' => array ('rule' => 'notEmpty', 'message' => 'Style Name is required' ), 'upload_file_url' => false );
 	
 	var $actsAs = array (// models/behaviors/meio_upload.php
 	'MeioUpload' => array (

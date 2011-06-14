@@ -14,14 +14,14 @@
 
 <?php foreach ($list as $item): ?>
 	<tr>
-		<td><?php echo $item[$model_name]['ID']; ?></td>
-		<td><?php echo $this->Html->link($item[$model_name][strtoupper(($model_name)).'_NAME'], array('action' => 'view', $item[$model_name]['ID']));?></td>
-		<td><?php echo $item[$model_name][strtoupper(($model_name)).'_DESC']; ?></td>
+		<td><?php echo $item[$model_name]['id']; ?></td>
+		<td><?php echo $this->Html->link($item[$model_name]['name'], array('action' => 'view', $item[$model_name]['id']));?></td>
+		<td><?php echo $item[$model_name]['desc']; ?></td>
         <td>
-			<?php echo $this->Html->link('Edit', array('action' => 'edit', $item[$model_name]['ID']));?>
+			<?php echo $this->Html->link('Edit', array('action' => 'edit', $item[$model_name]['id']));?>
 			<?php echo $this->Html->link(
 				'Delete', 
-				array('action' => 'delete', $item[$model_name]['ID']), 
+				array('action' => 'delete', $item[$model_name]['id']), 
 				null, 
 				'Are you sure?'
 			)?>
