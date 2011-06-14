@@ -1,4 +1,1 @@
-<?php
-class Fabric extends AppModel {
-	var $name = 'EsFabric';
-}
+<?phpclass Fabric extends AppModel {	var $name = 'EsFabric';		public $validate = array (		'code' => array ('rule' => 'notEmpty', 'message' => '生地IDを正しく入力してください。' ),		'name' => array ('rule' => 'notEmpty', 'message' => '生地名を正しく入力してください。' ), 		'price' => array (			'rule-1' => array('rule' => 'numeric', 'message' => '数字を入力してください。' ),			'rule-2' => array('rule' => 'notEmpty', 'message' => '値段を正しく入力してください。' )		)	);}
