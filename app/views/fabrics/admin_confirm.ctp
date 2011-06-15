@@ -61,28 +61,34 @@
 </tr><tr>
 <th valign="top">色:</th>
 <td>	
-<input type="text" class="inp-form" value="グレー、チャコール" readonly="readonly" />
+<?php echo $this->Form->input('color_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
+<?php echo $this->Form->input('color_id', array('type' => 'hidden'))?>
 </td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">柄:</th>
-<td>	
-<input type="text" class="inp-form" value="ストライプ" readonly="readonly" />
+<td>
+<?php echo $this->Form->input('tracery_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
+<?php echo $this->Form->input('big_tracery_id', array('type' => 'hidden'))?>
+<?php echo $this->Form->input('small_tracery_id', array('type' => 'hidden'))?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">季節:</th>
 <td>	
-<input type="text" class="inp-form" value="春夏" readonly="readonly" />
+<?php echo $this->Form->input('season_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
+<?php echo $this->Form->input('season_id', array('type' => 'hidden'))?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ブランド:</th>
 <td>	
-<input type="text" class="inp-form" value="CANONICO" readonly="readonly" />
+<?php echo $this->Form->input('brand_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
+<?php echo $this->Form->input('big_brand_id', array('type' => 'hidden'))?>
+<?php echo $this->Form->input('small_brand_id', array('type' => 'hidden'))?>
 </td>
 <td></td>
 </tr> 

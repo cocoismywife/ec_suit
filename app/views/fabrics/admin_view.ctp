@@ -25,7 +25,7 @@
 <tr valign="top">
 <td>
 
-<?php echo $this->Form->create($model_name, array('action' => 'delete', 'type' => 'file'))?>
+<?php echo $this->Form->create()?>
 <!-- start id-form -->
 <table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 <tr>
@@ -49,28 +49,28 @@
 <tr>
 <th valign="top">色:</th>
 <td>	
-<input type="text" class="inp-form" value="グレー、チャコール" readonly="readonly" />
+<?php echo $this->Form->input('color_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
 </td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">柄:</th>
 <td>	
-<input type="text" class="inp-form" value="ストライプ" readonly="readonly" />
+<?php echo $this->Form->input('tracery_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">季節:</th>
 <td>	
-<input type="text" class="inp-form" value="春夏" readonly="readonly" />
+<?php echo $this->Form->input('season_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ブランド:</th>
 <td>	
-<input type="text" class="inp-form" value="CANONICO" readonly="readonly" />
+<?php echo $this->Form->input('brand_name', array('label' => false, 'class' => 'inp-form', 'readonly' => true))?>
 </td>
 <td></td>
 </tr> 
@@ -89,8 +89,7 @@
 <tr>
 <th>&nbsp;</th>
 <td valign="top">
-<a href="#"><input type="reset" value="" class="form-del"  /></a>
-<?php echo $this->Form->reset('', array('class' => 'form-del'))?>
+<?php echo $this->Html->link($this->Form->button('', array('class' => 'form-del')), array('action' => 'delete', $this->data[$model_name]['id']), array('title' => '削除する', 'escape' => false), 'この生地を削除しますか?')?>
 </td>
 <td></td>
 </tr>

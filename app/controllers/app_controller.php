@@ -79,14 +79,14 @@ class AppController extends Controller {
 		$this->_all ();
 	}
 	
-	function admin_view($id) {
-		$currentModel = ClassRegistry::init ( $this->modelClass );
-		$currentModel->id = $id;
-		$model = $currentModel->read ();
-		$this->set ( 'model', $model );
-		$this->log ( 'Method: <admin_view>' );
-		$this->log ( $model );
-	}
+//	function admin_view($id) {
+//		$currentModel = ClassRegistry::init ( $this->modelClass );
+//		$currentModel->id = $id;
+//		$model = $currentModel->read ();
+//		$this->set ( 'model', $model );
+//		$this->log ( 'Method: <admin_view>' );
+//		$this->log ( $model );
+//	}
 	
 	function admin_add() {
 		$currentModel = ClassRegistry::init ( $this->modelClass );
