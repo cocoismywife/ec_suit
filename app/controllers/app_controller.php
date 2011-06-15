@@ -37,7 +37,9 @@ class AppController extends Controller {
 		Configure::write ( 'debug', 0 );
 		if (isset ( $this->params ['prefix'] ) && $this->params ['prefix'] == 'admin') {
 			$this->set ( 'model_name', $this->modelClass );
-			if ($this->modelClass == 'Fabric') {
+			if ($this->params ['isAjax']) {
+				$this->layout = 'empty';
+			} else if ($this->modelClass == 'Fabric') {
 				$this->layout = 'admin/default';
 			}
 		} else {

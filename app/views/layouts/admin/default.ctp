@@ -9,7 +9,7 @@
 <![endif]-->
 
 <!--  jquery core -->
-<?php echo $javascript->link(array('jquery/jquery-1.4.1.min'), true) ?>
+<?php echo $javascript->link(array('jquery/jquery-1.4.2.min'), true) ?>
 
 <!--  checkbox styling script -->
 <?php echo $javascript->link(array('jquery/ui.core', 'jquery/ui.checkbox', 'jquery/jquery.bind'), true) ?>

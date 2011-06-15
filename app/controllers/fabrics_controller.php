@@ -1,6 +1,6 @@
 <?php
 class FabricsController extends AppController {
-	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator' );
+	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax' );
 	var $components = array ('RequestHandler', 'Session' );
 	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 1, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
@@ -33,11 +33,12 @@ class FabricsController extends AppController {
 			//foreach ( $currentModel->parent_name as $parent_name => $value ) {
 			$parentModel = ClassRegistry::init ( $currentModel->parent_name [$i] );
 			$parentList = $parentModel->find ( 'list' );
-			$this->set ( 'parentList'.$i, $parentList );
+			$this->set ( 'parentList' . $i, $parentList );
 			$this->log ( $parentList );
 		}
 		
 		if (! empty ( $this->data )) {
+			$this->log ( $this->data );
 			$currentModel->set ( $this->data );
 			if ($currentModel->validates ()) {
 				$this->render ( 'admin_confirm' );
@@ -77,6 +78,18 @@ class FabricsController extends AppController {
 			$this->log ( $this->data );
 		} else {
 			$this->requestAction ( 'input' );
+		}
+	}
+	
+	function admin_update_small_traceries() {
+		$this->log ( 'update_select' );
+		$this->log ( $this->data );
+		$this->log ( $this->params );
+		if (! empty ( $this->data ['Fabric'] ['big_tracery_id'] )) {
+			$big_tracery_id = ( int ) $this->data ['Fabric'] ['big_tracery_id'];
+			$options = ClassRegistry::init ( 'SmallTracery' )->find ( 'list', array ('conditions' => array ('SmallTracery.big_tracery_id' => $big_tracery_id ) ) );
+			$this->set ( 'options', $options );
+			$this->log ( $options );
 		}
 	}
 }

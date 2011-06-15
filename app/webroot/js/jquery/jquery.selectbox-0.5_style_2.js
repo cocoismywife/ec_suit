@@ -157,6 +157,7 @@ jQuery.SelectBox = function(selectobj, options) {
 		var ar = (''+li.id).split('_');
 		var el = ar[ar.length-1];
 		$select.val(el);
+		$select.trigger('change');
 		$input.val($(li).html());
 		return true;
 	}
