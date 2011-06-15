@@ -2,7 +2,7 @@
 class FabricsController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax' );
 	var $components = array ('RequestHandler', 'Session' );
-	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 1, 'page' => 1, 'order' => array ('id' => 'desc' ) );
+	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
 	function admin_all() {
 		$this->log ( $this->modelClass );
@@ -12,6 +12,11 @@ class FabricsController extends AppController {
 	
 	function _all() {
 		$list = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('fields' => array ('id', 'code', 'name' ) ) );
+		if ($this->Session->check ( 'limit' )) {
+			$this->paginate ['limit'] = $this->Session->read ( 'limit' );
+		} else {
+			$this->paginate ['limit'] = 5;
+		}
 		$list = $this->paginate ();
 		$this->set ( 'list', $list );
 		$this->log ( $list );
@@ -30,9 +35,8 @@ class FabricsController extends AppController {
 	function admin_page_limit() {
 		$numberOfRow = $this->data ['number_row'];
 		if ($numberOfRow != '') {
-			$this->paginate ['limit'] = $numberOfRow;
+			$this->Session->write ( 'limit', $numberOfRow );
 		}
-		$this->log ( $this->paginate );
 	}
 	
 	function admin_input() {
