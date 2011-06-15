@@ -82,12 +82,24 @@ class FabricsController extends AppController {
 	}
 	
 	function admin_update_small_traceries() {
-		$this->log ( 'update_select' );
+		$this->log ( 'admin_update_small_traceries' );
 		$this->log ( $this->data );
 		$this->log ( $this->params );
 		if (! empty ( $this->data ['Fabric'] ['big_tracery_id'] )) {
 			$big_tracery_id = ( int ) $this->data ['Fabric'] ['big_tracery_id'];
 			$options = ClassRegistry::init ( 'SmallTracery' )->find ( 'list', array ('conditions' => array ('SmallTracery.big_tracery_id' => $big_tracery_id ) ) );
+			$this->set ( 'options', $options );
+			$this->log ( $options );
+		}
+	}
+	
+	function admin_update_small_brands() {
+		$this->log ( 'admin_update_small_traceries' );
+		$this->log ( $this->data );
+		$this->log ( $this->params );
+		if (! empty ( $this->data ['Fabric'] ['big_brand_id'] )) {
+			$big_brand_id = ( int ) $this->data ['Fabric'] ['big_brand_id'];
+			$options = ClassRegistry::init ( 'SmallBrand' )->find ( 'list', array ('conditions' => array ('SmallBrand.big_brand_id' => $big_brand_id ) ) );
 			$this->set ( 'options', $options );
 			$this->log ( $options );
 		}
