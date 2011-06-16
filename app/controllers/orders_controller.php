@@ -62,25 +62,20 @@ class OrdersController extends AppController {
 	function admin_price_range($price) {
 	}
 	
-	function admin_input() {
-		$this->set ( 'navClass', '2' );
+	function admin_add() {
 		$currentModel = ClassRegistry::init ( $this->modelClass );
 		
-		for($i = 0, $size = sizeof ( $currentModel->parent_name ); $i < $size; ++ $i) {
-			//foreach ( $currentModel->parent_name as $parent_name => $value ) {
-			$parentModel = ClassRegistry::init ( $currentModel->parent_name [$i] );
-			$parentList = $parentModel->find ( 'list' );
-			$this->set ( 'parentList' . $i, $parentList );
-			$this->log ( $parentList );
-		}
-		
-		if (! empty ( $this->data )) {
-			$this->log ( $this->data );
-			$currentModel->set ( $this->data );
-			if ($currentModel->validates ()) {
-				$this->get_name_of_select ();
-				$this->render ( 'admin_confirm' );
-				return;
+		if (empty ( $this->data )) {
+			for($i = 0, $size = sizeof ( $currentModel->parent_name ); $i < $size; ++ $i) {
+				$parentModel = ClassRegistry::init ( $currentModel->parent_name [$i] );
+				$parentList = $parentModel->find ( 'list' );
+				$this->set ( 'parentList' . $i, $parentList );
+				$this->log ( $parentList );
+			}
+		} else {
+			if ($currentModel->save ( $this->data, false )) {
+				$this->Session->setFlash ( 'Your post has been saved.' );
+				$this->redirect ( array ('action' => 'admin_all' ) );
 			}
 		}
 	}

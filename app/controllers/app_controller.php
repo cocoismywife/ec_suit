@@ -37,9 +37,9 @@ class AppController extends Controller {
 		Configure::write ( 'debug', 0 );
 		if (isset ( $this->params ['prefix'] ) && $this->params ['prefix'] == 'admin') {
 			$this->set ( 'model_name', $this->modelClass );
-			if ($this->params ['isAjax']) {
+			if (isset ( $this->params ['isAjax'] ) && $this->params ['isAjax']) {
 				$this->layout = 'empty';
-			} else if ($this->modelClass == 'Fabric' || $this->modelClass == 'Order') {
+			} else if ($this->modelClass == 'Fabric' && ($this->modelClass == 'Order' && $this->params ['action'] == 'action_all')) {
 				$this->layout = 'admin/default';
 			}
 		} else {
@@ -79,15 +79,16 @@ class AppController extends Controller {
 		$this->_all ();
 	}
 	
-//	function admin_view($id) {
-//		$currentModel = ClassRegistry::init ( $this->modelClass );
-//		$currentModel->id = $id;
-//		$model = $currentModel->read ();
-//		$this->set ( 'model', $model );
-//		$this->log ( 'Method: <admin_view>' );
-//		$this->log ( $model );
-//	}
+	//	function admin_view($id) {
+	//		$currentModel = ClassRegistry::init ( $this->modelClass );
+	//		$currentModel->id = $id;
+	//		$model = $currentModel->read ();
+	//		$this->set ( 'model', $model );
+	//		$this->log ( 'Method: <admin_view>' );
+	//		$this->log ( $model );
+	//	}
 	
+
 	function admin_add() {
 		$currentModel = ClassRegistry::init ( $this->modelClass );
 		
