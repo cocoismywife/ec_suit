@@ -39,7 +39,7 @@ class AppController extends Controller {
 			$this->set ( 'model_name', $this->modelClass );
 			if ($this->params ['isAjax']) {
 				$this->layout = 'empty';
-			} else if ($this->modelClass == 'Fabric') {
+			} else if ($this->modelClass == 'Fabric' || $this->modelClass == 'Order') {
 				$this->layout = 'admin/default';
 			}
 		} else {

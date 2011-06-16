@@ -248,26 +248,23 @@ $(document).pngFix( );
 <div class="nav">
 <div class="table">
 
-<ul class="<?php echo $navClass == '1' ? 'current' : 'select' ?>"><li><?php echo $this->Html->link('<b>生地一覧</b><!--[if IE 7]><!-->', array('action' => 'all'), array('escape' => false));?><!--<![endif]-->
+<ul class="<?php echo $navClass == '1' ? 'current' : 'select' ?>"><li><?php echo $this->Html->link('<b>生地一覧</b><!--[if IE 7]><!-->', array('controller' => 'fabrics', 'action' => 'all'), array('escape' => false));?><!--<![endif]-->
 </li>
 </ul>
-
 <div class="nav-divider">&nbsp;</div>
 
-<ul class="<?php echo $navClass == '2' ? 'current' : 'select' ?>"><li><?php echo $this->Html->link('<b>生地登録</b><!--[if IE 7]><!-->', array('action' => 'input'), array('escape' => false));?><!--<![endif]-->
+<ul class="<?php echo $navClass == '2' ? 'current' : 'select' ?>"><li><?php echo $this->Html->link('<b>生地登録</b><!--[if IE 7]><!-->', array('controller' => 'fabrics', 'action' => 'input'), array('escape' => false));?><!--<![endif]-->
 <!--[if lte IE 6]><table><tr><td><![endif]-->
 <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 </li>
 </ul>
-
 <div class="nav-divider">&nbsp;</div>
 
-<ul class="select"><li><a href="order.html"><b>注文一覧</b><!--[if IE 7]><!--></a><!--<![endif]-->
+<ul class="<?php echo $navClass == '3' ? 'current' : 'select' ?>"><li><?php echo $this->Html->link('<b>注文一覧</b><!--[if IE 7]><!-->', array('controller' => 'orders', 'action' => 'all'), array('escape' => false));?><!--<![endif]-->
 <!--[if lte IE 6]><table><tr><td><![endif]-->
 <!--[if lte IE 6]></td></tr></table></a><![endif]-->
 </li>
 </ul>
-
 <div class="nav-divider">&nbsp;</div>
 
 <div class="clear"></div>
