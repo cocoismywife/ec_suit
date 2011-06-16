@@ -181,23 +181,25 @@ $(document).pngFix( );
 
 <!--  start top-search -->
 <div id="top-search">
+<?php echo $this->Form->create($model_name, array('action' => 'query'))?>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><input type="text" value="Search" onblur="if (this.value=='') { this.value='Search'; }" onfocus="if (this.value=='Search') { this.value=''; }" class="top-search-inp" /></td>
+<td>
+<?php echo $this->Form->input('query_content', array('label' => false, 'class' => 'top-search-inp', 'value' => 'Search', 'onblur' => 'if (this.value=="") { this.value="Search"; }', 'onfocus' => 'if (this.value=="Search") { this.value=""; }'))?>
+</td>
 <td>
 
-<select  class="styledselect">
-<option value="">選択してください</option>
-<option value="">生地</option>
-<option value="">注文</option>
-</select> 
-
+<?php 
+	$option = array('code'=>'生地No','name'=>'生地名称', 'price'=>'価格', 'full_name'=>'氏名', 'full_name_kana'=>'フリガナ', 'address'=>'住所', 'mobile_number'=>'電話番号', 'email'=>'メールアドレス');
+	echo $this->Form->input('query_condition', array('id' => 'query_condition', 'label'=>false, 'type'=>'select', 'empty'=>'選択してください', 'options'=>$option, 'class'=>'styledselect') );
+?>
 </td>
 <td>
 <?php echo $form->submit('/images/shared/top_search_btn.gif'); ?>
 </td>
 </tr>
 </table>
+<?php echo $this->Form->end()?>
 </div>
 <!--  end top-search -->
 <div class="clear"></div>

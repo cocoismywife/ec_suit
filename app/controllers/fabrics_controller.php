@@ -10,17 +10,16 @@ class FabricsController extends AppController {
 		$this->set ( 'navClass', '1' );
 	}
 	
-	function _all() {
-		$list = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('fields' => array ('id', 'code', 'name' ) ) );
+	function _all($condition = array()) {
+		//		$list = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('fields' => array ('id', 'code', 'name' ) ) );
 		if ($this->Session->check ( 'limit' )) {
 			$this->paginate ['limit'] = $this->Session->read ( 'limit' );
 		} else {
 			$this->paginate ['limit'] = 5;
 		}
-		$list = $this->paginate ();
+		$list = $this->paginate ( null, null, $condition );
 		$this->set ( 'list', $list );
 		$this->log ( $list );
-		$this->log ( $this->paginate );
 	}
 	
 	function admin_view($id) {
@@ -37,6 +36,25 @@ class FabricsController extends AppController {
 		if ($numberOfRow != '') {
 			$this->Session->write ( 'limit', $numberOfRow );
 		}
+	}
+	
+	function admin_query() {
+		$this->log ( $this->data );
+		$condition = $this->data [$this->modelClass] ['query_condition'];
+		$content = $this->data [$this->modelClass] ['query_content'];
+		switch ($condition) {
+			case "code" :
+				$this->_all ( array ('Fabric.code LIKE' => '%' . $content . '%' ) );
+			case "name" :
+			case "price" :
+			case "full_name" :
+			case "full_name_kana" :
+			case "address" :
+			case "mobile_number" :
+			case "email" :
+		}
+		$this->render ( 'admin_all' );
+		return;
 	}
 	
 	function admin_input() {
