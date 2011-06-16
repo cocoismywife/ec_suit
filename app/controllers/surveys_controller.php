@@ -9,7 +9,7 @@ class SurveysController extends AppController {
 		if (empty ( $this->data )) {
 			$list = $currentModel->find ( 'list' );
 			$this->set ( 'list', $list );
-			
+				
 			$questions = ClassRegistry::init ( 'Question' )->find ( 'list' );
 			$this->set ( 'questions', $questions );
 		} else {
