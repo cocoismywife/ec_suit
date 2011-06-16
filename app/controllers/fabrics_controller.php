@@ -17,7 +17,7 @@ class FabricsController extends AppController {
 		} else {
 			$this->paginate ['limit'] = 5;
 		}
-		$list = $this->paginate ( null, null, $condition );
+		$list = $this->paginate ( null, $condition );
 		$this->set ( 'list', $list );
 		$this->log ( $list );
 	}
@@ -46,6 +46,7 @@ class FabricsController extends AppController {
 			case "code" :
 				$this->_all ( array ('Fabric.code LIKE' => '%' . $content . '%' ) );
 			case "name" :
+				$this->_all ( array ('Fabric.name LIKE' => '%' . $content . '%' ) );
 			case "price" :
 			case "full_name" :
 			case "full_name_kana" :
@@ -53,8 +54,12 @@ class FabricsController extends AppController {
 			case "mobile_number" :
 			case "email" :
 		}
+		$this->set ( 'navClass', '1' );
 		$this->render ( 'admin_all' );
 		return;
+	}
+	
+	function admin_price_range($price) {
 	}
 	
 	function admin_input() {

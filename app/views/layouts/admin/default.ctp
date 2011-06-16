@@ -185,7 +185,7 @@ $(document).pngFix( );
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
-<?php echo $this->Form->input('query_content', array('label' => false, 'class' => 'top-search-inp', 'value' => 'Search', 'onblur' => 'if (this.value=="") { this.value="Search"; }', 'onfocus' => 'if (this.value=="Search") { this.value=""; }'))?>
+<?php echo $this->Form->input('query_content', array('label' => false, 'class' => 'top-search-inp', 'default' => 'Search', 'onblur' => 'if (this.value=="") { this.value="Search"; }', 'onfocus' => 'if (this.value=="Search") { this.value=""; }'))?>
 </td>
 <td>
 
