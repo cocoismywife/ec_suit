@@ -55,6 +55,8 @@ class AppController extends Controller {
 	
 	function all() {
 		$this->_all ();
+		$this->render ( 'index' );
+		return;
 	}
 	
 	function _all() {
@@ -75,20 +77,20 @@ class AppController extends Controller {
 	}
 	
 	function admin_all() {
-		$this->log ( $this->modelClass );
 		$this->_all ();
+		$this->render ( 'admin_index' );
+		return;
 	}
 	
-	//	function admin_view($id) {
-	//		$currentModel = ClassRegistry::init ( $this->modelClass );
-	//		$currentModel->id = $id;
-	//		$model = $currentModel->read ();
-	//		$this->set ( 'model', $model );
-	//		$this->log ( 'Method: <admin_view>' );
-	//		$this->log ( $model );
-	//	}
+	function admin_view($id) {
+		$currentModel = ClassRegistry::init ( $this->modelClass );
+		$currentModel->id = $id;
+		$model = $currentModel->read ();
+		$this->set ( 'model', $model );
+		$this->log ( 'Method: <admin_view>' );
+		$this->log ( $model );
+	}
 	
-
 	function admin_add() {
 		$currentModel = ClassRegistry::init ( $this->modelClass );
 		
