@@ -2,7 +2,7 @@
 class OrdersController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax' );
 	var $components = array ('RequestHandler', 'Session' );
-	var $paginate = array ('fields' => array ('id', 'first_name', 'last_name' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
+	var $paginate = array ('fields' => array ('id', 'first_name', 'last_name', 'email', 'purchase_date'), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
 	function admin_all() {
 		$this->log ( $this->modelClass );

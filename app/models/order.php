@@ -4,7 +4,8 @@ class Order extends AppModel {
 	var $recursive = 4;
 	var $hasOne = array (
 		'OrderDetail' => array (
-			'foreignKey' => 'order_id' 
+			'foreignKey' => 'order_id',
+			'dependent'    => true
 	) );
 	// var $belongsTo = array ('Survey' );
 	var $hasMany = array (
