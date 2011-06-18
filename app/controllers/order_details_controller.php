@@ -1,5 +1,5 @@
 <?php
-class OrdersController extends AppController {
+class OrderDetailsController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax' );
 	var $components = array ('RequestHandler', 'Session' );
 	var $paginate = array ('fields' => array ('id', 'first_name', 'last_name' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
@@ -26,8 +26,9 @@ class OrdersController extends AppController {
 		$currentModel = ClassRegistry::init ( $this->modelClass );
 		$currentModel->id = $id;
 		$this->data = $currentModel->read ();
-		//		$this->get_name_of_select ();
-		$this->log ( $this->data );
+		$this->get_name_of_select ();
+		$this->render ( 'admin_view' );
+		return;
 	}
 	
 	function admin_page_limit() {
@@ -65,34 +66,15 @@ class OrdersController extends AppController {
 		$currentModel = ClassRegistry::init ( $this->modelClass );
 		
 		if (empty ( $this->data )) {
-			for($i = 0, $size = sizeof ( ClassRegistry::init ( 'OrderDetail' )->parent_name ); $i < $size; ++ $i) {
-				$parentModel = ClassRegistry::init ( ClassRegistry::init ( 'OrderDetail' )->parent_name [$i] );
+			for($i = 0, $size = sizeof ( $currentModel->parent_name ); $i < $size; ++ $i) {
+				$parentModel = ClassRegistry::init ( $currentModel->parent_name [$i] );
 				$parentList = $parentModel->find ( 'list' );
 				$this->set ( 'parentList' . $i, $parentList );
 				$this->log ( $parentList );
 			}
-			
-			$survey = ClassRegistry::init ( 'Survey' )->findByName ( 'Default' );
-			$this->set ( 'survey', $survey );
-			$this->log ( $survey );
 		} else {
-			$this->log ( $this->data );
-			$order = $currentModel->save ( $this->data );
-			if (! empty ( $order )) {
-				// save order detail
-				$this->data ['OrderDetail'] ['order_id'] = $currentModel->id;
-				$currentModel->OrderDetail->save ( $this->data );
-				
-				// save survey answer
-				for($i = 0; $i < sizeof ( $this->data ['Question'] ); $i ++) {
-					$this->data ['Answer'] [$i] ['order_id'] = $currentModel->id;
-					$this->data ['Answer'] [$i] ['question_id'] = $this->data ['Question'] [$i] ['id'];
-				}
-				$currentModel->Answer->saveAll ( $this->data ['Answer'] );
+			if ($currentModel->save ( $this->data, false )) {
 				$this->Session->setFlash ( 'Your post has been saved.' );
-				
-				$this->log ( $this->data );
-				
 				$this->redirect ( array ('action' => 'admin_all' ) );
 			}
 		}

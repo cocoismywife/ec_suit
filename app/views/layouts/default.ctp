@@ -43,6 +43,7 @@
 				<tr>
 					<th><?php echo $this->Html->link('Gender', '/genders/all')?></th>
 					<th><?php echo $this->Html->link('Style', '/styles/all')?></th>
+					<th><?php echo $this->Html->link('Fabric', '/fabrics/all')?></th>
 					<th><?php echo $this->Html->link('Collar', '/collars/all')?></th>
 					<th><?php echo $this->Html->link('Pocket', '/pockets/all')?></th>
 					<th><?php echo $this->Html->link('Hem', '/hems/all')?></th>

@@ -9,24 +9,30 @@ class Question extends AppModel {
             'order'    => 'Option.id ASC',
             'dependent' => true
         )
+//        , 'Answer' => array (
+//			'className' => 'Answer', 
+//			'foreignKey' => 'question_id', 
+//			'order' => 'Answer.id ASC', 
+//			'dependent' => true 
+//		)
     );  
 	
-	var $hasAndBelongsToMany = array(
-        'Survey' =>
-            array(
-                'className'              => 'Survey',
-                'joinTable'              => 'questions_surveys',
-                'foreignKey'             => 'question_id',
-                'associationForeignKey'  => 'survey_id',
-                'unique'                 => true,
-                'conditions'             => '',
-                'fields'                 => '',
-                'order'                  => '',
-                'limit'                  => '',
-                'offset'                 => '',
-                'finderQuery'            => '',
-                'deleteQuery'            => '',
-                'insertQuery'            => ''
-            )
-    );
+//	var $hasAndBelongsToMany = array(
+//        'Survey' =>
+//            array(
+//                'className'              => 'Survey',
+//                'joinTable'              => 'questions_surveys',
+//                'foreignKey'             => 'question_id',
+//                'associationForeignKey'  => 'survey_id',
+//                'unique'                 => true,
+//                'conditions'             => '',
+//                'fields'                 => '',
+//                'order'                  => '',
+//                'limit'                  => '',
+//                'offset'                 => '',
+//                'finderQuery'            => '',
+//                'deleteQuery'            => '',
+//                'insertQuery'            => ''
+//            )
+//    );
 }
