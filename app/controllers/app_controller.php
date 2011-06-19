@@ -147,4 +147,41 @@ class AppController extends Controller {
 	//		
 	//		exit ();
 	}
+	
+	function admin_query() {
+		$this->log ( $this->data );
+		$condition = $this->data [$this->modelClass] ['query_condition'];
+		$content = $this->data [$this->modelClass] ['query_content'];
+		switch ($condition) {
+			case "code" :
+				$this->set ( 'navClass', '1' );
+				$this->viewPath = 'fabrics';
+				$this->_all ( array ('code LIKE' => '%' . $content . '%' ) );
+				break;
+			case "name" :
+				$this->set ( 'navClass', '1' );
+				$this->viewPath = 'fabrics';
+				$this->_all ( array ('name LIKE' => '%' . $content . '%' ) );
+				break;
+			case "price" :
+				break;
+			case "full_name" :
+				break;
+			case "full_name_kana" :
+				break;
+			case "address" :
+				$this->set ( 'navClass', '3' );
+				$this->viewPath = 'orders';
+				$orderController = ClassRegistry::init ( 'Order' )->_all ( array ('Order.address LIKE' => '%' . $content . '%' ) );
+				$this->set ( compact ( 'orderController' ) );
+				break;
+			case "mobile_number" :
+				break;
+			case "email" :
+				break;
+		}
+		
+		$this->render ( 'admin_all' );
+		return;
+	}
 }

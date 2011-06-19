@@ -38,30 +38,6 @@ class FabricsController extends AppController {
 		}
 	}
 	
-	function admin_query() {
-		$this->log ( $this->data );
-		$condition = $this->data [$this->modelClass] ['query_condition'];
-		$content = $this->data [$this->modelClass] ['query_content'];
-		switch ($condition) {
-			case "code" :
-				$this->_all ( array ('Fabric.code LIKE' => '%' . $content . '%' ) );
-			case "name" :
-				$this->_all ( array ('Fabric.name LIKE' => '%' . $content . '%' ) );
-			case "price" :
-			case "full_name" :
-			case "full_name_kana" :
-			case "address" :
-			case "mobile_number" :
-			case "email" :
-		}
-		$this->set ( 'navClass', '1' );
-		$this->render ( 'admin_all' );
-		return;
-	}
-	
-	function admin_price_range($price) {
-	}
-	
 	function admin_input() {
 		$this->set ( 'navClass', '2' );
 		$currentModel = ClassRegistry::init ( $this->modelClass );
@@ -179,5 +155,30 @@ class FabricsController extends AppController {
 			$this->set ( 'options', $options );
 			$this->log ( $options );
 		}
+	}
+	
+	function query($categoryType, $categoryId, $subcategoryId = null) {
+		Configure::write ( 'debug', 2 );
+		switch ($categoryType) {
+			case 'color' :
+				$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('color_id' => $categoryId ) ) );
+				break;
+			case 'tracery' :
+				$model = array ();
+				if ($subcategoryId != null) {
+					$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('Fabric.big_tracery_id' => $categoryId, 'Fabric.small_tracery_id' => $subcategoryId ) ) );
+				}
+				break;
+			case 'season' :
+				$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('season_id' => $categoryId ) ) );
+				break;
+			case 'brand' :
+				$model = array ();
+				if ($subcategoryId != null) {
+					$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('Fabric.big_brand_id' => $categoryId, 'Fabric.small_brand_id' => $subcategoryId ) ) );
+				}
+				break;
+		}
+		$this->set ( 'model', $model );
 	}
 }
