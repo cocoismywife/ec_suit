@@ -59,10 +59,10 @@ $('.styledselect_pages').selectbox({ inputClass: "styledselect_pages" });
 <script type="text/javascript" charset="utf-8">
 $(function() {
 $("input.file_1").filestyle({ 
-image: "images/forms/choose-file.gif",
-imageheight : 21,
+image: "../../images/forms/upload_file.gif",
+imageheight : 29,
 imagewidth : 78,
-width : 310
+width : 300
 });
 });
 </script>
@@ -195,7 +195,7 @@ $(document).pngFix( );
 ?>
 </td>
 <td>
-<?php echo $form->submit('/images/shared/top_search_btn.gif'); ?>
+<?php echo $this->Form->submit('/images/shared/top_search_btn.gif'); ?>
 </td>
 </tr>
 </table>
