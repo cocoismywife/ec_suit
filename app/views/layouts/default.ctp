@@ -47,6 +47,7 @@
 					<th><?php echo $this->Html->link('Collar', '/collars/all')?></th>
 					<th><?php echo $this->Html->link('Pocket', '/pockets/all')?></th>
 					<th><?php echo $this->Html->link('Hem', '/hems/all')?></th>
+					<th><?php echo $this->Html->link('Lining', '/linings/all')?></th>
 					<th><?php echo $this->Html->link('Button', '/buttons/all')?></th>
 					<th><?php echo $this->Html->link('Tie', '/ties/all')?></th>
 					<th><?php echo $this->Html->link('Shirt', '/shirts/all')?></th>
@@ -61,6 +62,7 @@
 					<th><?php echo $this->Html->link('Collar', '/admin/collars/all')?></th>
 					<th><?php echo $this->Html->link('Pocket', '/admin/pockets/all')?></th>
 					<th><?php echo $this->Html->link('Hem', '/admin/hems/all')?></th>
+					<th><?php echo $this->Html->link('Lining', '/admin/linings/all')?></th>
 					<th><?php echo $this->Html->link('Button', '/admin/buttons/all')?></th>
 					<th><?php echo $this->Html->link('Tie', '/admin/ties/all')?></th>
 					<th><?php echo $this->Html->link('Shirt', '/admin/shirts/all')?></th>
