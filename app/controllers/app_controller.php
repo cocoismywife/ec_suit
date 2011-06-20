@@ -33,6 +33,8 @@
  * @link http://book.cakephp.org/view/957/The-App-Controller
  */
 class AppController extends Controller {
+	var $allowUploadImage = array ('Gender', 'Style' );
+	
 	function beforeRender() {
 		Configure::write ( 'debug', 0 );
 		if (isset ( $this->params ['prefix'] ) && $this->params ['prefix'] == 'admin') {
@@ -102,7 +104,15 @@ class AppController extends Controller {
 				$this->log ( $parentList );
 			}
 		} else {
-			if ($currentModel->save ( $this->data, false )) {
+			if (in_array ( $this->modelClass, $this->allowUploadImage )) {
+				$imageModel = ClassRegistry::init ( 'Image' );
+				$image = $imageModel->save ( $this->data, false );
+				
+				$this->data [$this->modelClass] ['image_id'] = $imageModel->id;
+				$this->log ( $this->data );
+			}
+			
+			if ($currentModel->save ( $this->data )) {
 				$this->Session->setFlash ( 'Your post has been saved.' );
 				$this->redirect ( array ('action' => 'admin_all' ) );
 			}
@@ -121,6 +131,14 @@ class AppController extends Controller {
 			}
 			$this->data = $currentModel->read ();
 		} else {
+			$this->log ( $this->data );
+			if (in_array ( $this->modelClass, $this->allowUploadImage ) && $this->data ['Image'] ['name']['name'] != null) {
+				$imageModel = ClassRegistry::init ( 'Image' );
+				$image = $imageModel->save ( $this->data, false );
+				
+				$this->data [$this->modelClass] ['image_id'] = $imageModel->id;
+			}
+			
 			if ($currentModel->save ( $this->data )) {
 				$this->Session->setFlash ( 'Your post has been updated.' );
 				$this->redirect ( array ('action' => 'admin_all' ) );
