@@ -51,7 +51,13 @@ class FabricsController extends AppController {
 		}
 		
 		if (! empty ( $this->data )) {
-			$this->log ( $this->data );
+			$imageModel = ClassRegistry::init ( 'Image' );
+			$image = $imageModel->save ( $this->data, false );
+			
+			$this->data [$this->modelClass] ['image_id'] = $imageModel->id;
+			$image = $imageModel->findById ( $imageModel->id );
+			$this->data['Image'] = $image['Image'];
+			
 			$currentModel->set ( $this->data );
 			if ($currentModel->validates ()) {
 				$this->get_name_of_select ();

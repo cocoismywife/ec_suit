@@ -84,7 +84,12 @@
 </tr>
 <tr>
 <th>生地画像:</th>
-<td colspan="2"><img src="images/cloth/cloth01.jpg" /></td>
+<td colspan="2">
+<?php
+	echo $this->Html->image('/'.$this->data['Image']['path'].'/'.$this->data['Image']['name'], array('width' => 180, 'height' => 180));
+	echo $this->Form->input('Image.name.remove', array('type' => 'hidden', 'value' => true));
+?>
+</td>
 </tr>
 <tr>
 <th>&nbsp;</th>
