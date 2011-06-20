@@ -2,4 +2,7 @@
 .settings
 tmp
 EC_SUITS.mwb.bak
-webroot/files
+/app/webroot/files/
+/app/webroot/files/images/
+*.swp
+
