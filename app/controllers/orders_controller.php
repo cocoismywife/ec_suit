@@ -2,7 +2,7 @@
 class OrdersController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax' );
 	var $components = array ('RequestHandler', 'Session' );
-	var $paginate = array ('fields' => array ('id', 'first_name', 'last_name', 'email', 'purchase_date'), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
+	var $paginate = array ('fields' => array ('id', 'first_name', 'last_name', 'email', 'purchase_date' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
 	function admin_all() {
 		$this->log ( $this->modelClass );
@@ -17,8 +17,9 @@ class OrdersController extends AppController {
 		} else {
 			$this->paginate ['limit'] = 5;
 		}
-		$list = $this->paginate ( null, $condition );
+		$list = $this->paginate ( $this->modelClass, $condition );
 		$this->set ( 'list', $list );
+		$this->log ( $this->paginate );
 		$this->log ( $list );
 	}
 	
@@ -37,25 +38,28 @@ class OrdersController extends AppController {
 		}
 	}
 	
-	function admin_query() {
-		$this->log ( $this->data );
-		$condition = $this->data [$this->modelClass] ['query_condition'];
-		$content = $this->data [$this->modelClass] ['query_content'];
+	function _query($condition, $content) {
 		switch ($condition) {
-			case "code" :
-				$this->_all ( array ('Fabric.code LIKE' => '%' . $content . '%' ) );
-			case "name" :
-				$this->_all ( array ('Fabric.name LIKE' => '%' . $content . '%' ) );
-			case "price" :
 			case "full_name" :
 			case "full_name_kana" :
 			case "address" :
+				$this->_all ( array ('Order.address LIKE' => '%' . $content . '%' ) );
+				break;
 			case "mobile_number" :
 			case "email" :
 		}
-		$this->set ( 'navClass', '1' );
-		$this->render ( 'admin_all' );
-		return;
+	}
+	
+	function admin_query($condition = null, $content = null) {
+		$this->log ( 'Order' );
+		$this->log ( $this->data );
+		if (null == $condition) {
+			$condition = $this->data [$this->modelClass] ['query_condition'];
+		}
+		if (null == $content) {
+			$content = $this->data [$this->modelClass] ['query_content'];
+		}
+		$this->_query ( $condition, $content );
 	}
 	
 	function admin_price_range($price) {

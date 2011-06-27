@@ -34,11 +34,16 @@
  */
 class AppController extends Controller {
 	var $allowUploadImage = array ('Gender', 'Style' );
+	var $displayModelName;
 	
 	function beforeRender() {
 		Configure::write ( 'debug', 0 );
 		if (isset ( $this->params ['prefix'] ) && $this->params ['prefix'] == 'admin') {
-			$this->set ( 'model_name', $this->modelClass );
+			if ($this->displayModelName != null) {
+				$this->set ( 'model_name', $this->displayModelName );
+			} else {
+				$this->set ( 'model_name', $this->modelClass );
+			}
 			if (isset ( $this->params ['isAjax'] ) && $this->params ['isAjax']) {
 				$this->layout = 'empty';
 			} else if ($this->modelClass == 'Fabric' || ($this->modelClass == 'Order' && $this->params ['action'] != 'admin_add')) {
@@ -132,7 +137,7 @@ class AppController extends Controller {
 			$this->data = $currentModel->read ();
 		} else {
 			$this->log ( $this->data );
-			if (in_array ( $this->modelClass, $this->allowUploadImage ) && $this->data ['Image'] ['name']['name'] != null) {
+			if (in_array ( $this->modelClass, $this->allowUploadImage ) && $this->data ['Image'] ['name'] ['name'] != null) {
 				$imageModel = ClassRegistry::init ( 'Image' );
 				$image = $imageModel->save ( $this->data, false );
 				
@@ -170,32 +175,34 @@ class AppController extends Controller {
 		$this->log ( $this->data );
 		$condition = $this->data [$this->modelClass] ['query_condition'];
 		$content = $this->data [$this->modelClass] ['query_content'];
+		if ($this->Session->check ( 'limit' )) {
+			$this->paginate ['limit'] = $this->Session->read ( 'limit' );
+		} else {
+			$this->paginate ['limit'] = 5;
+		}
 		switch ($condition) {
 			case "code" :
 				$this->set ( 'navClass', '1' );
 				$this->viewPath = 'fabrics';
-				$this->_all ( array ('code LIKE' => '%' . $content . '%' ) );
+				$list = $this->paginate ( 'Fabric', array ('Fabric.code LIKE' => '%' . $content . '%' ) );
+				$this->set ( 'list', $list );
 				break;
 			case "name" :
 				$this->set ( 'navClass', '1' );
 				$this->viewPath = 'fabrics';
-				$this->_all ( array ('name LIKE' => '%' . $content . '%' ) );
+				$list = $this->paginate ( 'Fabric', array ('Fabric.name LIKE' => '%' . $content . '%' ) );
+				$this->set ( 'list', $list );
 				break;
 			case "price" :
 				break;
 			case "full_name" :
-				break;
 			case "full_name_kana" :
-				break;
 			case "address" :
+			case "mobile_number" :
 				$this->set ( 'navClass', '3' );
 				$this->viewPath = 'orders';
-				$orderController = ClassRegistry::init ( 'Order' )->_all ( array ('Order.address LIKE' => '%' . $content . '%' ) );
-				$this->set ( compact ( 'orderController' ) );
-				break;
-			case "mobile_number" :
-				break;
-			case "email" :
+				$this->requestAction ( '/admin/orders/query', array ('return', 'pass' => array ($condition, $content ) ) );
+				$this->displayModelName = 'Order';
 				break;
 		}
 		
