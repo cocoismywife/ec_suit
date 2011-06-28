@@ -3,11 +3,11 @@ class SmallBrandsController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Ajax' );
 	var $components = array ('RequestHandler', 'Session' );
 	
-	function view($category_id = null, $sub_category_id = null) {
-		if ($sub_category_id != null) {
-			$model = $this->SubCategory->find ( 'all', array ('conditions' => array ('SubCategory.category_id = ' => $category_id, 'SubCategory.id =' => $sub_category_id ) ) );
+	function view($big_brand_id = null, $small_brand_id = null) {
+		if ($small_brand_id != null) {
+			$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('SmallBrand.big_brand_id' => $big_brand_id, 'SmallBrand.id =' => $small_brand_id ) ) );
 		} else {
-			$model = $this->SubCategory->find ( 'all', array ('conditions' => array ('SubCategory.category_id = ' => $category_id ) ) );
+			$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('SmallBrand.big_brand_id' => $big_brand_id ) ) );
 		}
 		$this->set ( 'model', $model );
 	}

@@ -3,11 +3,11 @@ class SmallTraceriesController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Ajax' );
 	var $components = array ('RequestHandler', 'Session' );
 	
-	function view($category_id = null, $sub_category_id = null) {
-		if ($sub_category_id != null) {
-			$model = $this->SubCategory->find ( 'all', array ('conditions' => array ('SubCategory.category_id = ' => $category_id, 'SubCategory.id =' => $sub_category_id ) ) );
+	function view($big_tracery_id = null, $small_tracery_id = null) {
+		if ($small_tracery_id != null) {
+			$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('SmallTracery.big_tracery_id' => $big_tracery_id, 'SmallTracery.id = ' => $small_tracery_id ) ) );
 		} else {
-			$model = $this->SubCategory->find ( 'all', array ('conditions' => array ('SubCategory.category_id = ' => $category_id ) ) );
+			$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('SmallTracery.big_tracery_id' => $big_tracery_id ) ) );
 		}
 		$this->set ( 'model', $model );
 	}
