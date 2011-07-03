@@ -105,7 +105,7 @@
 <th>生地画像:</th>
 <td colspan="2">
 <?php echo $this->Html->image('/'.$this->data['Image']['path'].'/'.$this->data['Image']['name'], array('width' => 180, 'height' => 180)); ?>
-<?php echo $this->Form->input('image_id', array('type' => 'hidden'))?>
+<?php echo $this->Form->input('image_id', array('type' => 'hidden', 'value' => 1))?>
 </td>
 </tr>
 <tr>
