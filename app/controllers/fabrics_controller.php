@@ -1,6 +1,6 @@
 <?php
 class FabricsController extends AppController {
-	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax' );
+	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax', 'Csv' );
 	var $components = array ('RequestHandler', 'Session' );
 	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
@@ -56,7 +56,7 @@ class FabricsController extends AppController {
 			
 			$this->data [$this->modelClass] ['image_id'] = $imageModel->id;
 			$image = $imageModel->findById ( $imageModel->id );
-			$this->data['Image'] = $image['Image'];
+			$this->data ['Image'] = $image ['Image'];
 			
 			$currentModel->set ( $this->data );
 			if ($currentModel->validates ()) {
@@ -137,6 +137,11 @@ class FabricsController extends AppController {
 				$this->redirect ( array ('action' => 'admin_finish' ) );
 			}
 		}
+	}
+	
+	function admin_export() {
+		$this->layout = 'empty';
+		$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all' ) );
 	}
 	
 	function admin_update_small_traceries() {

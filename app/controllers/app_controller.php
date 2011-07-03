@@ -46,7 +46,7 @@ class AppController extends Controller {
 			}
 			if (isset ( $this->params ['isAjax'] ) && $this->params ['isAjax']) {
 				$this->layout = 'empty';
-			} else if ($this->modelClass == 'Fabric' || ($this->modelClass == 'Order' && $this->params ['action'] != 'admin_add')) {
+			} else if (($this->modelClass == 'Fabric' && $this->params ['action'] != 'admin_export') || ($this->modelClass == 'Order' && $this->params ['action'] != 'admin_add' && $this->params ['action'] != 'admin_export')) {
 				$this->layout = 'admin/default';
 			}
 		} else {
