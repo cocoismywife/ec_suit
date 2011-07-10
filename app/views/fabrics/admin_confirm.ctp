@@ -1,3 +1,10 @@
+<script type="text/javascript">
+<!--
+	function amend_fabric() {
+		$('#FabricSaveForm').attr('action', '/ec_suits/admin/fabrics/amend').submit();;
+	}
+//-->
+</script>
 <!-- start content-outer -->
 <div id="content-outer">
 <!-- start content -->
@@ -105,15 +112,16 @@
 <th>生地画像:</th>
 <td colspan="2">
 <?php echo $this->Html->image('/'.$this->data['Image']['path'].'/'.$this->data['Image']['name'], array('width' => 180, 'height' => 180)); ?>
-<?php echo $this->Form->input('image_id', array('type' => 'hidden', 'value' => 1))?>
+<?php echo $this->Form->input('image_id', array('type' => 'hidden'))?>
 </td>
 </tr>
 <tr>
 <th>&nbsp;</th>
 <td valign="top">
-<a href="form_edit.html"><input type="reset" value="" class="form-edit"  /></a>
-<?php echo $this->Form->reset('', array('class' => 'form-edit'))?>
-<?php echo $this->Form->submit('', array('class' => 'form-add'))?>
+<?php
+	echo $this->Html->link('', 'javascript:void(0)', array('class' => 'form-edit', 'escape' => false, 'onclick' => 'amend_fabric();'));
+	echo $this->Form->submit('', array('class' => 'form-add'));
+?>
 </td>
 <td></td>
 </tr>

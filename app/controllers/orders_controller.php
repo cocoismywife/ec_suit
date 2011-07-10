@@ -1,6 +1,6 @@
 <?php
 class OrdersController extends AppController {
-	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax' );
+	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax', 'Csv' );
 	var $components = array ('RequestHandler', 'Session' );
 	var $paginate = array ('fields' => array ('id', 'first_name', 'last_name', 'email', 'purchase_date' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
@@ -174,6 +174,12 @@ class OrdersController extends AppController {
 		}
 	}
 	
+	function admin_export() {
+		$this->log ( '======Order======' );
+		$this->layout = 'empty';
+		$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all' ) );
+	}
+	
 	function admin_update_small_traceries() {
 		$this->log ( 'admin_update_small_traceries' );
 		$this->log ( $this->data );
@@ -197,4 +203,5 @@ class OrdersController extends AppController {
 			$this->log ( $options );
 		}
 	}
+
 }

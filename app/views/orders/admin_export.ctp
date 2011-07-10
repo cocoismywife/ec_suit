@@ -1,3 +1,4 @@
 <?php
-$this->Csv->addGrid ( $list );
+$csv->addGrid ( $list );
+echo 'aa';
 echo $this->Csv->render ( true );

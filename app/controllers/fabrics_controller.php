@@ -5,7 +5,6 @@ class FabricsController extends AppController {
 	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
 	function admin_all() {
-		$this->log ( $this->modelClass );
 		$this->_all ();
 		$this->set ( 'navClass', '1' );
 	}
@@ -19,7 +18,6 @@ class FabricsController extends AppController {
 		}
 		$list = $this->paginate ( null, $condition );
 		$this->set ( 'list', $list );
-		$this->log ( $list );
 	}
 	
 	function admin_view($id) {
@@ -42,21 +40,26 @@ class FabricsController extends AppController {
 		$this->set ( 'navClass', '2' );
 		$currentModel = ClassRegistry::init ( $this->modelClass );
 		
-		for($i = 0, $size = sizeof ( $currentModel->parent_name ); $i < $size; ++ $i) {
-			//foreach ( $currentModel->parent_name as $parent_name => $value ) {
-			$parentModel = ClassRegistry::init ( $currentModel->parent_name [$i] );
-			$parentList = $parentModel->find ( 'list' );
-			$this->set ( 'parentList' . $i, $parentList );
-			$this->log ( $parentList );
-		}
+		$this->init_combox_list ( $currentModel );
 		
 		if (! empty ( $this->data )) {
-			$imageModel = ClassRegistry::init ( 'Image' );
-			$image = $imageModel->save ( $this->data, false );
-			
-			$this->data [$this->modelClass] ['image_id'] = $imageModel->id;
-			$image = $imageModel->findById ( $imageModel->id );
-			$this->data ['Image'] = $image ['Image'];
+			if (! empty ( $this->data ['Image'] )) {
+				$imageModel = ClassRegistry::init ( 'Image' );
+				if (isset ( $this->data [$this->modelClass] ['image_id'] ) && $this->data [$this->modelClass] ['image_id'] != null) {
+					$imageModel->delete ( $this->data [$this->modelClass] ['image_id'] );
+				}
+				$imageModel->set ( $this->data );
+				
+				if ($imageModel->validates ()) {
+					$image = $imageModel->save ( $this->data );
+				} else {
+					return;
+				}
+				
+				$this->data [$this->modelClass] ['image_id'] = $imageModel->id;
+				$image = $imageModel->findById ( $imageModel->id );
+				$this->data ['Image'] = $image ['Image'];
+			}
 			
 			$currentModel->set ( $this->data );
 			if ($currentModel->validates ()) {
@@ -64,6 +67,7 @@ class FabricsController extends AppController {
 				$this->render ( 'admin_confirm' );
 				return;
 			}
+		
 		}
 	}
 	
@@ -106,8 +110,6 @@ class FabricsController extends AppController {
 		$this->data [$this->modelClass] ['tracery_name'] = $traceryName;
 		$this->data [$this->modelClass] ['season_name'] = $seasonName;
 		$this->data [$this->modelClass] ['brand_name'] = $brandName;
-		
-		$this->log ( $this->data );
 	}
 	
 	function admin_confirm() {
@@ -129,7 +131,6 @@ class FabricsController extends AppController {
 				$parentModel = ClassRegistry::init ( $currentModel->parent_name [$parent_name] );
 				$parentList = $parentModel->find ( 'list' );
 				$this->set ( "parentList", $parentList );
-				$this->log ( $parentList );
 			}
 		} else {
 			if ($currentModel->save ( $this->data )) {
@@ -139,32 +140,107 @@ class FabricsController extends AppController {
 		}
 	}
 	
-	function admin_export() {
+	function admin_amend() {
+		$this->set ( 'navClass', '2' );
+		$currentModel = ClassRegistry::init ( $this->modelClass );
+		
+		$this->init_combox_list ( $currentModel );
+		
+		//		$imageModel = ClassRegistry::init ( 'Image' );
+		//		
+		//		$image = $imageModel->findById ( $this->data [$this->modelClass] ['image_id'] );
+		//		$this->data ['Image'] = $image ['Image'];
+		//		
+		//		$imageModel->set ( $this->data );
+		//		
+		//		if ($imageModel->validates ()) {
+		//			$image = $imageModel->save ( $this->data );
+		//		} else {
+		//			return;
+		//		}
+		//		
+		//		$currentModel->set ( $this->data );
+		
+
+		if (! empty ( $this->data )) {
+			$imageModel = ClassRegistry::init ( 'Image' );
+			if (isset ( $this->data [$this->modelClass] ['redirect'] ) && $this->data [$this->modelClass] ['redirect'] == '1') {
+				if ($this->data ['Image'] ['name'] ['name'] != null) {
+					if (isset ( $this->data [$this->modelClass] ['image_id'] ) && $this->data [$this->modelClass] ['image_id'] != null) {
+						$imageModel->delete ( $this->data [$this->modelClass] ['image_id'] );
+					}
+					
+					$imageModel->set ( $this->data );
+					
+					if ($imageModel->validates ()) {
+						$image = $imageModel->save ( $this->data );
+						$this->data ['Image'] = $image;
+						$this->data [$this->modelClass] ['image_id'] = $imageModel->id;
+					}
+				}
+			}
+			if (isset ( $this->data [$this->modelClass] ['image_id'] ) && $this->data [$this->modelClass] ['image_id'] != null) {
+				$image = $imageModel->findById ( $this->data [$this->modelClass] ['image_id'] );
+				$this->data ['Image'] = $image ['Image'];
+			}
+			
+			//			$currentModel->set ( $this->data );
+			if ($currentModel->validates () && isset ( $this->data [$this->modelClass] ['redirect'] ) && $this->data [$this->modelClass] ['redirect'] == 1) {
+				$this->get_name_of_select ();
+				$this->render ( 'admin_confirm' );
+				return;
+			} else {
+				$this->data [$this->modelClass] ['redirect'] = '1';
+				return;
+			}
+		}
+	}
+	
+	function init_combox_list($currentModel) {
+		for($i = 0, $size = sizeof ( $currentModel->parent_name ); $i < $size; ++ $i) {
+			$parentModel = ClassRegistry::init ( $currentModel->parent_name [$i] );
+			$parentList = $parentModel->find ( 'list' );
+			$this->set ( 'parentList' . $i, $parentList );
+		}
+		
+		if (! empty ( $this->data [$this->modelClass] ['big_tracery_id'] )) {
+			$big_tracery_id = ( int ) $this->data [$this->modelClass] ['big_tracery_id'];
+			$options = ClassRegistry::init ( 'SmallTracery' )->find ( 'list', array ('conditions' => array ('SmallTracery.big_tracery_id' => $big_tracery_id ) ) );
+			$this->set ( 'smallTraceryList', $options );
+		}
+		
+		if (! empty ( $this->data [$this->modelClass] ['big_brand_id'] )) {
+			$big_brand_id = ( int ) $this->data [$this->modelClass] ['big_brand_id'];
+			$options = ClassRegistry::init ( 'SmallBrand' )->find ( 'list', array ('conditions' => array ('SmallBrand.big_brand_id' => $big_brand_id ) ) );
+			$this->set ( 'smallBrandList', $options );
+		}
+	}
+	
+	function admin_export($checkedIds = null) {
 		$this->layout = 'empty';
-		$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all' ) );
+		
+		if ($checkedIds == null) {
+			$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all' ) );
+		} else {
+			$idArray = split ( '[|]', $checkedIds );
+			$conditions = array ("Fabric.id" => $idArray );
+			$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => $conditions ) ) );
+		}
 	}
 	
 	function admin_update_small_traceries() {
-		$this->log ( 'admin_update_small_traceries' );
-		$this->log ( $this->data );
-		$this->log ( $this->params );
 		if (! empty ( $this->data [$this->modelClass] ['big_tracery_id'] )) {
-			$big_tracery_id = ( int ) $this->data ['Fabric'] ['big_tracery_id'];
+			$big_tracery_id = ( int ) $this->data [$this->modelClass] ['big_tracery_id'];
 			$options = ClassRegistry::init ( 'SmallTracery' )->find ( 'list', array ('conditions' => array ('SmallTracery.big_tracery_id' => $big_tracery_id ) ) );
 			$this->set ( 'options', $options );
-			$this->log ( $options );
 		}
 	}
 	
 	function admin_update_small_brands() {
-		$this->log ( 'admin_update_small_traceries' );
-		$this->log ( $this->data );
-		$this->log ( $this->params );
 		if (! empty ( $this->data [$this->modelClass] ['big_brand_id'] )) {
-			$big_brand_id = ( int ) $this->data ['Fabric'] ['big_brand_id'];
+			$big_brand_id = ( int ) $this->data [$this->modelClass] ['big_brand_id'];
 			$options = ClassRegistry::init ( 'SmallBrand' )->find ( 'list', array ('conditions' => array ('SmallBrand.big_brand_id' => $big_brand_id ) ) );
 			$this->set ( 'options', $options );
-			$this->log ( $options );
 		}
 	}
 	

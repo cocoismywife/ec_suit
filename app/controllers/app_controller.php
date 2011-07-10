@@ -69,14 +69,11 @@ class AppController extends Controller {
 	function _all() {
 		$list = ClassRegistry::init ( $this->modelClass )->find ( 'all' );
 		$this->set ( 'list', $list );
-		$this->log ( $list );
 	}
 	
 	function view($id = null) {
 		$model = ClassRegistry::init ( $this->modelClass )->findById ( $id );
 		$this->set ( 'model', $model );
-		$this->log ( 'Method: <view>' );
-		$this->log ( $model );
 	}
 	
 	function admin_index() {
@@ -94,8 +91,6 @@ class AppController extends Controller {
 		$currentModel->id = $id;
 		$model = $currentModel->read ();
 		$this->set ( 'model', $model );
-		$this->log ( 'Method: <admin_view>' );
-		$this->log ( $model );
 	}
 	
 	function admin_add() {
@@ -172,7 +167,6 @@ class AppController extends Controller {
 	}
 	
 	function admin_query() {
-		$this->log ( $this->data );
 		$condition = $this->data [$this->modelClass] ['query_condition'];
 		$content = $this->data [$this->modelClass] ['query_content'];
 		if ($this->Session->check ( 'limit' )) {

@@ -2,12 +2,21 @@
 class Image extends AppModel {
 	var $name = 'EsImage';
 	
+	var $validate = array(
+	    'name' => array(
+	        'InvalidExt' => array('message' => 'This file extension isn\'t allowed, it should be jpg, jpeg or gif.'),
+	        'UploadError' => array('message' => 'Image uploading failed.'),
+			'MaxSize' => array('message' => 'Exceed 5 MB.')
+	    )
+	);
+	
 	var $actsAs = array (// models/behaviors/meio_upload.php
 		'MeioUpload' => array (
 			 'name' => array (
 				'dir' => 'files{DS}images', 
-				'allowed_mime' => array ('image/jpeg', 'image/pjpeg', 'image/gif', 'image/png' ), 
-				'allowed_ext' => array ('.jpg', '.jpeg', '.png', '.gif' ),
+				'allowed_mime' => array ('image/jpeg', 'image/pjpeg', 'image/gif' ), 
+				'allowed_ext' => array ('.jpg', '.jpeg', '.gif' ),
+				'max_size' => '5Mb',
 				'fields' => array(
 					'filesize' => 'size',
 					'mimetype' => 'mime',
