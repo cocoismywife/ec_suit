@@ -166,9 +166,13 @@ class AppController extends Controller {
 	//		exit ();
 	}
 	
-	function admin_query() {
-		$condition = $this->data [$this->modelClass] ['query_condition'];
-		$content = $this->data [$this->modelClass] ['query_content'];
+	function admin_query($condition = null, $content = null) {
+		if ($condition == null) {
+			$condition = $this->data [$this->modelClass] ['query_condition'];
+		}
+		if ($content == null) {
+			$content = $this->data [$this->modelClass] ['query_content'];
+		}
 		if ($this->Session->check ( 'limit' )) {
 			$this->paginate ['limit'] = $this->Session->read ( 'limit' );
 		} else {
@@ -176,27 +180,25 @@ class AppController extends Controller {
 		}
 		switch ($condition) {
 			case "code" :
-				$this->set ( 'navClass', '1' );
-				$this->viewPath = 'fabrics';
-				$list = $this->paginate ( 'Fabric', array ('Fabric.code LIKE' => '%' . $content . '%' ) );
-				$this->set ( 'list', $list );
-				break;
 			case "name" :
-				$this->set ( 'navClass', '1' );
-				$this->viewPath = 'fabrics';
-				$list = $this->paginate ( 'Fabric', array ('Fabric.name LIKE' => '%' . $content . '%' ) );
-				$this->set ( 'list', $list );
-				break;
 			case "price" :
+				if ($this->params ['controller'] == 'orders') {
+					$this->redirect ( array ('controller' => 'fabrics', 'action' => 'query', $condition, $content ) );
+				} else {
+					$this->set ( 'navClass', '1' );
+					$this->_query ( $condition, $content );
+				}
 				break;
-			case "full_name" :
-			case "full_name_kana" :
+			case "fullName" :
+			case "fullNameKana" :
 			case "address" :
-			case "mobile_number" :
-				$this->set ( 'navClass', '3' );
-				$this->viewPath = 'orders';
-				$this->requestAction ( '/admin/orders/query', array ('return', 'pass' => array ($condition, $content ) ) );
-				$this->displayModelName = 'Order';
+			case "mobileNumber" :
+				if ($this->params ['controller'] == 'fabrics') {
+					$this->redirect ( array ('controller' => 'orders', 'action' => 'query', $condition, $content ) );
+				} else {
+					$this->set ( 'navClass', '3' );
+					$this->_query ( $condition, $content );
+				}
 				break;
 		}
 		

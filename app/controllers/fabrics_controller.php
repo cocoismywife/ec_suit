@@ -10,13 +10,14 @@ class FabricsController extends AppController {
 	}
 	
 	function _all($condition = array()) {
-		//		$list = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('fields' => array ('id', 'code', 'name' ) ) );
 		if ($this->Session->check ( 'limit' )) {
 			$this->paginate ['limit'] = $this->Session->read ( 'limit' );
 		} else {
 			$this->paginate ['limit'] = 5;
 		}
 		$list = $this->paginate ( null, $condition );
+		$this->log('========== log');
+		$this->log($list);
 		$this->set ( 'list', $list );
 	}
 	
@@ -34,6 +35,20 @@ class FabricsController extends AppController {
 		if ($numberOfRow != '') {
 			$this->Session->write ( 'limit', $numberOfRow );
 		}
+	}
+	
+	function _query($condition, $content) {
+		switch ($condition) {
+			case "code" :
+				$this->_all ( array ('Fabric.code LIKE' => '%' . $content . '%' ) );
+				break;
+			case "name" :
+				$this->_all ( array ('Fabric.name LIKE' => '%' . $content . '%' ) );
+				break;
+			case "price" :
+				break;
+		}
+		return;
 	}
 	
 	function admin_input() {
@@ -146,22 +161,6 @@ class FabricsController extends AppController {
 		
 		$this->init_combox_list ( $currentModel );
 		
-		//		$imageModel = ClassRegistry::init ( 'Image' );
-		//		
-		//		$image = $imageModel->findById ( $this->data [$this->modelClass] ['image_id'] );
-		//		$this->data ['Image'] = $image ['Image'];
-		//		
-		//		$imageModel->set ( $this->data );
-		//		
-		//		if ($imageModel->validates ()) {
-		//			$image = $imageModel->save ( $this->data );
-		//		} else {
-		//			return;
-		//		}
-		//		
-		//		$currentModel->set ( $this->data );
-		
-
 		if (! empty ( $this->data )) {
 			$imageModel = ClassRegistry::init ( 'Image' );
 			if (isset ( $this->data [$this->modelClass] ['redirect'] ) && $this->data [$this->modelClass] ['redirect'] == '1') {

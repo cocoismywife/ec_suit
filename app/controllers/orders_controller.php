@@ -40,26 +40,25 @@ class OrdersController extends AppController {
 	
 	function _query($condition, $content) {
 		switch ($condition) {
-			case "full_name" :
-			case "full_name_kana" :
+			case "fullName" :
+				$this->_all ( array ('Order.first_name LIKE' => '%' . $content . '%' ) );
+				break;
+			case "fullNameKana" :
+				$this->_all ( array ('Order.first_name_kana LIKE' => '%' . $content . '%' ) );
+				break;
 			case "address" :
 				$this->_all ( array ('Order.address LIKE' => '%' . $content . '%' ) );
 				break;
-			case "mobile_number" :
+			case "mobileNumber" :
+				$this->_all ( array ('Order.mobile_number LIKE' => '%' . $content . '%' ) );
+				break;
 			case "email" :
+				$this->_all ( array ('Order.email LIKE' => '%' . $content . '%' ) );
+				break;
 		}
 	}
 	
-	function admin_query($condition = null, $content = null) {
-		$this->log ( 'Order' );
-		$this->log ( $this->data );
-		if (null == $condition) {
-			$condition = $this->data [$this->modelClass] ['query_condition'];
-		}
-		if (null == $content) {
-			$content = $this->data [$this->modelClass] ['query_content'];
-		}
-		$this->_query ( $condition, $content );
+	function admin_search() {
 	}
 	
 	function admin_price_range($price) {
