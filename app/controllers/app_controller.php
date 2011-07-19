@@ -205,4 +205,9 @@ class AppController extends Controller {
 		$this->render ( 'admin_all' );
 		return;
 	}
+	
+	function admin_export() {
+		$this->layout = 'empty';
+		$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all' ) );
+	}
 }

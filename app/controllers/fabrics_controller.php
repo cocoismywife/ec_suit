@@ -215,18 +215,6 @@ class FabricsController extends AppController {
 		}
 	}
 	
-	function admin_export($checkedIds = null) {
-		$this->layout = 'empty';
-		
-		if ($checkedIds == null) {
-			$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all' ) );
-		} else {
-			$idArray = split ( '[|]', $checkedIds );
-			$conditions = array ("Fabric.id" => $idArray );
-			$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => $conditions ) ) );
-		}
-	}
-	
 	function admin_update_small_traceries() {
 		if (! empty ( $this->data [$this->modelClass] ['big_tracery_id'] )) {
 			$big_tracery_id = ( int ) $this->data [$this->modelClass] ['big_tracery_id'];

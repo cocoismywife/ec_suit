@@ -41,10 +41,10 @@ class OrdersController extends AppController {
 	function _query($condition, $content) {
 		switch ($condition) {
 			case "fullName" :
-				$this->_all ( array ('Order.first_name LIKE' => '%' . $content . '%' ) );
+				$this->_all ( array ('OR' => array ('Order.first_name LIKE' => '%' . $content . '%', 'Order.last_name LIKE' => '%' . $content . '%' ) ) );
 				break;
 			case "fullNameKana" :
-				$this->_all ( array ('Order.first_name_kana LIKE' => '%' . $content . '%' ) );
+				$this->_all ( array ('OR' => array ('Order.first_name_kana LIKE' => '%' . $content . '%', 'Order.last_name_kana LIKE' => '%' . $content . '%' ) ) );
 				break;
 			case "address" :
 				$this->_all ( array ('Order.address LIKE' => '%' . $content . '%' ) );
@@ -171,12 +171,6 @@ class OrdersController extends AppController {
 				$this->redirect ( array ('action' => 'admin_finish' ) );
 			}
 		}
-	}
-	
-	function admin_export() {
-		$this->log ( '======Order======' );
-		$this->layout = 'empty';
-		$this->set ( 'list', ClassRegistry::init ( $this->modelClass )->find ( 'all' ) );
 	}
 	
 	function admin_update_small_traceries() {

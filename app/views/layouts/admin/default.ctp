@@ -190,7 +190,8 @@ $(document).pngFix( );
 <td>
 
 <?php 
-	$option = array('code'=>'生地No','name'=>'生地名称', 'price'=>'価格', 'fullName'=>'氏名', 'fullNameKana'=>'フリガナ', 'address'=>'住所', 'mobileNumber'=>'電話番号', 'email'=>'メールアドレス');
+	$option = array('code'=>'生地No','name'=>'生地名称', 'price'=>'価格');
+//	$option = array('code'=>'生地No','name'=>'生地名称', 'price'=>'価格', 'fullName'=>'氏名', 'fullNameKana'=>'フリガナ', 'address'=>'住所', 'mobileNumber'=>'電話番号', 'email'=>'メールアドレス');
 	echo $this->Form->input('query_condition', array('id' => 'query_condition', 'label'=>false, 'type'=>'select', 'empty'=>'選択してください', 'options'=>$option, 'class'=>'styledselect') );
 ?>
 </td>
