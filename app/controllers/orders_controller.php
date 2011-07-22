@@ -2,7 +2,7 @@
 class OrdersController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax', 'Csv' );
 	var $components = array ('RequestHandler', 'Session' );
-	var $paginate = array ('fields' => array ('id', 'first_name', 'last_name', 'email', 'purchase_date' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
+	var $paginate = array ('fields' => array ('DISTINCT id', 'first_name', 'last_name', 'email', 'purchase_date' ), 'limit' => 10, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
 	function admin_all() {
 		$this->log ( $this->modelClass );
@@ -15,7 +15,7 @@ class OrdersController extends AppController {
 		if ($this->Session->check ( 'limit' )) {
 			$this->paginate ['limit'] = $this->Session->read ( 'limit' );
 		} else {
-			$this->paginate ['limit'] = 5;
+			$this->paginate ['limit'] = 10;
 		}
 		$list = $this->paginate ( $this->modelClass, $condition );
 		$this->set ( 'list', $list );
@@ -40,6 +40,24 @@ class OrdersController extends AppController {
 	
 	function _query($condition, $content) {
 		switch ($condition) {
+			case "order" :
+				$conditions = array(
+					'OR' => array (
+						array('Order.first_name LIKE' => '%' . $content . '%'), 
+						array('Order.last_name LIKE' => '%' . $content . '%'), 
+						array('Order.first_name_kana LIKE' => '%' . $content . '%'), 
+						array('Order.last_name_kana LIKE' => '%' . $content . '%'),
+						array('Order.address LIKE' => '%' . $content . '%'),
+						array('Order.mobile_number LIKE' => '%' . $content . '%'),
+						array('Order.email LIKE' => '%' . $content . '%'),
+					)
+				);
+				$this->paginate[$this->modelClass] = array(
+		            'conditions' => $conditions,
+					'recursive' => 4
+		        );
+				$this->_all ( $conditions );
+				break;
 			case "fullName" :
 				$this->_all ( array ('OR' => array ('Order.first_name LIKE' => '%' . $content . '%', 'Order.last_name LIKE' => '%' . $content . '%' ) ) );
 				break;

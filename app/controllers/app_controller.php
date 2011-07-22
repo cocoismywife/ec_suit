@@ -189,6 +189,14 @@ class AppController extends Controller {
 					$this->_query ( $condition, $content );
 				}
 				break;
+			case "order" :
+				if ($this->params ['controller'] == 'fabrics') {
+					$this->redirect ( array ('controller' => 'orders', 'action' => 'query', $condition, $content ) );
+				} else {
+					$this->set ( 'navClass', '3' );
+					$this->_query ( $condition, $content );
+				}
+				break;
 			case "fullName" :
 			case "fullNameKana" :
 			case "address" :

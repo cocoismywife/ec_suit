@@ -415,7 +415,7 @@ class CsvHelper extends Helper {
 		
 		$this->clear ();
 		
-		return $this->output ( $output );
+		return $this->output ( "\xEF\xBB\xBF" . $output );
 	
 	}
 	

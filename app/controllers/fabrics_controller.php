@@ -2,7 +2,7 @@
 class FabricsController extends AppController {
 	var $helpers = array ('Html', 'Xml', 'Javascript', 'Paginator', 'Ajax', 'Csv' );
 	var $components = array ('RequestHandler', 'Session' );
-	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 5, 'page' => 1, 'order' => array ('id' => 'desc' ) );
+	var $paginate = array ('fields' => array ('id', 'code', 'name' ), 'limit' => 10, 'page' => 1, 'order' => array ('id' => 'desc' ) );
 	
 	function admin_all() {
 		$this->_all ();
@@ -13,11 +13,11 @@ class FabricsController extends AppController {
 		if ($this->Session->check ( 'limit' )) {
 			$this->paginate ['limit'] = $this->Session->read ( 'limit' );
 		} else {
-			$this->paginate ['limit'] = 5;
+			$this->paginate ['limit'] = 10;
 		}
 		$list = $this->paginate ( null, $condition );
-		$this->log('========== log');
-		$this->log($list);
+		$this->log ( '========== log' );
+		$this->log ( $list );
 		$this->set ( 'list', $list );
 	}
 	
@@ -242,6 +242,9 @@ class FabricsController extends AppController {
 				if ($subcategoryId != null) {
 					$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('Fabric.big_tracery_id' => $categoryId, 'Fabric.small_tracery_id' => $subcategoryId ) ) );
 				}
+				break;
+			case 'price' :
+				$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('price_id' => $categoryId ) ) );
 				break;
 			case 'season' :
 				$model = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('conditions' => array ('season_id' => $categoryId ) ) );
