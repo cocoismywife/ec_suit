@@ -31,14 +31,14 @@
 <tr>
 <th valign="top">氏名:</th>
 <td>
-<?php echo $this->Form->input('name', array('label' => false, 'class' => 'inp-form', 'value' => $this->data[$model_name]['first_name'] . ' ' . $this->data[$model_name]['last_name'], 'readonly' => true)); ?>
+<?php echo $this->Form->input('name', array('label' => false, 'class' => 'inp-form', 'value' => $this->data[$model_name]['last_name'] . ' ' . $this->data[$model_name]['first_name'], 'readonly' => true)); ?>
 </td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">氏名（フリガナ）:</th>
 <td>
-<?php echo $this->Form->input('name', array('label' => false, 'class' => 'inp-form', 'value' => $this->data[$model_name]['first_name_kana'] . ' ' . $this->data[$model_name]['last_name_kana'], 'readonly' => true)); ?>
+<?php echo $this->Form->input('name', array('label' => false, 'class' => 'inp-form', 'value' => $this->data[$model_name]['last_name_kana'] . ' ' . $this->data[$model_name]['first_name_kana'], 'readonly' => true)); ?>
 </td>
 <td></td>
 </tr>
@@ -88,7 +88,7 @@
 <table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 <tr>
 <th valign="top">注文日:</th>
-<td><?php echo $this->Form->input('purchase_date_', array('label' => false, 'class' => 'inp-form', 'value' => date('Y.j.j', $this->data[$model_name]['purcharse_date']), 'readonly' => true)); ?></td>
+<td><?php echo $this->Form->input('purchase_date_', array('label' => false, 'class' => 'inp-form', 'value' => date('Y.m.d', strtotime($this->data[$model_name]['purchase_date'])), 'readonly' => true)); ?></td>
 <td></td>
 </tr>
 <tr>
