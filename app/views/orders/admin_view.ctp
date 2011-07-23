@@ -202,7 +202,7 @@
 <tr>
 <th>&nbsp;</th>
 <td valign="top">
-<a href="form_conf.html"><input type="button" value="" class="btn-print" /></a>
+<a href="javascript:void(0)" onclick="window.print();"><input type="button" value="" class="btn-print" /></a>
 </td>
 <td></td>
 </tr>
