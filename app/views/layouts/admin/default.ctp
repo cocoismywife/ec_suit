@@ -181,7 +181,7 @@ $(document).pngFix( );
 
 <!--  start top-search -->
 <div id="top-search">
-<?php echo $this->Form->create($model_name, array('action' => 'query'))?>
+<?php echo $this->Form->create($model_name, array('url' => '/admin/'.$controller_name.'/query'))?>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
