@@ -1,5 +1,7 @@
 <?php
 class StylesController extends AppController {
-	var $helpers = array ('Xml' );
-	var $components = array ('RequestHandler' );
+    var $helpers = array(
+        'Xml');
+    var $components = array(
+        'RequestHandler');
 }

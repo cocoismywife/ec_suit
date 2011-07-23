@@ -37,6 +37,8 @@ class AppController extends Controller {
         'Gender', 'Style');
     var $displayModelName;
     
+    function beforeFilter() {}
+    
     function beforeRender() {
         Configure::write('debug', 0);
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
