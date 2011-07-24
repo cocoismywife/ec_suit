@@ -7,10 +7,7 @@ class Gender extends AppModel {
         'rule' => 'notEmpty', 'message' => 'Gender Name is required'));
     var $belongsTo = array(
         'Image' => array(
-        'className' => 'Image', 'foreignKey' => 'image_id')
-//    , 'ImageMirror' => array(
-//        'className' => 'ImageMirror', 'foreignKey' => 'image_mirror_id')
-);
+        'className' => 'Image', 'foreignKey' => 'image_id'));
     var $parent_name = array(
         'Image', 'ImageMirror');
 }

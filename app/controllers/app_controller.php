@@ -122,8 +122,8 @@ class AppController extends Controller {
                 $this->log($this->data);
             }
             
-            //            $this->data['User']['password'] = Security::hash($this->data['User']['password'], null, 
-            //                    true);
+            $this->data['User']['password'] = Security::hash($this->data['User']['password'], null, 
+                    true);
             if ($currentModel->save($this->data)) {
                 $this->Session->setFlash('Your post has been saved.');
                 $this->redirect(array(
@@ -163,8 +163,8 @@ class AppController extends Controller {
             //                }
             }
             
-            //            $this->data['User']['password'] = Security::hash($this->data['User']['password'], null, 
-            //                    true);
+            $this->data['User']['password'] = Security::hash($this->data['User']['password'], null, 
+                    true);
             if ($currentModel->save($this->data)) {
                 $this->Session->setFlash('Your post has been updated.');
                 $this->redirect(array(
