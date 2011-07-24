@@ -34,7 +34,7 @@
  */
 class AppController extends Controller {
     var $allowUploadImage = array(
-        'Gender', 'Style');
+        'Gender', 'Style', 'Lining', 'Collar', 'Pocket', 'Hem', 'Button', 'Ty', 'Shirt');
     var $displayModelName;
     
     function beforeFilter() {}
@@ -53,11 +53,15 @@ class AppController extends Controller {
                 $this->layout = 'admin/default';
             }
         } else {
-            $this->layout = 'xml/xml';
-            $this->set('root', strtolower(Inflector::pluralize($this->modelKey)));
-            $this->RequestHandler->respondAs('text/xml', 
-                    array(
-                        'charset' => 'utf8'));
+            if ($this->params['controller'] == 'users') {
+                $this->layout = 'empty';
+            } else {
+                $this->layout = 'xml/xml';
+                $this->set('root', strtolower(Inflector::pluralize($this->modelKey)));
+                $this->RequestHandler->respondAs('text/xml', 
+                        array(
+                            'charset' => 'utf8'));
+            }
         }
         $this->set('controller_name', $this->params['controller']);
     }
@@ -118,6 +122,8 @@ class AppController extends Controller {
                 $this->log($this->data);
             }
             
+            //            $this->data['User']['password'] = Security::hash($this->data['User']['password'], null, 
+            //                    true);
             if ($currentModel->save($this->data)) {
                 $this->Session->setFlash('Your post has been saved.');
                 $this->redirect(array(
@@ -145,15 +151,20 @@ class AppController extends Controller {
                     $image = $imageModel->save($this->data, false);
                     
                     $this->data[$this->modelClass]['image_id'] = $imageModel->id;
+                
+     //                    $this->data[$this->modelClass]['image_id'] = '';
                 }
-                if ($this->data['ImageMirror']['name']['name'] != null) {
-                    $imageMirrorModel = ClassRegistry::init('ImageMirror');
-                    $imageMirror = $imageMirrorModel->save($this->data, false);
-                    
-                    $this->data[$this->modelClass]['image_mirror_id'] = $imageMirrorModel->id;
-                }
+            
+     //                if ($this->data['ImageMirror']['name']['name'] != null) {
+            //                    $imageMirrorModel = ClassRegistry::init('ImageMirror');
+            //                    $imageMirror = $imageMirrorModel->save($this->data, false);
+            //                    
+            //                    $this->data[$this->modelClass]['image_mirror_id'] = $imageMirrorModel->id;
+            //                }
             }
             
+            //            $this->data['User']['password'] = Security::hash($this->data['User']['password'], null, 
+            //                    true);
             if ($currentModel->save($this->data)) {
                 $this->Session->setFlash('Your post has been updated.');
                 $this->redirect(array(

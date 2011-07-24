@@ -43,7 +43,7 @@ class FabricsController extends AppController {
     }
     
     function _query($condition, $content) {
-        switch ($condition) {
+        switch($condition) {
             case "code" :
                 $this->_all(array(
                     'Fabric.code LIKE' => '%' . $content . '%'));
@@ -95,8 +95,9 @@ class FabricsController extends AppController {
     
     function get_name_of_select() {
         $color_id = $this->data[$this->modelClass]['color_id'];
-        $color = ClassRegistry::init('Color')->findById($color_id, array(
-            'fields' => 'name'));
+        $color = ClassRegistry::init('Color')->findById($color_id, 
+                array(
+                    'fields' => 'name'));
         $colorName = $color['Color']['name'];
         
         $big_tracery_id = $this->data[$this->modelClass]['big_tracery_id'];
@@ -117,20 +118,23 @@ class FabricsController extends AppController {
         }
         
         $season_id = $this->data[$this->modelClass]['season_id'];
-        $season = ClassRegistry::init('Season')->findById($season_id, array(
-            'fields' => 'name'));
+        $season = ClassRegistry::init('Season')->findById($season_id, 
+                array(
+                    'fields' => 'name'));
         $seasonName = $season['Season']['name'];
         
         $big_brand_id = $this->data[$this->modelClass]['big_brand_id'];
         $bigBrand = ClassRegistry::init('BigBrand')->findById(
-                $this->data[$this->modelClass]['big_brand_id'], array(
+                $this->data[$this->modelClass]['big_brand_id'], 
+                array(
                     'fields' => 'name'));
         $brandName = $bigBrand['BigBrand']['name'];
         
         $small_brand_id = $this->data[$this->modelClass]['small_brand_id'];
         if ($small_brand_id != '') {
             $smallBrand = ClassRegistry::init('SmallBrand')->findById(
-                    $this->data[$this->modelClass]['small_brand_id'], array(
+                    $this->data[$this->modelClass]['small_brand_id'], 
+                    array(
                         'fields' => 'name'));
             $smallBrandName = $smallBrand['SmallBrand']['name'];
             $brandName = $smallBrandName;
@@ -159,7 +163,7 @@ class FabricsController extends AppController {
         $currentModel = ClassRegistry::init($this->modelClass);
         
         if (empty($this->data)) {
-            foreach ( $currentModel->parent_name as $parent_name => $value ) {
+            foreach($currentModel->parent_name as $parent_name => $value) {
                 $parentModel = ClassRegistry::init($currentModel->parent_name[$parent_name]);
                 $parentList = $parentModel->find('list');
                 $this->set("parentList", $parentList);
@@ -214,6 +218,32 @@ class FabricsController extends AppController {
         }
     }
     
+    function admin_export() {
+        $this->layout = 'empty';
+        $fabrics = ClassRegistry::init($this->modelClass)->find('all');
+        
+        $list = array();
+        foreach($fabrics as $modelName => $fabric) {
+            $this->log('========== Order Info ==========');
+            $this->log($fabric);
+            $newFabric = array(
+                '生地ID' => $fabric[$this->modelClass]['id'], 
+                '生地Code' => $fabric[$this->modelClass]['code'],
+                '生地名' => $fabric[$this->modelClass]['name'],
+                '値段' => $fabric[$this->modelClass]['name'],
+                '色コード' => $fabric['Color']['name'],
+            	'柄カテゴリID1' => $fabric['BigTracery']['name'],
+                '柄カテゴリID2' => $fabric['SmallTracery']['name'],
+                '季節' => $fabric['Season']['name'],
+                'ブランドカテゴリID1' => $fabric['BigBrand']['name'],
+                'ブランドカテゴリID2' => $fabric['SmallBrand']['name'],
+                '備考' => $fabric[$this->modelClass]['remark'],
+            );
+            array_push($list, $newFabric);
+        }
+        $this->set('list', $list);
+    }
+    
     function init_combox_list($currentModel) {
         for($i = 0, $size = sizeof($currentModel->parent_name); $i < $size; ++ $i) {
             $parentModel = ClassRegistry::init($currentModel->parent_name[$i]);
@@ -264,7 +294,7 @@ class FabricsController extends AppController {
     
     function query($categoryType, $categoryId, $subcategoryId = null) {
         Configure::write('debug', 2);
-        switch ($categoryType) {
+        switch($categoryType) {
             case 'color' :
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
                         array(

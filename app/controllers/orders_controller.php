@@ -46,7 +46,7 @@ class OrdersController extends AppController {
     function _query($condition, $content) {
         $this->log('=========== Query Content ===========');
         $this->log($content);
-        switch ($condition) {
+        switch($condition) {
             case "order" :
                 $conditions = array(
                     'OR' => array(
@@ -75,12 +75,14 @@ class OrdersController extends AppController {
                             'Order.first_name_kana LIKE' => '%' . $content . '%', 'Order.last_name_kana LIKE' => '%' . $content . '%')));
                 break;
             case "address" :
-                $this->_all(array(
-                    'Order.address LIKE' => '%' . $content . '%'));
+                $this->_all(
+                        array(
+                            'Order.address LIKE' => '%' . $content . '%'));
                 break;
             case "mobileNumber" :
-                $this->_all(array(
-                    'Order.mobile_number LIKE' => '%' . $content . '%'));
+                $this->_all(
+                        array(
+                            'Order.mobile_number LIKE' => '%' . $content . '%'));
                 break;
             case "email" :
                 $this->_all(array(
@@ -134,8 +136,9 @@ class OrdersController extends AppController {
     
     function get_name_of_select() {
         $color_id = $this->data[$this->modelClass]['color_id'];
-        $color = ClassRegistry::init('Color')->findById($color_id, array(
-            'fields' => 'name'));
+        $color = ClassRegistry::init('Color')->findById($color_id, 
+                array(
+                    'fields' => 'name'));
         $colorName = $color['Color']['name'];
         
         $big_tracery_id = $this->data[$this->modelClass]['big_tracery_id'];
@@ -156,20 +159,23 @@ class OrdersController extends AppController {
         }
         
         $season_id = $this->data[$this->modelClass]['season_id'];
-        $season = ClassRegistry::init('Season')->findById($season_id, array(
-            'fields' => 'name'));
+        $season = ClassRegistry::init('Season')->findById($season_id, 
+                array(
+                    'fields' => 'name'));
         $seasonName = $season['Season']['name'];
         
         $big_brand_id = $this->data[$this->modelClass]['big_brand_id'];
         $bigBrand = ClassRegistry::init('BigBrand')->findById(
-                $this->data[$this->modelClass]['big_brand_id'], array(
+                $this->data[$this->modelClass]['big_brand_id'], 
+                array(
                     'fields' => 'name'));
         $brandName = $bigBrand['BigBrand']['name'];
         
         $small_brand_id = $this->data[$this->modelClass]['small_brand_id'];
         if ($small_brand_id != '') {
             $smallBrand = ClassRegistry::init('SmallBrand')->findById(
-                    $this->data[$this->modelClass]['small_brand_id'], array(
+                    $this->data[$this->modelClass]['small_brand_id'], 
+                    array(
                         'fields' => 'name'));
             $smallBrandName = $smallBrand['SmallBrand']['name'];
             $brandName = $smallBrandName;
@@ -200,7 +206,7 @@ class OrdersController extends AppController {
         $currentModel = ClassRegistry::init($this->modelClass);
         
         if (empty($this->data)) {
-            foreach ( $currentModel->parent_name as $parent_name => $value ) {
+            foreach($currentModel->parent_name as $parent_name => $value) {
                 $parentModel = ClassRegistry::init($currentModel->parent_name[$parent_name]);
                 $parentList = $parentModel->find('list');
                 $this->set("parentList", $parentList);
@@ -213,6 +219,29 @@ class OrdersController extends AppController {
                     'action' => 'admin_finish'));
             }
         }
+    }
+    
+    function admin_export() {
+        $this->layout = 'empty';
+        $orders = ClassRegistry::init($this->modelClass)->find('all');
+        
+        $list = array();
+        foreach($orders as $modelName => $order) {
+            $this->log('========== Order Info ==========');
+            $this->log($order);
+            $newOrder = array(
+                '注文ID' => $order[$this->modelClass]['id'], 
+                '氏名1' => $order[$this->modelClass]['first_name'],
+                '氏名2' => $order[$this->modelClass]['last_name'],
+                'カタカナ1' => $order[$this->modelClass]['first_name_kana'],
+                'カタカナ2' => $order[$this->modelClass]['last_name_kana'],
+            	'住所' => $order[$this->modelClass]['address'],
+                '電話番号' => $order[$this->modelClass]['mobile_number'],
+                'メールアドレス' => $order[$this->modelClass]['email'],
+                '注文日' => $order[$this->modelClass]['purchase_date']);
+            array_push($list, $newOrder);
+        }
+        $this->set('list', $list);
     }
     
     function admin_update_small_traceries() {
