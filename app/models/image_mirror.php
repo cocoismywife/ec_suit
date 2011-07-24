@@ -13,7 +13,7 @@ class ImageMirror extends AppModel {
 	var $actsAs = array (// models/behaviors/meio_upload.php
 		'MeioUpload' => array (
 			 'name' => array (
-				'dir' => 'files{DS}images', 
+				'dir' => 'files{DS}images{DS}mirror', 
 				'allowed_mime' => array ('image/jpeg', 'image/pjpeg', 'image/gif' ), 
 				'allowed_ext' => array ('.jpg', '.jpeg', '.gif' ),
 				'max_size' => '5Mb',

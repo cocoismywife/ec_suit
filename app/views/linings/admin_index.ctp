@@ -7,6 +7,8 @@
 		<th>Id</th>
 		<th>Name</th>
 		<th>Desc</th>
+		<th>Image Preview</th>
+		<th>Mirror Image Preview</th>
         <th>Action</th>
 	</tr>
 
@@ -17,6 +19,8 @@
 		<td><?php echo $item[$model_name]['id']; ?></td>
 		<td><?php echo $this->Html->link($item[$model_name]['name'], array('action' => 'view', $item[$model_name]['id']));?></td>
 		<td><?php echo $item[$model_name]['desc']; ?></td>
+		<td><?php echo $this->Html->image('/'.$item['Image']['path'].'/'.$item['Image']['name'], array('width' => 80, 'height' => 80)); ?></td>
+		<td><?php echo $this->Html->image('/'.$item['ImageMirror']['path'].'/'.$item['ImageMirror']['name'], array('width' => 80, 'height' => 80)); ?></td>
         <td>
 			<?php echo $this->Html->link('Edit', array('action' => 'edit', $item[$model_name]['id']));?>
 			<?php echo $this->Html->link(
