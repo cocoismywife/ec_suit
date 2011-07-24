@@ -209,21 +209,6 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `es_shoes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_shoes` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_shoes` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(25) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
 -- Table `es_orders`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `es_orders` ;

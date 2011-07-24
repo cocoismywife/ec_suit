@@ -51,7 +51,6 @@
 					<th><?php echo $this->Html->link('Button', '/buttons/all')?></th>
 					<th><?php echo $this->Html->link('Tie', '/ties/all')?></th>
 					<th><?php echo $this->Html->link('Shirt', '/shirts/all')?></th>
-					<th><?php echo $this->Html->link('Shoes', '/shoes/all')?></th>
 				</tr>
 				<tr>
 					<td colspan="9"><strong>For Administrator</strong></td>
@@ -66,7 +65,6 @@
 					<th><?php echo $this->Html->link('Button', '/admin/buttons/all')?></th>
 					<th><?php echo $this->Html->link('Tie', '/admin/ties/all')?></th>
 					<th><?php echo $this->Html->link('Shirt', '/admin/shirts/all')?></th>
-					<th><?php echo $this->Html->link('Shoes', '/admin/shoes/all')?></th>
 				</tr>
 			</table>
 		</div>
