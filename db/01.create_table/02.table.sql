@@ -1,371 +1,415 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
-
-DROP SCHEMA IF EXISTS `EC_SUITS` ;
-CREATE SCHEMA IF NOT EXISTS `EC_SUITS` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-SHOW WARNINGS;
-USE `EC_SUITS` ;
-
--- -----------------------------------------------------
--- Table `es_styles`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_styles` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_styles` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(20) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  `upload_file_url` VARCHAR(100) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.3\nスタイル選択';
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_big_traceries`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_big_traceries` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_big_traceries` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(20) NOT NULL COMMENT 'Third level of category' ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.4\n生地選択';
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_small_traceries`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_small_traceries` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_small_traceries` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(20) NOT NULL COMMENT 'Second level of category' ,
-  `desc` VARCHAR(45) NULL ,
-  `big_tracery_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.4\n生地選択';
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_colors`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_colors` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_colors` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(20) NOT NULL COMMENT 'Top level of category' ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.4\n生地選択';
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_genders`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_genders` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_genders` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(20) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  `upload_file_url` VARCHAR(100) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.2\n男女選択';
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_fabrics`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_fabrics` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_fabrics` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `code` VARCHAR(50) NOT NULL COMMENT '生地ID' ,
-  `name` VARCHAR(200) NOT NULL COMMENT '生地名' ,
-  `price` DECIMAL(9,2) NOT NULL COMMENT '値段' ,
-  `color` INT NULL COMMENT '色' ,
-  `big_tracery` INT NULL COMMENT '柄:大カテゴリ' ,
-  `small_tracery` INT NULL COMMENT '柄:小カテゴリ' ,
-  `season` INT NULL COMMENT '季節' ,
-  `big_brand` INT NULL COMMENT 'ブランド:大カテゴリ' ,
-  `small_brand` INT NULL COMMENT 'ブランド:小カテゴリ' ,
-  `remark` TEXT NULL COMMENT '備考' ,
-  `img_id` INT NULL COMMENT '画像ID' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'Page Seq.4\n生地選択';
-
-SHOW WARNINGS;
-CREATE UNIQUE INDEX `code_UNIQUE` ON `es_fabrics` (`code` ASC) ;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_collars`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_collars` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_collars` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(25) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_ties`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_ties` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_ties` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(25) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_cuffs`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_cuffs` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_cuffs` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(25) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_pockets`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_pockets` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_pockets` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(25) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_buttons`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_buttons` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_buttons` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(25) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_shirts`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_shirts` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_shirts` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(25) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_orders`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_orders` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_orders` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `first_name` VARCHAR(45) NULL ,
-  `last_name` VARCHAR(45) NULL ,
-  `first_name_kana` VARCHAR(45) NULL ,
-  `last_name_kana` VARCHAR(45) NULL ,
-  `zip_code` VARCHAR(45) NULL ,
-  `address` VARCHAR(45) NULL ,
-  `mobile_number` VARCHAR(45) NULL ,
-  `email` VARCHAR(45) NULL ,
-  `purchase_date` DATETIME NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_questions`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_questions` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_questions` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `create_date` DATETIME NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_options`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_options` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_options` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `options_text` VARCHAR(45) NOT NULL ,
-  `options_value` VARCHAR(45) NULL ,
-  `question_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_surveies`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_surveies` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_surveies` (
-  `id` INT NOT NULL ,
-  `name` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_answers`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_answers` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_answers` (
-  `id` INT NOT NULL ,
-  `order_id` INT NOT NULL ,
-  `survey_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_surveies_has_es_questions`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_surveies_has_es_questions` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_surveies_has_es_questions` (
-  `es_surveies_id` INT NOT NULL ,
-  `es_questions_id` INT NOT NULL ,
-  PRIMARY KEY (`es_surveies_id`, `es_questions_id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_answer_details`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_answer_details` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_answer_details` (
-  `id` INT NOT NULL ,
-  `answer_id` INT NOT NULL ,
-  `option_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_seasons`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_seasons` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_seasons` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_big_brands`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_big_brands` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_big_brands` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `es_small_brands`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `es_small_brands` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `es_small_brands` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `desc` VARCHAR(45) NULL ,
-  `big_brand_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- phpMyAdmin SQL Dump
+-- version 3.2.4
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jul 25, 2011 at 04:37 下午
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `ec_suits`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_answers`
+--
+
+CREATE TABLE IF NOT EXISTS `es_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `option_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_big_brands`
+--
+
+CREATE TABLE IF NOT EXISTS `es_big_brands` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_big_traceries`
+--
+
+CREATE TABLE IF NOT EXISTS `es_big_traceries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL COMMENT 'Third level of category',
+  `desc` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Page Seq.4\n生地選択' AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_buttons`
+--
+
+CREATE TABLE IF NOT EXISTS `es_buttons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  `image_mirror_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_collars`
+--
+
+CREATE TABLE IF NOT EXISTS `es_collars` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_colors`
+--
+
+CREATE TABLE IF NOT EXISTS `es_colors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL COMMENT 'Top level of category',
+  `desc` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Page Seq.4\n生地選択' AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_fabrics`
+--
+
+CREATE TABLE IF NOT EXISTS `es_fabrics` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL COMMENT '生地ID',
+  `name` varchar(200) NOT NULL COMMENT '生地名',
+  `price` decimal(9,2) NOT NULL COMMENT '値段',
+  `color_id` int(11) DEFAULT NULL COMMENT '色',
+  `big_tracery_id` int(11) DEFAULT NULL COMMENT '柄:大カテゴリ',
+  `small_tracery_id` int(11) DEFAULT NULL COMMENT '柄:小カテゴリ',
+  `season_id` int(11) DEFAULT NULL COMMENT '季節',
+  `big_brand_id` int(11) DEFAULT NULL COMMENT 'ブランド:大カテゴリ',
+  `small_brand_id` int(11) DEFAULT NULL COMMENT 'ブランド:小カテゴリ',
+  `remark` text COMMENT '備考',
+  `image_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code_UNIQUE` (`code`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Page Seq.4\n生地選択' AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_genders`
+--
+
+CREATE TABLE IF NOT EXISTS `es_genders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  `image_mirror_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Page Seq.2\n男女選択' AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_hems`
+--
+
+CREATE TABLE IF NOT EXISTS `es_hems` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  `image_mirror_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_images`
+--
+
+CREATE TABLE IF NOT EXISTS `es_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `path` varchar(45) DEFAULT NULL,
+  `size` varchar(45) DEFAULT NULL,
+  `mime` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=173 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_linings`
+--
+
+CREATE TABLE IF NOT EXISTS `es_linings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  `image_mirror_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_options`
+--
+
+CREATE TABLE IF NOT EXISTS `es_options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(45) NOT NULL,
+  `value` varchar(45) DEFAULT NULL,
+  `question_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_orders`
+--
+
+CREATE TABLE IF NOT EXISTS `es_orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `first_name_kana` varchar(45) DEFAULT NULL,
+  `last_name_kana` varchar(45) DEFAULT NULL,
+  `zip_code` varchar(45) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
+  `mobile_number` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `purchase_date` datetime DEFAULT NULL,
+  `survey_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_order_details`
+--
+
+CREATE TABLE IF NOT EXISTS `es_order_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gender_id` int(11) DEFAULT NULL,
+  `style_id` int(11) DEFAULT NULL,
+  `fabric_id` int(11) DEFAULT NULL,
+  `collar_id` int(11) DEFAULT NULL,
+  `pocket_id` int(11) DEFAULT NULL,
+  `hem_id` int(11) DEFAULT NULL,
+  `button_id` int(11) DEFAULT NULL,
+  `ty_id` int(11) DEFAULT NULL,
+  `shirt_id` int(11) DEFAULT NULL,
+  `lining_id` int(11) DEFAULT NULL,
+  `image_id` int(11) DEFAULT NULL,
+  `order_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_pockets`
+--
+
+CREATE TABLE IF NOT EXISTS `es_pockets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_prices`
+--
+
+CREATE TABLE IF NOT EXISTS `es_prices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_questions`
+--
+
+CREATE TABLE IF NOT EXISTS `es_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `addition` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_seasons`
+--
+
+CREATE TABLE IF NOT EXISTS `es_seasons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_shirts`
+--
+
+CREATE TABLE IF NOT EXISTS `es_shirts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  `image_mirror_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_small_brands`
+--
+
+CREATE TABLE IF NOT EXISTS `es_small_brands` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `big_brand_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_small_traceries`
+--
+
+CREATE TABLE IF NOT EXISTS `es_small_traceries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL COMMENT 'Second level of category',
+  `desc` varchar(45) DEFAULT NULL,
+  `big_tracery_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Page Seq.4\n生地選択' AUTO_INCREMENT=10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_styles`
+--
+
+CREATE TABLE IF NOT EXISTS `es_styles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Page Seq.3\nスタイル選択' AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_surveys`
+--
+
+CREATE TABLE IF NOT EXISTS `es_surveys` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_ties`
+--
+
+CREATE TABLE IF NOT EXISTS `es_ties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `desc` varchar(45) DEFAULT NULL,
+  `image_id` int(11) NOT NULL,
+  `image_mirror_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `es_users`
+--
+
+CREATE TABLE IF NOT EXISTS `es_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL COMMENT '	',
+  `password` varchar(45) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions_surveys`
+--
+
+CREATE TABLE IF NOT EXISTS `questions_surveys` (
+  `question_id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
+  PRIMARY KEY (`question_id`,`survey_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
