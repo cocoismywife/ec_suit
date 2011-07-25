@@ -230,15 +230,28 @@ class OrdersController extends AppController {
             $this->log('========== Order Info ==========');
             $this->log($order);
             $newOrder = array(
-                '注文ID' => $order[$this->modelClass]['id'], 
-                '氏名1' => $order[$this->modelClass]['first_name'],
-                '氏名2' => $order[$this->modelClass]['last_name'],
-                'カタカナ1' => $order[$this->modelClass]['first_name_kana'],
-                'カタカナ2' => $order[$this->modelClass]['last_name_kana'],
-            	'住所' => $order[$this->modelClass]['address'],
-                '電話番号' => $order[$this->modelClass]['mobile_number'],
-                'メールアドレス' => $order[$this->modelClass]['email'],
-                '注文日' => $order[$this->modelClass]['purchase_date']);
+                '注文ID' => $order[$this->modelClass]['id'], '氏名1' => $order[$this->modelClass]['first_name'], '氏名2' => $order[$this->modelClass]['last_name'], 'カタカナ1' => $order[$this->modelClass]['first_name_kana'], 'カタカナ2' => $order[$this->modelClass]['last_name_kana'], '住所' => $order[$this->modelClass]['address'], '電話番号' => $order[$this->modelClass]['mobile_number'], 'メールアドレス' => $order[$this->modelClass]['email'], '注文日' => $order[$this->modelClass]['purchase_date'], '生地名' => isset(
+                    $order['OrderDetail']['Fabric']['name']) ? $order['OrderDetail']['Fabric']['name'] : '', '生地ブランド' => isset(
+                    $order['OrderDetail']['Fabric']['BigBrand']['name']) ? $order['OrderDetail']['Fabric']['BigBrand']['name'] : '', '品名' => 'スーツ', '値段' => isset(
+                    $order['OrderDetail']['Fabric']['price']) ? $order['OrderDetail']['Fabric']['price'] : '', 'スタイル' => isset(
+                    $order['OrderDetail']['Style']['name']) ? $order['OrderDetail']['Style']['name'] : '', '裏地' => 'SW1', '襟デザイン' => isset(
+                    $order['OrderDetail']['Collar']['name']) ? $order['OrderDetail']['Collar']['name'] : '', 'ポケット' => isset(
+                    $order['OrderDetail']['Pocket']['name']) ? $order['OrderDetail']['Pocket']['name'] : '', '裾' => isset(
+                    $order['OrderDetail']['Hem']['name']) ? $order['OrderDetail']['Hem']['name'] : '', 'ボタン' => isset(
+                    $order['OrderDetail']['Button']['name']) ? $order['OrderDetail']['Button']['name'] : '', 'ネクタイ' => isset(
+                    $order['OrderDetail']['Ty']['name']) ? $order['OrderDetail']['Ty']['name'] : '', 'シャツ' => isset(
+                    $order['OrderDetail']['Shirt']['name']) ? $order['OrderDetail']['Shirt']['name'] : '', '裏仕様' => isset(
+                    $order['OrderDetail']['Lining']['name']) ? $order['OrderDetail']['Lining']['name'] : '');
+            
+            $answers = $order['Answer'];
+            
+            for($i = 0; $i < count($answers); $i ++) {
+                if (isset($answers[$i])) {
+                    $answer = $answers[$i];
+                    $newOrder[$answer['Option']['Question']['name']] = isset(
+                            $answer['Option']['text']) ? $answer['Option']['text'] : '';
+                }
+            }
             array_push($list, $newOrder);
         }
         $this->set('list', $list);
