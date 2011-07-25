@@ -88,7 +88,7 @@
 <table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 <tr>
 <th valign="top">注文日:</th>
-<td><?php echo $this->Form->input('purchase_date_', array('label' => false, 'class' => 'inp-form', 'value' => isset($this->data[$model_name]['purchase_date']) ? date('Y.m.d', strtotime($this->data[$model_name]['purchase_date'])) : '', 'readonly' => true)); ?></td>
+<td><?php echo $this->Form->input('purchase_date', array('label' => false, 'class' => 'inp-form', 'type' => 'text', 'value' => isset($this->data[$model_name]['purchase_date']) ? date('Y.m.d', strtotime($this->data[$model_name]['purchase_date'])) : '', 'readonly' => true)); ?></td>
 <td></td>
 </tr>
 <tr>
@@ -120,7 +120,7 @@
 </tr> 
 <tr>
 <th valign="top">裏地:</th>
-<td>	
+<td>
 <input type="text" class="inp-form" value="SW1" readonly="readonly" />
 </td>
 <td></td>
