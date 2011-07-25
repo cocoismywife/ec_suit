@@ -154,17 +154,19 @@ class AppController extends Controller {
                 
      //                    $this->data[$this->modelClass]['image_id'] = '';
                 }
-            
-     //                if ($this->data['ImageMirror']['name']['name'] != null) {
-            //                    $imageMirrorModel = ClassRegistry::init('ImageMirror');
-            //                    $imageMirror = $imageMirrorModel->save($this->data, false);
-            //                    
-            //                    $this->data[$this->modelClass]['image_mirror_id'] = $imageMirrorModel->id;
-            //                }
+                
+                if ($this->data['ImageMirror']['name']['name'] != null) {
+                    $imageMirrorModel = ClassRegistry::init('ImageMirror');
+                    $imageMirror = $imageMirrorModel->save($this->data, false);
+                    
+                    $this->data[$this->modelClass]['image_mirror_id'] = $imageMirrorModel->id;
+                }
             }
             
-            $this->data['User']['password'] = Security::hash($this->data['User']['password'], null, 
-                    true);
+            if (isset($this->data['User']['password'])) {
+                $this->data['User']['password'] = Security::hash($this->data['User']['password'], 
+                        null, true);
+            }
             if ($currentModel->save($this->data)) {
                 $this->Session->setFlash('Your post has been updated.');
                 $this->redirect(array(

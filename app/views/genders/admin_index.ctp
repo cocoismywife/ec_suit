@@ -8,6 +8,7 @@
 		<th>Name</th>
 		<th>Desc</th>
 		<th>Image Preview</th>
+		<th>Mirror Image Preview</th>
         <th>Action</th>
 	</tr>
 
