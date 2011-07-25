@@ -227,18 +227,7 @@ class FabricsController extends AppController {
             $this->log('========== Order Info ==========');
             $this->log($fabric);
             $newFabric = array(
-                '生地ID' => $fabric[$this->modelClass]['id'], 
-                '生地Code' => $fabric[$this->modelClass]['code'],
-                '生地名' => $fabric[$this->modelClass]['name'],
-                '値段' => $fabric[$this->modelClass]['name'],
-                '色コード' => $fabric['Color']['name'],
-            	'柄カテゴリID1' => $fabric['BigTracery']['name'],
-                '柄カテゴリID2' => $fabric['SmallTracery']['name'],
-                '季節' => $fabric['Season']['name'],
-                'ブランドカテゴリID1' => $fabric['BigBrand']['name'],
-                'ブランドカテゴリID2' => $fabric['SmallBrand']['name'],
-                '備考' => $fabric[$this->modelClass]['remark'],
-            );
+                '生地ID' => $fabric[$this->modelClass]['id'], '生地Code' => $fabric[$this->modelClass]['code'], '生地名' => $fabric[$this->modelClass]['name'], '値段' => $fabric[$this->modelClass]['name'], '色コード' => $fabric['Color']['name'], '柄カテゴリID1' => $fabric['BigTracery']['name'], '柄カテゴリID2' => $fabric['SmallTracery']['name'], '季節' => $fabric['Season']['name'], 'ブランドカテゴリID1' => $fabric['BigBrand']['name'], 'ブランドカテゴリID2' => $fabric['SmallBrand']['name'], '備考' => $fabric[$this->modelClass]['remark']);
             array_push($list, $newFabric);
         }
         $this->set('list', $list);
@@ -311,10 +300,34 @@ class FabricsController extends AppController {
                 }
                 break;
             case 'price' :
+                // (1, '５０，０００円以下', '５０，０００円以下'),
+                // (2, '５０，００１円～７５，０００円', '５０，００１円～７５，０００円'),
+                // (3, '７５，００１円～１００，０００円', '７５，００１円～１００，０００円'),
+                // (4, '１００，００１円以上', '１００，００１円以上');
+                $conditions = null;
+                switch($categoryId) {
+                    case 1 :
+                        $conditions = array(
+                            'price <=' => 50000);
+                        break;
+                    case 2 :
+                        $conditions = array(
+                            'and' => array(
+                            'price >' => 50000, 'price <=' => 75000));
+                        break;
+                    case 3 :
+                        $conditions = array(
+                            'and' => array(
+                            'price >' => 75000, 'price <=' => 100000));
+                        break;
+                    case 3 :
+                        $conditions = array(
+                            'price >' => 100000);
+                        break;
+                }
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
                         array(
-                            'conditions' => array(
-                            'price_id' => $categoryId)));
+                            'conditions' => $conditions));
                 break;
             case 'season' :
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
