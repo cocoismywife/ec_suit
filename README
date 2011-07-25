@@ -1,0 +1,24 @@
+Intallation
+
+1. get the latest copy of cakephp from git which address was
+	cd <your_path>
+	git clone https://github.com/cakephp/cakephp
+2. get the latest copy of ec_suits from git which address was
+	cd <your_path>
+	git clone https://github.com/cocoismywife/ec_suit
+3. make sure put cakephp folder and ec_suits folder at same directory level
+4. if there is no link with name cake, you should create a link for cakephp lib
+	cd <your_path>/ec_suits
+	ln -s ../cakephp/cake ./cake
+5. make sure your mysql instance work well, go into db foler
+	cd <your_path>/ec_suits/db/
+	run:
+		a). `01.create_table/01.schema.sql`
+		b). `01.create_table/02.table.sql`
+		c). `02.import_data/data.sql`
+	all this import script with no errors mean your import data is ok
+6. now you can run your app local
+
+	http://localhost/ec_suits/users/login
+	
+	the default username and password are both as "admin"
