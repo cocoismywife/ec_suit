@@ -207,6 +207,23 @@ CREATE TABLE IF NOT EXISTS `es_lining_fabrics` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `es_lining_sets`
+--
+
+CREATE TABLE IF NOT EXISTS `es_lining_sets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lining_id` int(11) NOT NULL,
+  `lining_fabric_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_es_lining_sets_es_linings1` (`lining_id`),
+  KEY `fk_es_lining_sets_es_lining_fabrics1` (`lining_fabric_id`),
+  KEY `fk_es_lining_sets_es_images1` (`image_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=109 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `es_options`
 --
 
