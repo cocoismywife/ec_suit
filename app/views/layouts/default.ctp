@@ -46,6 +46,7 @@
 					<th><?php echo $this->Html->link('Fabric', '/fabrics/all')?></th>
 					<th><?php echo $this->Html->link('Lining', '/linings/all')?></th>
 					<th><?php echo $this->Html->link('LiningFabric', '/lining_fabrics/all')?></th>
+					<th><?php echo $this->Html->link('LiningSet', '/lining_sets/all')?></th>
 					<th><?php echo $this->Html->link('Collar', '/collars/all')?></th>
 					<th><?php echo $this->Html->link('Pocket', '/pockets/all')?></th>
 					<th><?php echo $this->Html->link('Hem', '/hems/all')?></th>
@@ -61,6 +62,7 @@
 					<th><?php echo $this->Html->link('Style', '/admin/styles/all')?></th>
 					<th><?php echo $this->Html->link('Lining', '/admin/linings/all')?></th>
 					<th><?php echo $this->Html->link('LiningFabric', '/admin/lining_fabrics/all')?></th>
+					<th><?php echo $this->Html->link('LiningSet', '/admin/lining_sets/all')?></th>
 					<th><?php echo $this->Html->link('Collar', '/admin/collars/all')?></th>
 					<th><?php echo $this->Html->link('Pocket', '/admin/pockets/all')?></th>
 					<th><?php echo $this->Html->link('Hem', '/admin/hems/all')?></th>

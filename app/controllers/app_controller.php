@@ -34,7 +34,7 @@
  */
 class AppController extends Controller {
     var $allowUploadImage = array(
-        'Gender', 'Style', 'Lining', 'LiningFabric', 'Collar', 'Pocket', 'Hem', 'Button', 'Ty', 'Shirt');
+        'Gender', 'Style', 'Lining', 'LiningFabric', 'LiningSet', 'Collar', 'Pocket', 'Hem', 'Button', 'Ty', 'Shirt');
     var $displayModelName;
     
     function beforeFilter() {}
@@ -78,6 +78,8 @@ class AppController extends Controller {
     
     function _all() {
         $list = ClassRegistry::init($this->modelClass)->find('all');
+        $this->log('============ _all method invoke');
+        $this->log($list);
         $this->set('list', $list);
     }
     
@@ -107,10 +109,11 @@ class AppController extends Controller {
         $currentModel = ClassRegistry::init($this->modelClass);
         
         if (empty($this->data)) {
-            foreach($currentModel->parent_name as $parent_name => $value) {
-                $parentModel = ClassRegistry::init($currentModel->parent_name[$parent_name]);
+            for($i = 0, $size = sizeof($currentModel->parent_name); $i < $size; ++ $i) {
+                // foreach($currentModel->parent_name as $parent_name => $value) {
+                $parentModel = ClassRegistry::init($currentModel->parent_name[$i]);
                 $parentList = $parentModel->find('list');
-                $this->set("parentList", $parentList);
+                $this->set("parentList" . $i, $parentList);
                 $this->log($parentList);
             }
         } else {
@@ -124,7 +127,7 @@ class AppController extends Controller {
      //                    $this->data[$this->modelClass]['image_id'] = '';
                 }
                 
-                if ($this->data['ImageMirror']['name']['name'] != null) {
+                if (isset($this->data['ImageMirror']['name']['name']) && $this->data['ImageMirror']['name']['name'] != null) {
                     $imageMirrorModel = ClassRegistry::init('ImageMirror');
                     $imageMirror = $imageMirrorModel->save($this->data, false);
                     
@@ -148,10 +151,10 @@ class AppController extends Controller {
         $currentModel = ClassRegistry::init($this->modelClass);
         $currentModel->id = $id;
         if (empty($this->data)) {
-            foreach($currentModel->parent_name as $parent_name => $value) {
-                $parentModel = ClassRegistry::init($currentModel->parent_name[$parent_name]);
+            for($i = 0, $size = sizeof($currentModel->parent_name); $i < $size; ++ $i) {
+                $parentModel = ClassRegistry::init($currentModel->parent_name[$i]);
                 $parentList = $parentModel->find('list');
-                $this->set("parentList", $parentList);
+                $this->set("parentList" . $i, $parentList);
                 $this->log($parentList);
             }
             $this->data = $currentModel->read();
@@ -167,7 +170,7 @@ class AppController extends Controller {
      //                    $this->data[$this->modelClass]['image_id'] = '';
                 }
                 
-                if ($this->data['ImageMirror']['name']['name'] != null) {
+                if (isset($this->data['ImageMirror']['name']['name']) && $this->data['ImageMirror']['name']['name'] != null) {
                     $imageMirrorModel = ClassRegistry::init('ImageMirror');
                     $imageMirror = $imageMirrorModel->save($this->data, false);
                     
