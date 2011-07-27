@@ -166,7 +166,7 @@
 
 </td>
 <td>
-<p style="margin-left: -300px; border: #999999 solid 1px;"><?php echo $this->Html->image('/'.$this->data['Image']['path'].'/'.$this->data['Image']['name']);?></p>
+<p style="margin-left: -300px; border: #999999 solid 1px;"><?php echo $this->Html->image('/'.$this->data['OrderDetail']['Image']['path'].'/'.$this->data['OrderDetail']['Image']['name'], array('width' => 301));?></p>
 <!--  start related-activities -->
 
 <!-- end related-activities -->
