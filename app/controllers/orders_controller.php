@@ -114,6 +114,16 @@ class OrdersController extends AppController {
             $this->log($this->data);
             $order = $currentModel->save($this->data);
             if (! empty($order)) {
+                // save image
+                if (in_array($this->modelClass, $this->allowUploadImage)) {
+                    if (isset($this->data['Image']['name']['name']) && $this->data['Image']['name']['name'] != null) {
+                        $imageModel = ClassRegistry::init('Image');
+                        $image = $imageModel->save($this->data, false);
+                        
+                        $this->data[$this->modelClass]['image_id'] = $imageModel->id;
+                    }
+                }
+                
                 // save order detail
                 $this->data['OrderDetail']['order_id'] = $currentModel->id;
                 $currentModel->OrderDetail->save($this->data);

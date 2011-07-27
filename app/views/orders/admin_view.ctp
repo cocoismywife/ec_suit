@@ -120,9 +120,7 @@
 </tr> 
 <tr>
 <th valign="top">裏地:</th>
-<td>
-<input type="text" class="inp-form" value="SW1" readonly="readonly" />
-</td>
+<td><?php echo $this->Form->input('OrderDetail.LiningFabric.name', array('label' => false, 'class' => 'inp-form', 'readonly' => true)); ?></td>
 <td></td>
 </tr> 
 <tr>
@@ -157,9 +155,7 @@
 </tr> 
 <tr>
 <th valign="top">裏仕様:</th>
-<td>	
-<input type="text" class="inp-form" value="レギュラー" readonly="readonly" />
-</td>
+<td><?php echo $this->Form->input('OrderDetail.Lining.name', array('label' => false, 'class' => 'inp-form', 'readonly' => true)); ?></td>
 <td></td>
 </tr> 
 <tr>
@@ -170,7 +166,7 @@
 
 </td>
 <td>
-<p style="margin-left: -300px; border: #999999 solid 1px;"><img src="images/suit/suit.jpg" /></p>
+<p style="margin-left: -300px; border: #999999 solid 1px;"><?php echo $this->Html->image('/'.$this->data['Image']['path'].'/'.$this->data['Image']['name']);?></p>
 <!--  start related-activities -->
 
 <!-- end related-activities -->

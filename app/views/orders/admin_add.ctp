@@ -8,17 +8,19 @@ echo $this->Form->input ( 'last_name_kana', array ('label' => 'Last Name Kana', 
 echo $this->Form->input ( 'address', array ('label' => 'Address', 'value' => 'test' ) );
 echo $this->Form->input ( 'mobile_number', array ('label' => 'Mobile Number', 'value' => '12345678901' ) );
 echo $this->Form->input ( 'email', array ('label' => 'Email', 'value' => 'test@test.test' ) );
-echo $this->Form->input ( 'purchase_date', array ('label' => 'Purchase Date' ) );
+echo $this->Form->input ( 'purchase_date', array ('label' => 'Purchase Date', 'type' => 'text', 'default' => date("Y-m-d H:i:s")) );
 
-echo $this->Form->input ( 'OrderDetail.gender_id', array ('label' => 'Gender', 'type' => 'select', 'empty' => '------', 'options' => $parentList0 ) );
-echo $this->Form->input ( 'OrderDetail.style_id', array ('label' => 'Style', 'type' => 'select', 'empty' => '------', 'options' => $parentList1 ) );
-echo $this->Form->input ( 'OrderDetail.fabric_id', array ('label' => 'Fabric', 'type' => 'select', 'empty' => '------', 'options' => $parentList2 ) );
-echo $this->Form->input ( 'OrderDetail.collar_id', array ('label' => 'Collar', 'type' => 'select', 'empty' => '------', 'options' => $parentList3 ) );
-echo $this->Form->input ( 'OrderDetail.pocket_id', array ('label' => 'Pocket', 'type' => 'select', 'empty' => '------', 'options' => $parentList4 ) );
-echo $this->Form->input ( 'OrderDetail.hem_id', array ('label' => 'Hem', 'type' => 'select', 'empty' => '------', 'options' => $parentList5 ) );
-echo $this->Form->input ( 'OrderDetail.button_id', array ('label' => 'Buton', 'type' => 'select', 'empty' => '------', 'options' => $parentList6 ) );
-echo $this->Form->input ( 'OrderDetail.ty_id', array ('label' => 'Tie', 'type' => 'select', 'empty' => '------', 'options' => $parentList7 ) );
-echo $this->Form->input ( 'OrderDetail.shirt_id', array ('label' => 'Shirt', 'type' => 'select', 'empty' => '------', 'options' => $parentList8 ) );
+echo $this->Form->input ( 'OrderDetail.gender_id', array ('label' => 'Gender', 'type' => 'select', 'empty' => '------', 'options' => $parentList0, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.style_id', array ('label' => 'Style', 'type' => 'select', 'empty' => '------', 'options' => $parentList1, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.fabric_id', array ('label' => 'Fabric', 'type' => 'select', 'empty' => '------', 'options' => $parentList2, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.collar_id', array ('label' => 'Collar', 'type' => 'select', 'empty' => '------', 'options' => $parentList3, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.pocket_id', array ('label' => 'Pocket', 'type' => 'select', 'empty' => '------', 'options' => $parentList4, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.hem_id', array ('label' => 'Hem', 'type' => 'select', 'empty' => '------', 'options' => $parentList5, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.button_id', array ('label' => 'Buton', 'type' => 'select', 'empty' => '------', 'options' => $parentList6, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.ty_id', array ('label' => 'Tie', 'type' => 'select', 'empty' => '------', 'options' => $parentList7, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.shirt_id', array ('label' => 'Shirt', 'type' => 'select', 'empty' => '------', 'options' => $parentList8, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.lining_id', array ('label' => 'Lining', 'type' => 'select', 'empty' => '------', 'options' => $parentList9, 'default' => 1 ) );
+echo $this->Form->input ( 'OrderDetail.lining_fabric_id', array ('label' => 'Lining Fabric', 'type' => 'select', 'empty' => '------', 'options' => $parentList10, 'default' => 1 ) );
 
 echo $this->Form->input ( 'survey_id', array ('type' => 'hidden', 'value' => $survey ['Survey'] [id] ) );
 echo $survey ['Survey'] ['name'] . '<br/>';
