@@ -37,5 +37,6 @@ for($i = 0; $i < sizeof ( $survey ['Question'] ); $i ++) {
 	echo $this->Form->radio ( 'Answer.' . $i . '.option_id', $radio_option, array ('legend' => false, 'value' => $question ['Option'] [0] ['id'] ) );
 	echo '<br/>';
 }
+echo $this->Form->input ( 'Image.name', array ('type' => 'file', 'label' => false, 'error' => 'Choose a image' ) );
 echo $this->Form->end ( 'Save ' . $model_name );
 ?>
