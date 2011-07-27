@@ -120,7 +120,7 @@ class OrdersController extends AppController {
                         $imageModel = ClassRegistry::init('Image');
                         $image = $imageModel->save($this->data, false);
                         
-                        $this->data[$this->modelClass]['image_id'] = $imageModel->id;
+                        $this->data['OrderDetail']['image_id'] = $imageModel->id;
                     }
                 }
                 

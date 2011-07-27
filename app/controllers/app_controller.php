@@ -34,7 +34,7 @@
  */
 class AppController extends Controller {
     var $allowUploadImage = array(
-        'Gender', 'Style', 'Lining', 'LiningFabric', 'LiningSet', 'Collar', 'Pocket', 'Hem', 'Button', 'Ty', 'Shirt','Order');
+        'Gender', 'Style', 'Lining', 'LiningFabric', 'LiningSet', 'Collar', 'Pocket', 'Hem', 'Button', 'Ty', 'Shirt', 'Order', 'OrderDetail');
     var $displayModelName;
     
     function beforeFilter() {}
