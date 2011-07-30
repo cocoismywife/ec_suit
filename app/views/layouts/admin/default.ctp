@@ -4,15 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>仕立館</title>
 <?php echo $this->Html->css('screen', null, array('media' => 'screen', 'title' => 'default')) ?>
+<?php echo $this->Html->css('screen', null, array('media' => 'print', 'title' => 'default')) ?>
 <!--[if IE]>
 <?php echo $this->Html->css('pro_dropline_ie', null, array('media' => 'screen')) ?>
+<?php echo $this->Html->css('pro_dropline_ie', null, array('media' => 'print')) ?>
 <![endif]-->
 
 <!--  jquery core -->
-<?php echo $javascript->link(array('jquery/jquery-1.4.2.min'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery-1.4.2.min'), true) ?>
 
 <!--  checkbox styling script -->
-<?php echo $javascript->link(array('jquery/ui.core', 'jquery/ui.checkbox', 'jquery/jquery.bind'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/ui.core', 'jquery/ui.checkbox', 'jquery/jquery.bind'), true) ?>
 <script type="text/javascript">
 $(function(){
 $('input').checkBox();
@@ -27,7 +29,7 @@ return false;
 <![if !IE 7]>
 
 <!--  styled select box script version 1 -->
-<?php echo $javascript->link(array('jquery/jquery.selectbox-0.5'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery.selectbox-0.5'), true) ?>
 <script type="text/javascript">
 $(document).ready(function() {
 $('.styledselect').selectbox({ inputClass: "selectbox_styled" });
@@ -38,7 +40,7 @@ $('.styledselect').selectbox({ inputClass: "selectbox_styled" });
 <![endif]>
 
 <!--  styled select box script version 2 --> 
-<?php echo $javascript->link(array('jquery/jquery.selectbox-0.5_style_2'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery.selectbox-0.5_style_2'), true) ?>
 <script type="text/javascript">
 $(document).ready(function() {
 $('.styledselect_form_1').selectbox({ inputClass: "styledselect_form_1" });
@@ -47,7 +49,7 @@ $('.styledselect_form_2').selectbox({ inputClass: "styledselect_form_2" });
 </script>
 
 <!--  styled select box script version 3 --> 
-<?php echo $javascript->link(array('jquery/jquery.selectbox-0.5_style_2'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery.selectbox-0.5_style_2'), true) ?>
 <script type="text/javascript">
 $(document).ready(function() {
 $('.styledselect_pages').selectbox({ inputClass: "styledselect_pages" });
@@ -55,7 +57,7 @@ $('.styledselect_pages').selectbox({ inputClass: "styledselect_pages" });
 </script>
 
 <!--  styled file upload script --> 
-<?php echo $javascript->link(array('jquery/jquery.filestyle'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery.filestyle'), true) ?>
 <script type="text/javascript" charset="utf-8">
 $(function() {
 $("input.file_1").filestyle({ 
@@ -68,10 +70,10 @@ width : 300
 </script>
 
 <!-- Custom jquery scripts -->
-<?php echo $javascript->link(array('jquery/custom_jquery'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/custom_jquery'), true) ?>
 
 <!-- Tooltips -->
-<?php echo $javascript->link(array('jquery/jquery.tooltip', 'jquery/jquery.dimensions'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery.tooltip', 'jquery/jquery.dimensions'), true) ?>
 <script type="text/javascript">
 $(function() {
 $('a.info-tooltip ').tooltip({
@@ -89,7 +91,7 @@ left: 5
 
 <!--  date picker script -->
 <?php echo $this->Html->css('datePicker') ?>
-<?php echo $javascript->link(array('jquery/date', 'jquery/jquery.datePicker'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/date', 'jquery/jquery.datePicker'), true) ?>
 <script type="text/javascript" charset="utf-8">
 $(function()
 {
@@ -159,7 +161,7 @@ $('#d').trigger('change');
 </script>
 
 <!-- MUST BE THE LAST SCRIPT IN <HEAD></HEAD></HEAD> png fix -->
-<?php echo $javascript->link(array('jquery/jquery.pngFix.pack'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery.pngFix.pack'), true) ?>
 <script type="text/javascript">
 $(document).ready(function(){
 $(document).pngFix( );
