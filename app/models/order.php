@@ -12,7 +12,7 @@ class Order extends AppModel {
 		'Answer' => array (
 			'className' => 'Answer', 
 			'foreignKey' => 'order_id', 
-			'order' => 'Answer.id ASC', 
+			'order' => 'Answer.question_id ASC', 
 			'dependent' => true 
 	) );
 	var $parent_name = array ('Survey' );
