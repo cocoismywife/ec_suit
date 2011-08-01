@@ -167,6 +167,17 @@ $(document).ready(function(){
 $(document).pngFix( );
 });
 </script>
+<script type="text/javascript">
+function doPrint() {    
+    bdhtml=window.document.body.innerHTML;    
+    sprnstr="<!-- start content-outer -->";    
+    eprnstr="<!-- end footer -->";    
+    prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+sprnstr.length);    
+    prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));    
+    window.document.body.innerHTML=prnhtml;    
+    window.print();    
+}    
+</script>
 </head>
 <body> 
 <!-- Start: page-top-outer -->
