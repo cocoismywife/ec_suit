@@ -37,8 +37,6 @@ class AppController extends Controller {
         'Gender', 'Style', 'Lining', 'LiningFabric', 'LiningSet', 'Collar', 'Pocket', 'Hem', 'Button', 'Ty', 'Shirt', 'Order', 'OrderDetail');
     var $displayModelName;
     
-    function beforeFilter() {}
-    
     function beforeRender() {
         Configure::write('debug', 0);
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
