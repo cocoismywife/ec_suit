@@ -46,7 +46,7 @@ $(document).pngFix( );
 		</tr>
 		<tr>
 			<th>Password</th>
-			<td><?php echo $this->Form->input('password', array('label' => false, 'class' => 'login-inp', 'default' => '************', 'onfocus' => 'this.value=""'))?></td>
+			<td><?php echo $this->Form->input('password', array('label' => false, 'class' => 'login-inp', 'onfocus' => 'this.value=""'))?></td>
 		</tr>
 		<tr>
 			<th></th>
