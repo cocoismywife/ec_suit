@@ -227,7 +227,7 @@ class FabricsController extends AppController {
             $this->log('========== Order Info ==========');
             $this->log($fabric);
             $newFabric = array(
-                '生地ID' => $fabric[$this->modelClass]['id'], '生地Code' => $fabric[$this->modelClass]['code'], '生地名' => $fabric[$this->modelClass]['name'], '値段' => $fabric[$this->modelClass]['name'], '色コード' => $fabric['Color']['name'], '柄カテゴリID1' => $fabric['BigTracery']['name'], '柄カテゴリID2' => ($fabric['SmallTracery']['name'] == null ? $fabric['BigTracery']['name'] : $fabric['SmallTracery']['name']), '季節' => $fabric['Season']['name'], 'ブランドカテゴリID1' => $fabric['BigBrand']['name'], 'ブランドカテゴリID2' => ($fabric['SmallBrand']['name'] == null ? $fabric['BigBrand']['name'] : $fabric['SmallBrand']['name']), '備考' => $fabric[$this->modelClass]['remark']);
+                '生地ID' => $fabric[$this->modelClass]['id'], '生地Code' => $fabric[$this->modelClass]['code'], '生地名' => $fabric[$this->modelClass]['name'], '値段' => $fabric[$this->modelClass]['price'], '色コード' => $fabric['Color']['name'], '柄カテゴリID1' => $fabric['BigTracery']['name'], '柄カテゴリID2' => ($fabric['SmallTracery']['name'] == null ? $fabric['BigTracery']['name'] : $fabric['SmallTracery']['name']), '季節' => $fabric['Season']['name'], 'ブランドカテゴリID1' => $fabric['BigBrand']['name'], 'ブランドカテゴリID2' => ($fabric['SmallBrand']['name'] == null ? $fabric['BigBrand']['name'] : $fabric['SmallBrand']['name']), '備考' => $fabric[$this->modelClass]['remark']);
             array_push($list, $newFabric);
         }
         $this->set('list', $list);

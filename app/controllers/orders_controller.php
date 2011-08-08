@@ -32,7 +32,6 @@ class OrdersController extends AppController {
         $currentModel = ClassRegistry::init($this->modelClass);
         $currentModel->id = $id;
         $this->data = $currentModel->read();
-        //		$this->get_name_of_select ();
         $this->log($this->data);
     }
     
