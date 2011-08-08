@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `es_fabrics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(50) NOT NULL COMMENT '生地ID',
   `name` varchar(200) NOT NULL COMMENT '生地名',
-  `price` decimal(9,2) NOT NULL COMMENT '値段',
+  `price` int(11) NOT NULL COMMENT '値段',
   `color_id` int(11) DEFAULT NULL COMMENT '色',
   `big_tracery_id` int(11) DEFAULT NULL COMMENT '柄:大カテゴリ',
   `small_tracery_id` int(11) DEFAULT NULL COMMENT '柄:小カテゴリ',
