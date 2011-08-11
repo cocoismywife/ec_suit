@@ -254,11 +254,13 @@ class OrdersController extends AppController {
             
             $answers = $order['Answer'];
             
-            for($i = 0; $i < count($answers); $i ++) {
+            for($i = 0; $i < count($answers); $i++) {
                 if (isset($answers[$i])) {
                     $answer = $answers[$i];
-                    $newOrder[$answer['Option']['Question']['name']] = isset(
-                            $answer['Option']['text']) ? $answer['Option']['text'] : '';
+                    if (isset($answer['Option']['Question']['name'])) {
+                        $newOrder[$answer['Option']['Question']['name']] = isset(
+                                $answer['Option']['text']) ? $answer['Option']['text'] : '';
+                    }
                 }
             }
             array_push($list, $newOrder);
