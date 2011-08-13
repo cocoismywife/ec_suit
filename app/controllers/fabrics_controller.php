@@ -106,15 +106,17 @@ class FabricsController extends AppController {
                     'fields' => 'name'));
         $traceryName = $bigTracery['BigTracery']['name'];
         
-        $small_tracery_id = $this->data[$this->modelClass]['small_tracery_id'];
-        if ($small_tracery_id != '') {
-            $smallTracery = ClassRegistry::init('SmallTracery')->findById($small_tracery_id, 
-                    array(
-                        'fields' => 'name'));
-            $smallTraceryName = $smallTracery['SmallTracery']['name'];
-            $traceryName = $smallTraceryName;
-        
+        if (isset($this->data[$this->modelClass]['small_tracery_id'])) {
+            $small_tracery_id = $this->data[$this->modelClass]['small_tracery_id'];
+            if ($small_tracery_id != '') {
+                $smallTracery = ClassRegistry::init('SmallTracery')->findById($small_tracery_id, 
+                        array(
+                            'fields' => 'name'));
+                $smallTraceryName = $smallTracery['SmallTracery']['name'];
+                $traceryName = $smallTraceryName;
+            
      //			$traceryName = join ( '、', array ($traceryName, $smallTraceryName ) );
+            }
         }
         
         $season_id = $this->data[$this->modelClass]['season_id'];
@@ -130,16 +132,19 @@ class FabricsController extends AppController {
                     'fields' => 'name'));
         $brandName = $bigBrand['BigBrand']['name'];
         
-        $small_brand_id = $this->data[$this->modelClass]['small_brand_id'];
-        if ($small_brand_id != '') {
-            $smallBrand = ClassRegistry::init('SmallBrand')->findById(
-                    $this->data[$this->modelClass]['small_brand_id'], 
-                    array(
-                        'fields' => 'name'));
-            $smallBrandName = $smallBrand['SmallBrand']['name'];
-            $brandName = $smallBrandName;
-        
+        if (isset($this->data[$this->modelClass]['small_brand_id'])) 
+        {
+            $small_brand_id = $this->data[$this->modelClass]['small_brand_id'];
+            if ($small_brand_id != '') {
+                $smallBrand = ClassRegistry::init('SmallBrand')->findById(
+                        $this->data[$this->modelClass]['small_brand_id'], 
+                        array(
+                            'fields' => 'name'));
+                $smallBrandName = $smallBrand['SmallBrand']['name'];
+                $brandName = $smallBrandName;
+            
      //			$brandName = join ( '、', array ($brandName, $smallBrandName ) );
+            }
         }
         
         $this->data[$this->modelClass]['color_name'] = $colorName;
