@@ -132,8 +132,7 @@ class FabricsController extends AppController {
                     'fields' => 'name'));
         $brandName = $bigBrand['BigBrand']['name'];
         
-        if (isset($this->data[$this->modelClass]['small_brand_id'])) 
-        {
+        if (isset($this->data[$this->modelClass]['small_brand_id'])) {
             $small_brand_id = $this->data[$this->modelClass]['small_brand_id'];
             if ($small_brand_id != '') {
                 $smallBrand = ClassRegistry::init('SmallBrand')->findById(
@@ -302,6 +301,11 @@ class FabricsController extends AppController {
                             array(
                                 'conditions' => array(
                                 'Fabric.big_tracery_id' => $categoryId, 'Fabric.small_tracery_id' => $subcategoryId)));
+                } else {
+                    $model = ClassRegistry::init($this->modelClass)->find('all', 
+                            array(
+                                'conditions' => array(
+                                'Fabric.big_tracery_id' => $categoryId)));
                 }
                 break;
             case 'price' :
@@ -347,6 +351,11 @@ class FabricsController extends AppController {
                             array(
                                 'conditions' => array(
                                 'Fabric.big_brand_id' => $categoryId, 'Fabric.small_brand_id' => $subcategoryId)));
+                } else {
+                    $model = ClassRegistry::init($this->modelClass)->find('all', 
+                            array(
+                                'conditions' => array(
+                                'Fabric.big_brand_id' => $categoryId)));
                 }
                 break;
         }
