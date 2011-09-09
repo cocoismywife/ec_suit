@@ -300,12 +300,12 @@ class FabricsController extends AppController {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
                                 'conditions' => array(
-                                'Fabric.big_tracery_id' => $categoryId, 'Fabric.small_tracery_id' => $subcategoryId)));
+                                'Fabric.big_tracery_id' => $categoryId, 'Fabric.small_tracery_id' => $subcategoryId, 'Fabric.public' => 1)));
                 } else {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
                                 'conditions' => array(
-                                'Fabric.big_tracery_id' => $categoryId)));
+                                'Fabric.big_tracery_id' => $categoryId, 'Fabric.public' => 1)));
                 }
                 break;
             case 'price' :
