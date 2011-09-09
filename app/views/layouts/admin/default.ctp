@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>仕立館</title>
-<?php echo $this->Html->css('screen', null, array('media' => 'screen', 'title' => 'default')) ?>
-<?php echo $this->Html->css('screen', null, array('media' => 'print', 'title' => 'default')) ?>
+<?php echo $this->Html->css('screen', null, array('media' => 'screen, print', 'title' => 'default')) ?>
+<?php echo $this->Html->css('print', null, array('media' => 'print', 'title' => 'default')) ?>
 <!--[if IE]>
 <?php echo $this->Html->css('pro_dropline_ie', null, array('media' => 'screen')) ?>
 <?php echo $this->Html->css('pro_dropline_ie', null, array('media' => 'print')) ?>
@@ -188,7 +188,7 @@ function doPrint() {
 
 <!-- start logo -->
 <div id="logo">
-<a href="list.html"><?php echo $this->Html->image('/images/shared/logo.png', array('alt'=> __('仕立館', true), 'border' => '0', 'height' => 40, 'width' => 116)) ?></a>
+<a href="/ec_suits/admin/fabrics/all"><?php echo $this->Html->image('/images/shared/logo.png', array('alt'=> __('仕立館', true), 'border' => '0', 'height' => 40, 'width' => 116)) ?></a>
 </div>
 <!-- end logo -->
 

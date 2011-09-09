@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* CSS Document */
+
+div#page-top-outer {
+	display: none;
+}
+
+div.nav-outer-repeat {
+	display: none;
+}
+
+input.btn-print {
+	display: none;
+}
+
+div#sign {
+	display:block;
+	position: relative;
+	width: 100%;
+}
+
+div#sign dl {
+	position: relative;
+	left: 40%;
+	top: 0;
+	width: 60%;
+}
+
+div#sign dt {
+	margin-top: 3em;
+	text-align: left;
+	width: 20%;
+}
+
+div#sign dd {
+	border-bottom: 1px solid #ccc;
+	height: 2em;
+}
+
+#content-table th.sized	img {
+	display: none;
+}
+
+div#footer {
+	display: none;
+}
