@@ -123,6 +123,7 @@ CREATE TABLE IF NOT EXISTS `es_fabrics` (
   `image_id` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
+  `public` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_UNIQUE` (`code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Page Seq.4\n生地選択' AUTO_INCREMENT=2 ;
