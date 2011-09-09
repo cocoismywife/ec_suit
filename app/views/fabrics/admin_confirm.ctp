@@ -116,6 +116,11 @@
 </td>
 </tr>
 <tr>
+<th valign="top">公開フラグ:</th>
+<td><?php echo $this->Form->checkbox('public', array('id' => 'public', 'value' => '1', 'checked' => ($this->data['Fabric']['public'] == 1 ? true : false), 'readonly' => true));?></td>
+<td></td>
+</tr>
+<tr>
 <th>&nbsp;</th>
 <td valign="top">
 <?php
