@@ -9,8 +9,12 @@ class FabricsController extends AppController {
         'id', 'code', 'name'), 'limit' => 10, 'page' => 1, 'order' => array(
         'id' => 'desc'));
     
-    function admin_all() {
-        $this->_all();
+    function admin_all($order) {
+        $condition = array();
+        if ($order != null) {
+            $condition = array('order' => array('price '.$order));
+        }
+        $this->_all($condition);
         $this->set('navClass', '1');
     }
     
@@ -285,14 +289,16 @@ class FabricsController extends AppController {
         }
     }
     
-    function query($categoryType, $categoryId, $subcategoryId = null) {
+    function query($order, $categoryType, $categoryId, $subcategoryId = null) {
         Configure::write('debug', 2);
         switch($categoryType) {
             case 'color' :
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
                         array(
                             'conditions' => array(
-                            'color_id' => $categoryId)));
+                            'color_id' => $categoryId),
+                            'order' => array('price '.$order)
+                        ));
                 break;
             case 'tracery' :
                 $model = array();
@@ -300,12 +306,15 @@ class FabricsController extends AppController {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
                                 'conditions' => array(
-                                'Fabric.big_tracery_id' => $categoryId, 'Fabric.small_tracery_id' => $subcategoryId, 'Fabric.public' => 1)));
+                                'Fabric.big_tracery_id' => $categoryId, 'Fabric.small_tracery_id' => $subcategoryId, 'Fabric.public' => 1),
+                            	'order' => array('price '.$order)
+                        ));
                 } else {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
-                                'conditions' => array(
-                                'Fabric.big_tracery_id' => $categoryId, 'Fabric.public' => 1)));
+                                'conditions' => array('Fabric.big_tracery_id' => $categoryId, 'Fabric.public' => 1),
+                            	'order' => array('price '.$order)
+                        ));
                 }
                 break;
             case 'price' :
@@ -336,26 +345,31 @@ class FabricsController extends AppController {
                 }
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
                         array(
-                            'conditions' => $conditions));
+                            'conditions' => $conditions,
+                            'order' => array('price '.$order)
+                        ));
                 break;
             case 'season' :
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
                         array(
-                            'conditions' => array(
-                            'season_id' => $categoryId)));
+                            'conditions' => array('season_id' => $categoryId),
+                            'order' => array('price '.$order)
+                        ));
                 break;
             case 'brand' :
                 $model = array();
                 if ($subcategoryId != null) {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
-                                'conditions' => array(
-                                'Fabric.big_brand_id' => $categoryId, 'Fabric.small_brand_id' => $subcategoryId)));
+                                'conditions' => array('Fabric.big_brand_id' => $categoryId, 'Fabric.small_brand_id' => $subcategoryId),
+                            	'order' => array('price '.$order)
+                        ));
                 } else {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
-                                'conditions' => array(
-                                'Fabric.big_brand_id' => $categoryId)));
+                                'conditions' => array('Fabric.big_brand_id' => $categoryId),
+                            	'order' => array('price '.$order)
+                        ));
                 }
                 break;
         }
