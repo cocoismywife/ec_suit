@@ -9,12 +9,8 @@ class FabricsController extends AppController {
         'id', 'code', 'name'), 'limit' => 10, 'page' => 1, 'order' => array(
         'id' => 'desc'));
     
-    function admin_all($order) {
-        $condition = array();
-        if ($order != null) {
-            $condition = array('order' => array('price '.$order));
-        }
-        $this->_all($condition);
+    function admin_all() {
+        $this->_all();
         $this->set('navClass', '1');
     }
     
