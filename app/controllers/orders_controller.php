@@ -160,7 +160,11 @@ class OrdersController extends AppController {
             // save order detail
             $orderDetail = $order['OrderDetail'];
             $currentModel->OrderDetail->id = $orderDetail['id'];
+            $currentModel->OrderDetail->deleteAll(
+                    array(
+                        'OrderDetail.order_id' => $currentModel->id));
             $this->data['OrderDetail']['order_id'] = $currentModel->id;
+            $this->data['OrderDetail']['image_id'] = $this->data['OrderDetail']['Image']['id'];
             $currentModel->OrderDetail->save($this->data);
             
             // save survey answer
@@ -173,13 +177,6 @@ class OrdersController extends AppController {
             }
             $currentModel->Answer->saveAll($this->data['Answer']);
             $this->Session->setFlash('Your post has been saved.');
-        
-     //            if ($currentModel->save($this->data)) {
-        //                $this->Session->setFlash('Your post has been updated.');
-        //            
-        //     //                $this->redirect(array(
-        //            //                    'action' => 'admin_all'));
-        //            }
         }
         
         for($i = 0, $size = sizeof(ClassRegistry::init('OrderDetail')->parent_name); $i < $size; ++ $i) {
