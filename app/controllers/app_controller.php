@@ -47,8 +47,12 @@ class AppController extends Controller {
             }
             if (isset($this->params['isAjax']) && $this->params['isAjax']) {
                 $this->layout = 'empty';
-            } else if (($this->modelClass == 'Fabric' && $this->params['action'] != 'admin_export') || ($this->modelClass == 'Order' && $this->params['action'] != 'admin_add' && $this->params['action'] != 'admin_export')) {
-                $this->layout = 'admin/default';
+            } else if (($this->modelClass == 'Fabric' && $this->params['action'] != 'admin_export') || ($this->modelClass == 'Order' && $this->params['action'] != 'admin_export')) {
+                if ($this->params['action'] == 'admin_add' || $this->params['action'] == 'admin_add_confirm' || $this->params['action'] == 'admin_add_survey' || $this->params['action'] == 'admin_add_finish') {
+                    $this->layout = 'admin/order';
+                } else {
+                    $this->layout = 'admin/default';
+                }
             }
         } else {
             if ($this->params['controller'] == 'users') {

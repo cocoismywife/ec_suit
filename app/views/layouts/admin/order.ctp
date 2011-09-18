@@ -18,11 +18,6 @@
 
 <?php echo $content_for_layout; ?>
 
-<div id="footer">
-<div id="footerInner">
-<p><?php echo $this->Html->image('/images/order/img_foot1.gif', array('alt'=> __('情報の入力をお願い致します。', true))) ?></p>
-<!-- / id footerInner --></div>
-<!-- / id footer --></div>
 <!-- / id layout --></div>
 </body>
 </html>

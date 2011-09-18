@@ -98,11 +98,84 @@ class OrdersController extends AppController {
         }
     }
     
-    function admin_search() {}
-    
-    function admin_price_range($price) {}
-    
     function admin_add() {
+        $currentModel = ClassRegistry::init($this->modelClass);
+        
+        if (empty($this->data)) {
+            for($i = 0, $size = sizeof(ClassRegistry::init('OrderDetail')->parent_name); $i < $size; ++ $i) {
+                $parentModel = ClassRegistry::init(
+                        ClassRegistry::init('OrderDetail')->parent_name[$i]);
+                $parentList = $parentModel->find('list');
+                $this->set('parentList' . $i, $parentList);
+            }
+            
+            $survey = ClassRegistry::init('Survey')->findByName('Default');
+            $this->set('survey', $survey);
+        } else {
+            $order = $currentModel->save($this->data);
+            if (! empty($order)) {
+                // save image
+                if (in_array($this->modelClass, $this->allowUploadImage)) {
+                    if (isset($this->data['Image']['name']['name']) && $this->data['Image']['name']['name'] != null) {
+                        $imageModel = ClassRegistry::init('Image');
+                        $image = $imageModel->save($this->data, false);
+                        
+                        $this->data['OrderDetail']['image_id'] = $imageModel->id;
+                    }
+                }
+                
+                // save order detail
+                $this->data['OrderDetail']['order_id'] = $currentModel->id;
+                $currentModel->OrderDetail->save($this->data);
+                
+                // save survey answer
+                if (isset($this->data['Question'])) {
+                    for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
+                        $this->data['Answer'][$i]['order_id'] = $currentModel->id;
+                        $this->data['Answer'][$i]['question_id'] = $this->data['Question'][$i]['id'];
+                    }
+                    $currentModel->Answer->saveAll($this->data['Answer']);
+                    $this->Session->setFlash('Your post has been saved.');
+                }
+                
+                $this->data = $currentModel->read();
+            }
+        }
+    }
+    
+    function admin_add_confirm() {
+        $currentModel = ClassRegistry::init($this->modelClass);
+        $currentModel->id = $this->data[$this->modelClass]['id'];
+        $order = $currentModel->read();
+        $this->data['Order']['purchase_date'] = $order['Order']['purchase_date'];
+        $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
+    }
+    
+    function admin_add_survey() {
+        $currentModel = ClassRegistry::init($this->modelClass);
+        $currentModel->id = $this->data[$this->modelClass]['id'];
+        $mobile_number = join('-', array($this->data[$this->modelClass]['phone1'], $this->data[$this->modelClass]['phone2'], $this->data[$this->modelClass]['phone3']));
+        $this->data[$this->modelClass]['mobile_number'] = $mobile_number;
+        $currentModel->save($this->data);
+        
+        $survey = ClassRegistry::init('Survey')->findByName('Default');
+        $this->set('survey', $survey);
+    }
+    
+    function admin_add_finish() {
+        $currentModel = ClassRegistry::init($this->modelClass);
+        $currentModel->id = $this->data[$this->modelClass]['id'];
+        
+        // save survey answer
+        for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
+            $this->data['Answer'][$i]['order_id'] = $currentModel->id;
+            $this->data['Answer'][$i]['question_id'] = $this->data['Question'][$i]['id'];
+        }
+        $currentModel->Answer->saveAll($this->data['Answer']);
+        $this->Session->setFlash('Your post has been saved.');
+    }
+    
+    function admin_add_sample() {
         $currentModel = ClassRegistry::init($this->modelClass);
         
         if (empty($this->data)) {
@@ -143,10 +216,12 @@ class OrdersController extends AppController {
                 $currentModel->Answer->saveAll($this->data['Answer']);
                 $this->Session->setFlash('Your post has been saved.');
                 
-                $this->log($this->data);
+                $this->data = $currentModel->read();
                 
-                $this->redirect(array(
-                    'action' => 'admin_all'));
+                $this->render('add');
+            
+     //                $this->redirect(array(
+            //                    'action' => 'admin_all'));
             }
         }
     }
