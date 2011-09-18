@@ -35,6 +35,14 @@ class OrdersController extends AppController {
         $this->log($this->data);
     }
     
+    //    function admin_edit($id) {
+    //        $currentModel = ClassRegistry::init($this->modelClass);
+    //        $currentModel->id = $id;
+    //        $this->data = $currentModel->read();
+    //        $this->log($this->data);
+    //    }
+    
+
     function admin_page_limit() {
         $numberOfRow = $this->data['number_row'];
         if ($numberOfRow != '') {
@@ -141,6 +149,48 @@ class OrdersController extends AppController {
                     'action' => 'admin_all'));
             }
         }
+    }
+    
+    function admin_edit($id = null) {
+        $currentModel = ClassRegistry::init($this->modelClass);
+        $currentModel->id = $id;
+        
+        if (! empty($this->data)) {
+            $order = $currentModel->find();
+            // save order detail
+            $orderDetail = $order['OrderDetail'];
+            $currentModel->OrderDetail->id = $orderDetail['id'];
+            $this->data['OrderDetail']['order_id'] = $currentModel->id;
+            $currentModel->OrderDetail->save($this->data);
+            
+            // save survey answer
+            $currentModel->Answer->deleteAll(
+                    array(
+                        'Answer.order_id' => $currentModel->id));
+            for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
+                $this->data['Answer'][$i]['order_id'] = $currentModel->id;
+                $this->data['Answer'][$i]['question_id'] = $this->data['Question'][$i]['id'];
+            }
+            $currentModel->Answer->saveAll($this->data['Answer']);
+            $this->Session->setFlash('Your post has been saved.');
+        
+     //            if ($currentModel->save($this->data)) {
+        //                $this->Session->setFlash('Your post has been updated.');
+        //            
+        //     //                $this->redirect(array(
+        //            //                    'action' => 'admin_all'));
+        //            }
+        }
+        
+        for($i = 0, $size = sizeof(ClassRegistry::init('OrderDetail')->parent_name); $i < $size; ++ $i) {
+            $parentModel = ClassRegistry::init(ClassRegistry::init('OrderDetail')->parent_name[$i]);
+            $parentList = $parentModel->find('list');
+            $this->set('parentList' . $i, $parentList);
+        }
+        
+        $this->data = $currentModel->read();
+        $survey = ClassRegistry::init('Survey')->findByName('Default');
+        $this->set('survey', $survey);
     }
     
     function get_name_of_select() {
@@ -254,7 +304,7 @@ class OrdersController extends AppController {
             
             $answers = $order['Answer'];
             
-            for($i = 0; $i < count($answers); $i++) {
+            for($i = 0; $i < count($answers); $i ++) {
                 if (isset($answers[$i])) {
                     $answer = $answers[$i];
                     if (isset($answer['Option']['Question']['name'])) {
