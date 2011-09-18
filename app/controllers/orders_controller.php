@@ -16,7 +16,6 @@ class OrdersController extends AppController {
     }
     
     function _all($condition = array()) {
-        //		$list = ClassRegistry::init ( $this->modelClass )->find ( 'all', array ('fields' => array ('id', 'code', 'name' ) ) );
         if ($this->Session->check('limit')) {
             $this->paginate['limit'] = $this->Session->read('limit');
         } else {
@@ -35,14 +34,6 @@ class OrdersController extends AppController {
         $this->log($this->data);
     }
     
-    //    function admin_edit($id) {
-    //        $currentModel = ClassRegistry::init($this->modelClass);
-    //        $currentModel->id = $id;
-    //        $this->data = $currentModel->read();
-    //        $this->log($this->data);
-    //    }
-    
-
     function admin_page_limit() {
         $numberOfRow = $this->data['number_row'];
         if ($numberOfRow != '') {
@@ -154,7 +145,9 @@ class OrdersController extends AppController {
     function admin_add_survey() {
         $currentModel = ClassRegistry::init($this->modelClass);
         $currentModel->id = $this->data[$this->modelClass]['id'];
-        $mobile_number = join('-', array($this->data[$this->modelClass]['phone1'], $this->data[$this->modelClass]['phone2'], $this->data[$this->modelClass]['phone3']));
+        $mobile_number = join('-', 
+                array(
+                    $this->data[$this->modelClass]['phone1'], $this->data[$this->modelClass]['phone2'], $this->data[$this->modelClass]['phone3']));
         $this->data[$this->modelClass]['mobile_number'] = $mobile_number;
         $currentModel->save($this->data);
         
@@ -247,9 +240,15 @@ class OrdersController extends AppController {
                     array(
                         'Answer.order_id' => $currentModel->id));
             for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
-                $this->data['Answer'][$i]['order_id'] = $currentModel->id;
-                $this->data['Answer'][$i]['question_id'] = $this->data['Question'][$i]['id'];
+                $answerId = $this->data['Answer'][$i]['option_id'];
+                if ($answerId == null || empty($answerId)) {
+                    unset($this->data['Answer'][$i]);
+                } else { 
+                    $this->data['Answer'][$i]['order_id'] = $currentModel->id;
+                    $this->data['Answer'][$i]['question_id'] = $answerId;
+                }
             }
+            $this->log($this->data['Answer']);
             $currentModel->Answer->saveAll($this->data['Answer']);
             $this->Session->setFlash('Your post has been saved.');
         }

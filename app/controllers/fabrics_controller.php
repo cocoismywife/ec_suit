@@ -293,7 +293,14 @@ class FabricsController extends AppController {
         }
     }
     
-    function query($order, $categoryType, $categoryId, $subcategoryId = null) {
+    function query($order, $categoryType, $categoryId = null, $subcategoryId = null) {
+        if ($order != 'desc' || $order != 'asc')
+        {
+            $subcategoryId = $categoryId;
+            $categoryId = $categoryType;
+            $categoryType = $order;
+            $order = 'desc';
+        }
         Configure::write('debug', 2);
         switch($categoryType) {
             case 'color' :

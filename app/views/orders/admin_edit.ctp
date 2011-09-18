@@ -134,56 +134,56 @@
 <tr>
 <th valign="top">裏地:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.fabric_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList2, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.fabric_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList3, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">襟デザイン:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.collar_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList3, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.collar_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList4, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ポケット:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.pocket_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList4, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.pocket_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList5, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">裾:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.hem_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList5, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.hem_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList6, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ボタン:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.button_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList6, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.button_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList7, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ネクタイ:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.ty_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList7, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.ty_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList8, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">シャツ:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.shirt_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList8, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.shirt_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList9, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">裏仕様:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.lining_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList9, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.lining_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList10, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
