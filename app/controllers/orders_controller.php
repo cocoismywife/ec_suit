@@ -145,6 +145,14 @@ class OrdersController extends AppController {
     function admin_add_survey() {
         $currentModel = ClassRegistry::init($this->modelClass);
         $currentModel->id = $this->data[$this->modelClass]['id'];
+        $zip = join('-', 
+                array(
+                    $this->data[$this->modelClass]['zip1'], $this->data[$this->modelClass]['zip2']));
+        $this->data[$this->modelClass]['zip'] = $zip;
+        $address = join('  ', 
+                array(
+                    $this->data[$this->modelClass]['pref'], $this->data[$this->modelClass]['address']));
+        $this->data[$this->modelClass]['address'] = $address;
         $mobile_number = join('-', 
                 array(
                     $this->data[$this->modelClass]['phone1'], $this->data[$this->modelClass]['phone2'], $this->data[$this->modelClass]['phone3']));
@@ -243,7 +251,7 @@ class OrdersController extends AppController {
                 $answerId = $this->data['Answer'][$i]['option_id'];
                 if ($answerId == null || empty($answerId)) {
                     unset($this->data['Answer'][$i]);
-                } else { 
+                } else {
                     $this->data['Answer'][$i]['order_id'] = $currentModel->id;
                     $this->data['Answer'][$i]['question_id'] = $answerId;
                 }

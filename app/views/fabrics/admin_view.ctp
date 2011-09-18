@@ -98,8 +98,8 @@
 <th>&nbsp;</th>
 <td valign="top">
 <?php
-    echo $this->Form->submit('', array('class' => 'form-conf'));
     echo $this->Html->link($this->Form->button('', array('class' => 'form-del')), array('action' => 'delete', $this->data[$model_name]['id']), array('title' => '削除する', 'escape' => false), 'この生地を削除しますか?');
+    echo $this->Form->submit('', array('div' => false, 'class' => 'form-conf'));
 ?>
 </td>
 <td></td>

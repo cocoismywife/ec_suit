@@ -53,9 +53,11 @@
 <dd>
 <dl class="answer">
 <dt>〒</dt>
-<dd><input name="" type="text" size="8" maxlength="3" /> - <input name="" type="text" size="10" maxlength="4" /></dd>
 <dd>
-<select name="pref">
+<?php echo $this->Form->input ( 'zip1', array ('div' => false, 'label' => false, 'size' => 8, 'maxlength' => 3 ) );?> - <?php echo $this->Form->input ('zip2', array ('div' => false, 'label' => false, 'size' => 10, 'maxlength' => 4, 'onKeyUp' => "AjaxZip3.zip2addr('data[Order][zip1]','data[Order][zip2]','data[Order][pref]','data[Order][address]');"));?>
+</dd>
+<dd>
+<select name="data[Order][pref]">
 <option value="" selected="selected">都道府県を選択</option>
 <optgroup label="北海道・東北">
 <option value="北海道">北海道</option>
@@ -122,7 +124,7 @@
 </optgroup>
 </select>
 </dd>
-<dd><input name="" type="text" size="68" /></dd>
+<dd><?php echo $this->Form->input('address', array('div' => false, 'label' => false, 'size' => 68));?></dd>
 </dl>
 </dd>
 <!-- / class qaSet --></dl>

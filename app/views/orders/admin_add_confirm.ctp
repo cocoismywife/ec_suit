@@ -28,6 +28,10 @@
 <?php echo $this->Form->hidden('first_name');?>
 <?php echo $this->Form->hidden('last_name_kana');?>
 <?php echo $this->Form->hidden('first_name_kana');?>
+<?php echo $this->Form->hidden('zip1');?>
+<?php echo $this->Form->hidden('zip2');?>
+<?php echo $this->Form->hidden('pref');?>
+<?php echo $this->Form->hidden('address');?>
 <?php echo $this->Form->hidden('phone1');?>
 <?php echo $this->Form->hidden('phone2');?>
 <?php echo $this->Form->hidden('phone3');?>
@@ -44,8 +48,8 @@
 
 <dl class="qaBigSet">
 <dt><?php echo $this->Html->image('/images/order/img_q3.gif', array('alt'=> __('住所', true))) ?></dt>
-<dd>〒104-0041　東京都<br />
-中央区新富1-7-11 マルイビル3F</dd>
+<dd>〒<?php echo $this->data[$model_name]['zip1'];?>-<?php echo $this->data[$model_name]['zip2'];?>　<?php echo $this->data[$model_name]['pref'];?><br />
+<?php echo $this->data[$model_name]['address'];?></dd>
 <!-- / class qaSet --></dl>
 
 <dl class="qaSet">
