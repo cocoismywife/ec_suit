@@ -63,13 +63,29 @@
 <!-- / class qaSet --></dl>
 
 <div id="nav">
-<p id="btnBack"><a href="index.html"><?php echo $this->Html->image('/images/order/btn_back.gif', array('alt'=> __('修正する', true)));?></a></p>
+<p id="btnBack"><a href="javascript:document.forms[1].submit();"><?php echo $this->Html->image('/images/order/btn_back.gif', array('alt'=> __('修正する', true)));?></a></p>
 <p id="btnNext"><a href="javascript:document.forms[0].submit();"><?php echo $this->Html->image('/images/order/btn_next.gif', array('alt'=> __('次へ', true)));?></a></p>
 <!-- / id nav --></div>
 
 <?php echo $this->Form->end()?>
 <!-- / id content --></div>
 <!-- / id pageBody --></div>
+
+<?php echo $this->Form->create($model_name, array('action' => 'add', 'method' => 'post'))?>
+<?php echo $this->Form->hidden('id');?>
+<?php echo $this->Form->hidden('last_name');?>
+<?php echo $this->Form->hidden('first_name');?>
+<?php echo $this->Form->hidden('last_name_kana');?>
+<?php echo $this->Form->hidden('first_name_kana');?>
+<?php echo $this->Form->hidden('zip1');?>
+<?php echo $this->Form->hidden('zip2');?>
+<?php echo $this->Form->hidden('pref');?>
+<?php echo $this->Form->hidden('address');?>
+<?php echo $this->Form->hidden('phone1');?>
+<?php echo $this->Form->hidden('phone2');?>
+<?php echo $this->Form->hidden('phone3');?>
+<?php echo $this->Form->hidden('email');?>
+<?php echo $this->Form->end()?>
 
 <div id="footer">
 <div id="footerInner">

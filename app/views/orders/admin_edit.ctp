@@ -38,6 +38,14 @@
 <td>
 <?php 
     echo $this->Form->input('last_name', array('label' => false, 'class' => 'inp-form'));
+?>
+</td>
+<td></td>
+</tr>
+<tr>
+<th valign="top"></th>
+<td>
+<?php 
     echo $this->Form->input('first_name', array('label' => false, 'class' => 'inp-form'));
 ?>
 </td>
@@ -48,6 +56,14 @@
 <td>
 <?php
     echo $this->Form->input('last_name_kana', array('label' => false, 'class' => 'inp-form'));
+?>
+</td>
+<td></td>
+</tr>
+<tr>
+<th valign="top">氏名（フリガナ）:</th>
+<td>
+<?php
     echo $this->Form->input('first_name_kana', array('label' => false, 'class' => 'inp-form'));
 ?>
 </td>

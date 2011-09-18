@@ -103,32 +103,39 @@ class OrdersController extends AppController {
             $survey = ClassRegistry::init('Survey')->findByName('Default');
             $this->set('survey', $survey);
         } else {
-            $order = $currentModel->save($this->data);
-            if (! empty($order)) {
-                // save image
-                if (in_array($this->modelClass, $this->allowUploadImage)) {
-                    if (isset($this->data['Image']['name']['name']) && $this->data['Image']['name']['name'] != null) {
-                        $imageModel = ClassRegistry::init('Image');
-                        $image = $imageModel->save($this->data, false);
-                        
-                        $this->data['OrderDetail']['image_id'] = $imageModel->id;
+            $orderId = null;
+            if (isset($this->data[$this->modelClass]['id'])) {
+                $orderId = $this->data[$this->modelClass]['id'];
+                $this->log($this->data);
+                $currentModel->id = $orderId;
+            }
+            if ($orderId == null || empty($orderId)) {
+                $order = $currentModel->save($this->data);
+                if (! empty($order)) {
+                    // save image
+                    if (in_array($this->modelClass, $this->allowUploadImage)) {
+                        if (isset($this->data['Image']['name']['name']) && $this->data['Image']['name']['name'] != null) {
+                            $imageModel = ClassRegistry::init('Image');
+                            $image = $imageModel->save($this->data, false);
+                            
+                            $this->data['OrderDetail']['image_id'] = $imageModel->id;
+                        }
+                    }
+                    
+                    // save order detail
+                    $this->data['OrderDetail']['order_id'] = $currentModel->id;
+                    $currentModel->OrderDetail->save($this->data);
+                    
+                    // save survey answer
+                    if (isset($this->data['Question'])) {
+                        for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
+                            $this->data['Answer'][$i]['order_id'] = $currentModel->id;
+                            $this->data['Answer'][$i]['question_id'] = $this->data['Question'][$i]['id'];
+                        }
+                        $currentModel->Answer->saveAll($this->data['Answer']);
+                        $this->Session->setFlash('Your post has been saved.');
                     }
                 }
-                
-                // save order detail
-                $this->data['OrderDetail']['order_id'] = $currentModel->id;
-                $currentModel->OrderDetail->save($this->data);
-                
-                // save survey answer
-                if (isset($this->data['Question'])) {
-                    for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
-                        $this->data['Answer'][$i]['order_id'] = $currentModel->id;
-                        $this->data['Answer'][$i]['question_id'] = $this->data['Question'][$i]['id'];
-                    }
-                    $currentModel->Answer->saveAll($this->data['Answer']);
-                    $this->Session->setFlash('Your post has been saved.');
-                }
-                
                 $this->data = $currentModel->read();
             }
         }
@@ -426,5 +433,4 @@ class OrdersController extends AppController {
             $this->log($options);
         }
     }
-
 }
