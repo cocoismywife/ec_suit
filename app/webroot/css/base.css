@@ -1,0 +1,243 @@
+@charset "utf-8";
+
+/* ****************************************************
+Title: base.css
+Created: 2010-09-17
+Last Modified: 2011-09-17
+Editor(s): inukai
+Last Editor: inukai
+***************************************************** */
+
+
+/* Table Of Contents
+----------------------------------------
+
+# General Elements
+# body
+# layout
+# header
+# visual & pageBody
+# content
+# sidebar
+# footer
+# popup
+# clearfix
+# common classes
+
+----------------------------------------*/
+
+
+/* # General Elements
+---------------------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6,em { font-weight: bold; }
+
+a { color: #005ba8; }
+a:hover	{ text-decoration: none; }
+
+table {
+	width: 100%;
+}
+
+textarea {
+	font-size: 12px;
+	font-size: 100%\9;
+}
+
+
+/* # body
+---------------------------------------------------------------------------- */
+
+body {
+	background-color: #07060c;
+	color: #313131;
+	font-size: 100%;
+	font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
+	line-height: 1.6;
+	-webkit-text-size-adjust: none;
+}
+
+
+/* # layout
+---------------------------------------------------------------------------- */
+
+div#layout {
+	background: url(../images/order/bg.gif) repeat left top;
+	min-height: 1128px;
+	min-width: 768px;
+	width: 100%;
+	position: relative;
+}
+
+
+/* # header
+---------------------------------------------------------------------------- */
+
+
+
+/* # gNav
+---------------------------------------------------------------------------- */
+
+
+
+/* # visual & pageBody
+---------------------------------------------------------------------------- */
+
+div#pageBody {
+	margin: 0 auto;
+	padding-top: 48px;
+	width: 676px;
+}
+
+
+/* # content
+---------------------------------------------------------------------------- */
+
+div#content {
+}
+
+div#content dl.qaSet {
+	background: url(../images/order/bg_longqa.gif) no-repeat left top;
+	margin-bottom: 9px;
+	height: 84px;
+}
+
+div#content dl.qaBigSet {
+	background: url(../images/order/bg_bigqa.gif) no-repeat left top;
+	margin-bottom: 9px;
+	height: 114px;
+}
+
+body.questionnaire div#content dl.qaSet {
+	background: url(../images/order/bg_lowqa.gif) no-repeat left top;
+	margin-bottom: 10px;
+	height: 69px;
+}
+
+body.questionnaire div#content dl.qaBigSet {
+	background: url(../images/order/bg_middleqa.gif) no-repeat left top;
+	margin-bottom: 10px;
+	height: 94px;
+}
+
+div#content dl.qaSet dt,
+div#content dl.qaBigSet dt {
+	padding: 10px 16px 17px;
+}
+
+body.questionnaire div#content dl.qaSet dt,
+body.questionnaire div#content dl.qaBigSet dt {
+	padding: 10px 16px 11px;
+}
+
+div#content dl.qaSet dd,
+div#content dl.qaBigSet dd {
+	padding: 0 16px;
+	position: relative;
+}
+
+div#content dl.qaSet dd dl.answer dt,
+div#content dl.qaSet dd dl.answer dd,
+div#content dl.qaBigSet dd dl.answer dt,
+div#content dl.qaBigSet dd dl.answer dd {
+	float: left;
+	line-height: 1em;
+	padding: 0;
+	vertical-align: middle;
+}
+
+div#content dl.qaSet dd dl.answer dt,
+div#content dl.qaBigSet dd dl.answer dt {
+	padding-top: 6px;
+	width: 3em;
+}
+
+div#content dl.qaSet dd dl.answer dd,
+div#content dl.qaBigSet dd dl.answer dd {
+	padding-right: 2em;
+}
+
+div#content dl.qaSet dd dl.cloudA dd {
+	padding-right: 0;
+}
+
+div#content h1 {
+	padding: 22px 0 9px 6px;
+}
+
+div#content p {
+	padding: 0;
+}
+
+div#content div#nav {
+	height: 73px;
+	position: relative;
+}
+
+div#content div#nav P#btnBack {
+	position: absolute;
+	left: -7px;
+	top: 0;
+}
+
+div#content div#nav P#btnNext {
+	position: absolute;
+	right: -7px;
+	top: 0;
+}
+
+
+/* # sidebar
+---------------------------------------------------------------------------- */
+
+
+
+/* # footer
+---------------------------------------------------------------------------- */
+
+div#footer {
+	background: url(../images/order/bg_footer.gif) repeat-x left bottom;
+	clear: both;
+	height: 91px;
+	position: relative;
+	left: 0;
+	bottom: 0;
+}
+
+div#footer div#footerInner {
+	background: url(../images/order/logo.gif) no-repeat 7px 2px;
+	margin: 0 auto;
+	padding-top: 63px;
+	text-align: center;
+	width: 768px;
+}
+
+div#footer div#footerInner p {
+	padding: 0;
+}
+
+body.questionnaire div#footer {
+	height: 92px;
+}
+
+div#content p#finishText {
+	padding: 460px 0 459px;
+	text-align: center;
+}
+
+
+/* # popup
+---------------------------------------------------------------------------- */
+
+
+
+
+/* # clearfix
+---------------------------------------------------------------------------- */
+
+
+
+
+/* # common classes
+---------------------------------------------------------------------------- */
+

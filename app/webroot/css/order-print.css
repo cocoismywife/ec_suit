@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+/* ****************************************************
+Title: print.css
+Created: 2011-07-15
+Last Modified: 2011-07-20
+Editor(s): nishio
+Last Editor: nishio
+***************************************************** */
+
+
+/* Table Of Contents
+----------------------------------------
+
+#01 for previous ie
+#02 for all browser
+
+----------------------------------------*/
+
+
+/* #01 for previous ie
+---------------------------------------------------------------------------- */
+
+* html body {
+	zoom: 70%;
+}
+
+
+/* #02 for all browser
+---------------------------------------------------------------------------- */
+
+div#gNav ul li span img,
+div#gNav ul li a img {
+	visibility: visible !important;
+}
+
+
+div#content div#cmcAbout {
+	page-break-after: always;
+}
