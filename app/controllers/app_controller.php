@@ -50,6 +50,12 @@ class AppController extends Controller {
             } else if (($this->modelClass == 'Fabric' && $this->params['action'] != 'admin_export') || ($this->modelClass == 'Order' && $this->params['action'] != 'admin_export')) {
                 if ($this->params['action'] == 'admin_add' || $this->params['action'] == 'admin_add_confirm' || $this->params['action'] == 'admin_add_survey' || $this->params['action'] == 'admin_add_finish') {
                     $this->layout = 'admin/order';
+                } else if ($this->params['action'] == 'admin_post') {
+                    $this->layout = 'xml/xml';
+                    $this->set('root', strtolower(Inflector::pluralize($this->modelKey)));
+                    $this->RequestHandler->respondAs('text/xml', 
+                            array(
+                                'charset' => 'utf8'));
                 } else {
                     $this->layout = 'admin/default';
                 }

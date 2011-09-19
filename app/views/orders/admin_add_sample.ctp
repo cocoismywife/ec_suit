@@ -1,6 +1,6 @@
 <?php
 echo '<h1>Add ' . $model_name . '</h1>';
-echo $this->Form->create ( $model_name, array ('action' => 'add', 'type' => 'file' ) );
+echo $this->Form->create ( $model_name, array ('action' => 'post', 'type' => 'file' ) );
 echo $this->Form->input ( 'first_name', array ('label' => 'First Name', 'value' => '犬飼' ) );
 echo $this->Form->input ( 'last_name', array ('label' => 'Last Name', 'value' => '尋士' ) );
 echo $this->Form->input ( 'first_name_kana', array ('label' => 'First Name Kana', 'value' => 'イヌカイ' ) );
