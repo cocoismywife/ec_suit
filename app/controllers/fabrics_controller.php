@@ -307,7 +307,7 @@ class FabricsController extends AppController {
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
                         array(
                             'conditions' => array(
-                            'color_id' => $categoryId), 'order' => array(
+                            'color_id' => $categoryId, 'Fabric.public' => 1), 'order' => array(
                             'price ' . $order)));
                 break;
             case 'tracery' :
@@ -335,21 +335,21 @@ class FabricsController extends AppController {
                 switch($categoryId) {
                     case 1 :
                         $conditions = array(
-                            'price <=' => 50000);
+                            'price <=' => 50000, 'Fabric.public' => 1);
                         break;
                     case 2 :
                         $conditions = array(
                             'and' => array(
-                            'price >' => 50000, 'price <=' => 75000));
+                            'price >' => 50000, 'price <=' => 75000, 'Fabric.public' => 1));
                         break;
                     case 3 :
                         $conditions = array(
                             'and' => array(
-                            'price >' => 75000, 'price <=' => 100000));
+                            'price >' => 75000, 'price <=' => 100000, 'Fabric.public' => 1));
                         break;
                     case 3 :
                         $conditions = array(
-                            'price >' => 100000);
+                            'price >' => 100000, 'Fabric.public' => 1);
                         break;
                 }
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
@@ -361,7 +361,7 @@ class FabricsController extends AppController {
                 $model = ClassRegistry::init($this->modelClass)->find('all', 
                         array(
                             'conditions' => array(
-                            'season_id' => $categoryId), 'order' => array(
+                            'season_id' => $categoryId, 'Fabric.public' => 1), 'order' => array(
                             'price ' . $order)));
                 break;
             case 'brand' :
@@ -370,13 +370,13 @@ class FabricsController extends AppController {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
                                 'conditions' => array(
-                                'Fabric.big_brand_id' => $categoryId, 'Fabric.small_brand_id' => $subcategoryId), 'order' => array(
+                                'Fabric.big_brand_id' => $categoryId, 'Fabric.small_brand_id' => $subcategoryId, 'Fabric.public' => 1), 'order' => array(
                                 'price ' . $order)));
                 } else {
                     $model = ClassRegistry::init($this->modelClass)->find('all', 
                             array(
                                 'conditions' => array(
-                                'Fabric.big_brand_id' => $categoryId), 'order' => array(
+                                'Fabric.big_brand_id' => $categoryId, 'Fabric.public' => 1), 'order' => array(
                                 'price ' . $order)));
                 }
                 break;
