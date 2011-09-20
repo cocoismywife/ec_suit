@@ -73,6 +73,10 @@
 
 <?php echo $this->Form->create($model_name, array('action' => 'add', 'method' => 'post'))?>
 <?php echo $this->Form->hidden('id');?>
+<?php echo $this->Form->hidden('purchase_date');?>
+<?php echo $this->Form->hidden('OrderDetail.Fabric.BigBrand.name');?>
+<?php echo $this->Form->hidden('OrderDetail.Fabric.SmallBrand.name');?>
+<?php echo $this->Form->hidden('OrderDetail.Fabric.price');?>
 <?php echo $this->Form->hidden('last_name');?>
 <?php echo $this->Form->hidden('first_name');?>
 <?php echo $this->Form->hidden('last_name_kana');?>

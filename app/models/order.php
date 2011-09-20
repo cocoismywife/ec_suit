@@ -16,7 +16,7 @@ class Order extends AppModel {
 			'dependent' => true 
 	) );
 	var $parent_name = array ('Survey' );
-	var $validate = array (
-		'first_name' => array ('rule' => 'notEmpty', 'message' => '名を正しく入力してください。' ), 
-		'last_name' => array ('rule' => 'notEmpty', 'message' => '姓を正しく入力してください。' ) );
+	public $validate = array (
+		'first_name' => array ('rule' => 'notEmpty', 'message' => '「氏名が入力されていません。」' ), 
+		'last_name' => array ('rule' => 'notEmpty', 'message' => '「氏名が入力されていません。」' ) );
 }

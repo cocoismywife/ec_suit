@@ -41,6 +41,20 @@ class OrdersController extends AppController {
         }
     }
     
+    function init_option() {
+        $area = array(
+            '北海道・東北' => array(
+            '北海道' => '北海道', '青森県' => '青森県', '岩手県' => '岩手県', '秋田県' => '秋田県', '宮城県' => '宮城県', '山形県' => '山形県', '福島県' => '福島県'), '関東' => array(
+            '東京都' => '東京都', '神奈川県' => '神奈川県', '埼玉県' => '埼玉県', '千葉県' => '千葉県', '茨城県' => '茨城県', '栃木県' => '栃木県', '群馬県' => '群馬県'), '甲信越・北陸' => array(
+            '新潟県' => '新潟県', '富山県' => '富山県', '石川県' => '石川県', '福井県' => '福井県', '山梨県' => '山梨県', '長野県' => '長野県'), '東海' => array(
+            '岐阜県' => '岐阜県', '静岡県' => '静岡県', '愛知県' => '愛知県', '三重県' => '三重県'), '近畿' => array(
+            '滋賀県' => '滋賀県', '京都府' => '京都府', '大阪府' => '大阪府', '兵庫県' => '兵庫県', '奈良県' => '奈良県', '和歌山県' => '和歌山県'), '中国' => array(
+            '鳥取県' => '鳥取県', '島根県' => '島根県', '岡山県' => '岡山県', '広島県' => '広島県', '山口県' => '山口県'), '四国' => array(
+            '徳島県' => '徳島県', '香川県' => '香川県', '愛媛県' => '愛媛県', '高知県' => '高知県'), '九州・沖縄' => array(
+            '福岡県' => '福岡県', '佐賀県' => '佐賀県', '長崎県' => '長崎県', '熊本県' => '熊本県', '大分県' => '大分県', '宮崎県' => '宮崎県', '鹿児島県' => '鹿児島県', '沖縄県' => '沖縄県'));
+        $this->set('area', $area);
+    }
+    
     function _query($condition, $content) {
         $this->log('=========== Query Content ===========');
         $this->log($content);
@@ -127,7 +141,7 @@ class OrdersController extends AppController {
     
     function admin_add($orderId = null) {
         $currentModel = ClassRegistry::init($this->modelClass);
-        
+        $this->init_option();
         if (($orderId == null || empty($orderId)) && empty($this->data)) {
             for($i = 0, $size = sizeof(ClassRegistry::init('OrderDetail')->parent_name); $i < $size; ++ $i) {
                 $parentModel = ClassRegistry::init(
@@ -178,9 +192,9 @@ class OrdersController extends AppController {
                 }
                 $this->data = $currentModel->read();
             } else {
-                $this->log($orderId);
-                $currentModel->id = $orderId;
-                $this->data = $currentModel->read();
+                $order = $currentModel->read();
+                $this->data['Order']['purchase_date'] = $order['Order']['purchase_date'];
+                $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
             }
         }
     }
@@ -190,12 +204,15 @@ class OrdersController extends AppController {
         $currentModel->id = $this->data[$this->modelClass]['id'];
         $currentModel->set($this->data);
         
-        if (! $currentModel->validates()) {
+        $this->log($this->data);
+        if ($currentModel->validates()) {
+            $order = $currentModel->read();
+            $this->data['Order']['purchase_date'] = $order['Order']['purchase_date'];
+            $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
+        } else {
+            $this->render('admin_add');
             return;
         }
-        $order = $currentModel->read();
-        $this->data['Order']['purchase_date'] = $order['Order']['purchase_date'];
-        $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
     }
     
     function admin_add_survey() {
@@ -289,6 +306,8 @@ class OrdersController extends AppController {
         
         if (! empty($this->data)) {
             $order = $currentModel->find();
+            $currentModel->save($this->data);
+            
             // save order detail
             $orderDetail = $order['OrderDetail'];
             $currentModel->OrderDetail->id = $orderDetail['id'];
