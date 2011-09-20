@@ -1,12 +1,10 @@
-<script language="javascript">
+<script type="text/javascript">
 <!--
-function clock() {
-	var i;
-	i = i-1;
-	if (i>0)setTimeout("clock();",1200);
-	else self.close();}
-var i = 5;
-clock();
+setTimeout(jumpToFlashClient,"5000");//三秒后执行
+//func函数定义
+function jumpToFlashClient() {
+	 location.href = '/ec_suits_client/suitsFlash.swf'; 
+}
 //-->
 </script>
 <div id="pageBody">
