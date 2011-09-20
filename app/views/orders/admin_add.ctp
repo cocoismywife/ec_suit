@@ -29,9 +29,9 @@
 <dd>
 <dl class="answer">
 <dt>姓</dt>
-<dd><?php echo $this->Form->input ( 'last_name', array ('label' => false, 'size' => 20 ) );?></dd>
+<dd><?php echo $this->Form->input ( 'last_name', array ('label' => false, 'size' => 20, 'error' => false ) );?></dd>
 <dt>名</dt>
-<dd><?php echo $this->Form->input ( 'first_name', array ('label' => false, 'size' => 20 ) );?></dd>
+<dd><?php echo $this->Form->input ( 'first_name', array ('label' => false, 'size' => 20, 'error' => false) );?></dd>
 </dl>
 </dd>
 <!-- / class qaSet --></dl>
@@ -74,7 +74,7 @@
 <dt><?php echo $this->Html->image('/images/order/img_q5.gif', array('alt'=> __('メールアドレス', true))) ?></dt>
 <dd><?php echo $this->Form->input ( 'email', array ('label' => false, 'size' => 40 ) );?></dd>
 <!-- / class qaSet --></dl>
-
+<?php echo $this->Form->error('first_name', '「氏名が入力されていません。」', array('class' => 'error-message'));?>
 <p class="alignCenter"><a href="javascript:document.forms[0].submit();"><?php echo $this->Html->image('/images/order/btn_next.gif', array('alt'=> __('次へ', true)));?></a></p>
 
 <?php echo $this->Form->end()?>

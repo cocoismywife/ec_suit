@@ -209,6 +209,7 @@ class OrdersController extends AppController {
             $order = $currentModel->read();
             $this->data['Order']['purchase_date'] = $order['Order']['purchase_date'];
             $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
+            $errors = $currentModel->invalidFields();
         } else {
             $this->render('admin_add');
             return;
