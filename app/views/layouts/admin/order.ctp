@@ -14,7 +14,7 @@
 <?php echo $this->Html->css('print', null, array('media' => 'print')) ?>
 </head>
 
-<body>
+<body class="<?php echo $body_class?>">
 <div id="layout">
 
 <?php echo $content_for_layout; ?>
