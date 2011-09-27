@@ -215,7 +215,7 @@ class OrdersController extends AppController {
             $this->data[$this->modelClass]['id'] = $order[$this->modelClass]['id'];
             $this->data[$this->modelClass]['purchase_date'] = $order[$this->modelClass]['purchase_date'];
             $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
-  
+            $this->init_option();
             $this->render('admin_add');
             return;
         }
@@ -240,6 +240,7 @@ class OrdersController extends AppController {
         
         $survey = ClassRegistry::init('Survey')->findByName('Default');
         $this->set('survey', $survey);
+        $this->set('body_class', 'questionnaire');
     }
     
     function admin_add_finish() {
@@ -331,10 +332,10 @@ class OrdersController extends AppController {
             for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
                 $answerId = $this->data['Answer'][$i]['option_id'];
                 if ($answerId == null || empty($answerId)) {
-//                    unset($this->data['Answer'][$i]);
+                    //                    unset($this->data['Answer'][$i]);
                     $this->data['Answer'][$i]['order_id'] = $currentModel->id;
-                    $this->data['Answer'][$i]['question_id'] = -1;
-                    $this->data['Answer'][$i]['option_id'] = -1;
+                    $this->data['Answer'][$i]['question_id'] = - 1;
+                    $this->data['Answer'][$i]['option_id'] = - 1;
                 } else {
                     $this->data['Answer'][$i]['order_id'] = $currentModel->id;
                     $this->data['Answer'][$i]['question_id'] = $answerId;
