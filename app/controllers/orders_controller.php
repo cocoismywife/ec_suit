@@ -193,7 +193,8 @@ class OrdersController extends AppController {
                 $this->data = $currentModel->read();
             } else {
                 $order = $currentModel->read();
-                $this->data['Order']['purchase_date'] = $order['Order']['purchase_date'];
+                $this->data[$this->modelClass]['id'] = $order[$this->modelClass]['id'];
+                $this->data[$this->modelClass]['purchase_date'] = $order[$this->modelClass]['purchase_date'];
                 $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
             }
         }
@@ -202,15 +203,19 @@ class OrdersController extends AppController {
     function admin_add_confirm() {
         $currentModel = ClassRegistry::init($this->modelClass);
         $currentModel->id = $this->data[$this->modelClass]['id'];
+        $order = $currentModel->read();
         $currentModel->set($this->data);
         
-        $this->log($this->data);
         if ($currentModel->validates()) {
-            $order = $currentModel->read();
-            $this->data['Order']['purchase_date'] = $order['Order']['purchase_date'];
+            $this->data[$this->modelClass]['id'] = $order[$this->modelClass]['id'];
+            $this->data[$this->modelClass]['purchase_date'] = $order[$this->modelClass]['purchase_date'];
             $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
             $errors = $currentModel->invalidFields();
         } else {
+            $this->data[$this->modelClass]['id'] = $order[$this->modelClass]['id'];
+            $this->data[$this->modelClass]['purchase_date'] = $order[$this->modelClass]['purchase_date'];
+            $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
+  
             $this->render('admin_add');
             return;
         }
