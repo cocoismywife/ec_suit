@@ -331,13 +331,16 @@ class OrdersController extends AppController {
             for($i = 0; $i < sizeof($this->data['Question']); $i ++) {
                 $answerId = $this->data['Answer'][$i]['option_id'];
                 if ($answerId == null || empty($answerId)) {
-                    unset($this->data['Answer'][$i]);
+//                    unset($this->data['Answer'][$i]);
+                    $this->data['Answer'][$i]['order_id'] = $currentModel->id;
+                    $this->data['Answer'][$i]['question_id'] = -1;
+                    $this->data['Answer'][$i]['option_id'] = -1;
                 } else {
                     $this->data['Answer'][$i]['order_id'] = $currentModel->id;
                     $this->data['Answer'][$i]['question_id'] = $answerId;
                 }
             }
-            $this->log($this->data['Answer']);
+            $allAnswers = $this->data['Answer'];
             $currentModel->Answer->saveAll($this->data['Answer']);
             $this->Session->setFlash('Your post has been saved.');
         }
@@ -351,6 +354,7 @@ class OrdersController extends AppController {
         $this->data = $currentModel->read();
         $survey = ClassRegistry::init('Survey')->findByName('Default');
         $this->set('survey', $survey);
+        $this->data['Answer'] = $allAnswers;
     }
     
     function get_name_of_select() {

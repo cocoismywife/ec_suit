@@ -244,7 +244,8 @@ for($i = 0; $i < sizeof ( $survey ['Question'] ); $i ++) {
 		$option = $question ['Option'] [$j];
 		$radio_option [$option ['id']] = $option ['text'];
 	}
-    echo $this->Form->input('Answer.' . $i . '.option_id', array('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $radio_option, 'class' => 'styledselect_form_1') );
+	
+    echo $this->Form->select('Answer.' . $i . '.option_id', $radio_option, $this->data['Answer'][$i]['option_id'], array('empty' => '------', 'class' => 'styledselect_form_1'));
 	echo '</td><tr/>';
 }
 ?>
