@@ -225,6 +225,13 @@ div#content p#finishText {
 	text-align: center;
 }
 
+.error-message {
+	clear: both;
+	color: #c73e14;
+	font-weight: bold;
+	text-align: center;
+}
+
 
 /* # popup
 ---------------------------------------------------------------------------- */
