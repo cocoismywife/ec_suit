@@ -8,7 +8,7 @@ class Order extends AppModel {
     // var $belongsTo = array ('Survey' );
     var $hasMany = array(
         'Answer' => array(
-        'className' => 'Answer', 'foreignKey' => 'order_id', 'order' => 'Answer.question_id ASC', 'dependent' => true));
+        'className' => 'Answer', 'foreignKey' => 'order_id', 'order' => 'Answer.id ASC', 'dependent' => true));
     var $parent_name = array(
         'Survey');
     public $validate = array(

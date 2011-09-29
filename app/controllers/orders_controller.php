@@ -344,6 +344,14 @@ class OrdersController extends AppController {
             $allAnswers = $this->data['Answer'];
             $currentModel->Answer->saveAll($this->data['Answer']);
             $this->Session->setFlash('Your post has been saved.');
+        } else {
+                      $order = $currentModel->read();
+                      $allAnswers = $order['Answer'];
+//            $allAnswers = ClassRegistry::init('Answer')->find('all', 
+//                    array(
+//                        'conditions' => array(
+//                        'Answer.order_id' => $id), 'order' => 'Answer.id'));
+            $this->log($allAnswers);
         }
         
         for($i = 0, $size = sizeof(ClassRegistry::init('OrderDetail')->parent_name); $i < $size; ++ $i) {
@@ -355,7 +363,9 @@ class OrdersController extends AppController {
         $this->data = $currentModel->read();
         $survey = ClassRegistry::init('Survey')->findByName('Default');
         $this->set('survey', $survey);
-        $this->data['Answer'] = $allAnswers;
+        if (isset($allAnswers) && $allAnswers != null) {
+            $this->data['Answer'] = $allAnswers;
+        }
     }
     
     function get_name_of_select() {
