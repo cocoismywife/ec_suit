@@ -35,39 +35,29 @@
 <table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 <tr>
 <th valign="top">氏名:</th>
-<td>
-<?php 
-    echo $this->Form->input('last_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));
-?>
-</td>
+<td><?php echo $this->Form->input('last_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
 <td></td>
 </tr>
 <tr>
 <th valign="top"></th>
-<td>
-<?php 
-    echo $this->Form->input('first_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));
-?>
-</td>
+<td><?php echo $this->Form->input('first_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">氏名（フリガナ）:</th>
-<td>
-<?php
-    echo $this->Form->input('last_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));
-?>
-</td>
+<td><?php echo $this->Form->input('last_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">氏名（フリガナ）:</th>
-<td>
-<?php
-    echo $this->Form->input('first_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));
-?>
-</td>
+<td><?php echo $this->Form->input('first_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
 <td></td>
+</tr>
+<tr>
+<th valign="top">郵便番号:</th>
+<td><?php echo $this->Form->input('zip_code1', array('label' => false, 'div' => false, 'class' => 'zipcode', 'maxlength' => 3));?> - <?php echo $this->Form->input('zip_code2', array('label' => false, 'div' => false, 'class' => 'zipcode', 'maxlength' => 4));?></td>
+<td>
+</td>
 </tr>
 <tr>
 <th valign="top">住所:</th>

@@ -28,8 +28,8 @@
 <?php echo $this->Form->hidden('first_name');?>
 <?php echo $this->Form->hidden('last_name_kana');?>
 <?php echo $this->Form->hidden('first_name_kana');?>
-<?php echo $this->Form->hidden('zip1');?>
-<?php echo $this->Form->hidden('zip2');?>
+<?php echo $this->Form->hidden('zip_code1');?>
+<?php echo $this->Form->hidden('zip_code2');?>
 <?php echo $this->Form->hidden('pref');?>
 <?php echo $this->Form->hidden('address');?>
 <?php echo $this->Form->hidden('phone1');?>
@@ -48,7 +48,7 @@
 
 <dl class="qaBigSet">
 <dt><?php echo $this->Html->image('/images/order/img_q3.gif', array('alt'=> __('住所', true))) ?></dt>
-<dd>〒<?php echo $this->data[$model_name]['zip1'];?>-<?php echo $this->data[$model_name]['zip2'];?>　<?php echo $this->data[$model_name]['pref'];?><br />
+<dd>〒<?php echo $this->data[$model_name]['zip_code1'];?>-<?php echo $this->data[$model_name]['zip_code2'];?>　<?php echo $this->data[$model_name]['pref'];?><br />
 <?php echo $this->data[$model_name]['address'];?></dd>
 <!-- / class qaSet --></dl>
 
@@ -81,8 +81,8 @@
 <?php echo $this->Form->hidden('first_name');?>
 <?php echo $this->Form->hidden('last_name_kana');?>
 <?php echo $this->Form->hidden('first_name_kana');?>
-<?php echo $this->Form->hidden('zip1');?>
-<?php echo $this->Form->hidden('zip2');?>
+<?php echo $this->Form->hidden('zip_code1');?>
+<?php echo $this->Form->hidden('zip_code2');?>
 <?php echo $this->Form->hidden('pref');?>
 <?php echo $this->Form->hidden('address');?>
 <?php echo $this->Form->hidden('phone1');?>

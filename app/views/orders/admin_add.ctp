@@ -54,7 +54,7 @@
 <dl class="answer">
 <dt>〒</dt>
 <dd>
-<?php echo $this->Form->input('zip1', array ('div' => false, 'label' => false, 'size' => 8, 'maxlength' => 3 ) );?> - <?php echo $this->Form->input ('zip2', array ('div' => false, 'label' => false, 'size' => 10, 'maxlength' => 4, 'onKeyUp' => "AjaxZip3.zip2addr('data[Order][zip1]','data[Order][zip2]','data[Order][pref]','data[Order][address]');"));?>
+<?php echo $this->Form->input('zip_code1', array ('div' => false, 'label' => false, 'size' => 8, 'maxlength' => 3 ) );?> - <?php echo $this->Form->input ('zip_code2', array ('div' => false, 'label' => false, 'size' => 10, 'maxlength' => 4, 'onKeyUp' => "AjaxZip3.zip2addr('data[Order][zip1]','data[Order][zip2]','data[Order][pref]','data[Order][address]');"));?>
 </dd>
 <dd>
 <?php echo $this->Form->select('pref', $area, null, array('empty' => '都道府県を選択'));?>

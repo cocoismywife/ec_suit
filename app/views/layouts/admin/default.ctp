@@ -183,6 +183,7 @@ $(document).pngFix( );
 <!--  start top-search -->
 <div id="top-search">
 <?php echo $this->Form->create($model_name, array('url' => '/admin/'.$controller_name.'/query'))?>
+
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
@@ -197,7 +198,7 @@ $(document).pngFix( );
 ?>
 </td>
 <td>
-<?php echo $this->Form->submit('/images/shared/top_search_btn.gif'); ?>
+<?php echo $this->Form->submit('/images/shared/top_search_btn.gif', array('div' => false)); ?>
 </td>
 </tr>
 </table>

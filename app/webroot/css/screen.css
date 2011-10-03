@@ -685,7 +685,15 @@ a:hover.action-delete	{
 	padding: 6px 6px 0 6px;
 	width: 186px;
 	}
-	
+.zipcode {
+	background: url(../images/forms/form_zipcode.gif) no-repeat;
+	border: none;
+	color: #393939;
+	height: 25px;
+ 
+	padding: 6px 6px 0 6px;
+	width: 58px;
+	}	
 .inp-form-error	{
 	background: url(../images/forms/form_inp_error.gif) no-repeat;
 	border: none; 

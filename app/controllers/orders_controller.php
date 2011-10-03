@@ -228,10 +228,6 @@ class OrdersController extends AppController {
     function admin_add_survey() {
         $currentModel = ClassRegistry::init($this->modelClass);
         $currentModel->id = $this->data[$this->modelClass]['id'];
-        $zip = join('-', 
-                array(
-                    $this->data[$this->modelClass]['zip1'], $this->data[$this->modelClass]['zip2']));
-        $this->data[$this->modelClass]['zip_code'] = $zip;
         $address = join('  ', 
                 array(
                     $this->data[$this->modelClass]['pref'], $this->data[$this->modelClass]['address']));
@@ -468,7 +464,7 @@ class OrdersController extends AppController {
             $this->log('========== Order Info ==========');
             $this->log($order);
             $newOrder = array(
-                '注文ID' => $order[$this->modelClass]['id'], '氏名1' => $order[$this->modelClass]['last_name'], '氏名2' => $order[$this->modelClass]['first_name'], 'カタカナ1' => $order[$this->modelClass]['last_name_kana'], 'カタカナ2' => $order[$this->modelClass]['first_name_kana'], '郵便番号' => $order[$this->modelClass]['zip_code'], '住所' => $order[$this->modelClass]['address'], '電話番号' => $order[$this->modelClass]['mobile_number'], 'メールアドレス' => $order[$this->modelClass]['email'], '注文日' => $order[$this->modelClass]['purchase_date'], '生地名' => isset(
+                '注文ID' => $order[$this->modelClass]['id'], '氏名1' => $order[$this->modelClass]['last_name'], '氏名2' => $order[$this->modelClass]['first_name'], 'カタカナ1' => $order[$this->modelClass]['last_name_kana'], 'カタカナ2' => $order[$this->modelClass]['first_name_kana'], '郵便番号' => $order[$this->modelClass]['zip_code1'] . '-' . $order[$this->modelClass]['zip_code2'], '住所' => $order[$this->modelClass]['address'], '電話番号' => $order[$this->modelClass]['mobile_number'], 'メールアドレス' => $order[$this->modelClass]['email'], '注文日' => $order[$this->modelClass]['purchase_date'], '生地名' => isset(
                     $order['OrderDetail']['Fabric']['name']) ? $order['OrderDetail']['Fabric']['name'] : '', '生地ブランド' => isset(
                     $order['OrderDetail']['Fabric']['BigBrand']['name']) ? $order['OrderDetail']['Fabric']['BigBrand']['name'] : '', '品名' => 'スーツ', '値段' => isset(
                     $order['OrderDetail']['Fabric']['price']) ? $order['OrderDetail']['Fabric']['price'] : '', 'スタイル' => isset(
