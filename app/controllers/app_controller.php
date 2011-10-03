@@ -36,6 +36,25 @@ class AppController extends Controller {
     var $allowUploadImage = array(
         'Gender', 'Style', 'Lining', 'LiningFabric', 'LiningSet', 'Collar', 'Pocket', 'Hem', 'Button', 'Ty', 'Shirt', 'Order', 'OrderDetail');
     var $displayModelName;
+    var $components = array(
+        'Session', 'Auth');
+    
+    function beforeFilter() {
+        $this->Auth->allow('all', 'query', 'view', 'index');
+        $users = $this->Session->read('Auth.User');
+        $this->log('User Logging.');
+        $this->log($users);
+    }
+    
+    function login() {
+        if (isset($this->data)) {
+            if ($this->Auth->login($this->data)) {
+                $this->redirect('/admin/fabrics/all');
+            }
+        } else {
+            //$this->redirect('/users/login');
+        }
+    }
     
     function beforeRender() {
         Configure::write('debug', 0);

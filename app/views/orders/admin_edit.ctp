@@ -37,7 +37,7 @@
 <th valign="top">氏名:</th>
 <td>
 <?php 
-    echo $this->Form->input('last_name', array('label' => false, 'class' => 'inp-form'));
+    echo $this->Form->input('last_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));
 ?>
 </td>
 <td></td>
@@ -46,7 +46,7 @@
 <th valign="top"></th>
 <td>
 <?php 
-    echo $this->Form->input('first_name', array('label' => false, 'class' => 'inp-form'));
+    echo $this->Form->input('first_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));
 ?>
 </td>
 <td></td>
@@ -55,7 +55,7 @@
 <th valign="top">氏名（フリガナ）:</th>
 <td>
 <?php
-    echo $this->Form->input('last_name_kana', array('label' => false, 'class' => 'inp-form'));
+    echo $this->Form->input('last_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));
 ?>
 </td>
 <td></td>
@@ -64,25 +64,25 @@
 <th valign="top">氏名（フリガナ）:</th>
 <td>
 <?php
-    echo $this->Form->input('first_name_kana', array('label' => false, 'class' => 'inp-form'));
+    echo $this->Form->input('first_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));
 ?>
 </td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">住所:</th>
-<td><?php echo $this->Form->textarea('address', array('class' => 'form-textarea-address')); ?></td>
+<td><?php echo $this->Form->textarea('address', array('div' => false, 'class' => 'form-textarea-address')); ?></td>
 <td>
 </td>
 </tr>
 <tr>
 <th valign="top">電話番号:</th>
-<td><?php echo $this->Form->input('mobile_number', array('label' => false, 'class' => 'inp-form')); ?></td>
+<td><?php echo $this->Form->input('mobile_number', array('label' => false, 'div' => false, 'class' => 'inp-form')); ?></td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">メールアドレス:</th>
-<td><?php echo $this->Form->input('email', array('label' => false, 'class' => 'inp-form')); ?></td>
+<td><?php echo $this->Form->input('email', array('label' => false, 'div' => false, 'class' => 'inp-form')); ?></td>
 <td></td>
 </tr> 
 <tr>
@@ -115,17 +115,17 @@
 <table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 <tr>
 <th valign="top">注文日:</th>
-<td><?php echo $this->Form->input('purchase_date', array('label' => false, 'class' => 'inp-form', 'type' => 'text', 'value' => isset($this->data[$model_name]['purchase_date']) ? date('Y.m.d', strtotime($this->data[$model_name]['purchase_date'])) : '', 'readonly' => true)); ?></td>
+<td><?php echo $this->Form->input('purchase_date', array('label' => false, 'div' => false, 'class' => 'inp-form', 'type' => 'text', 'value' => isset($this->data[$model_name]['purchase_date']) ? date('Y.m.d', strtotime($this->data[$model_name]['purchase_date'])) : '', 'readonly' => true)); ?></td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">生地:</th>
-<td><?php echo $this->Form->input('OrderDetail.Fabric.name', array('label' => false, 'class' => 'inp-form')); ?></td>
+<td><?php echo $this->Form->input('OrderDetail.Fabric.name', array('label' => false, 'div' => false, 'class' => 'inp-form')); ?></td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">生地ブランド:</th>
-<td><?php echo $this->Form->input('brand', array('label' => false, 'class' => 'inp-form', 'value' => join(array($this->data['OrderDetail']['Fabric']['BigBrand']['name'], $this->data['OrderDetail']['Fabric']['SmallBrand']['name']), ' '))); ?></td>
+<td><?php echo $this->Form->input('brand', array('label' => false, 'div' => false, 'class' => 'inp-form', 'value' => join(array($this->data['OrderDetail']['Fabric']['BigBrand']['name'], $this->data['OrderDetail']['Fabric']['SmallBrand']['name']), ' '))); ?></td>
 <td></td>
 </tr>
 <tr>
@@ -137,69 +137,69 @@
 </tr>
 <tr>
 <th valign="top">値段:</th>
-<td><?php echo $this->Form->input('OrderDetail.Fabric.price', array('label' => false, 'class' => 'inp-form')); ?></td>
+<td><?php echo $this->Form->input('OrderDetail.Fabric.price', array('label' => false, 'div' => false, 'class' => 'inp-form')); ?></td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">スタイル:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.style_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList1, 'class' => 'styledselect_form_1') );?>
+<?php echo $this->Form->input('OrderDetail.style_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList1, 'class' => 'styledselect_form_1') );?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">裏地:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.fabric_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList3, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.fabric_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList3, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">襟デザイン:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.collar_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList4, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.collar_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList4, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ポケット:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.pocket_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList5, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.pocket_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList5, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">裾:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.hem_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList6, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.hem_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList6, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ボタン:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.button_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList7, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.button_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList7, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">ネクタイ:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.ty_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList8, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.ty_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList8, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">シャツ:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.shirt_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList9, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.shirt_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList9, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
 <tr>
 <th valign="top">裏仕様:</th>
 <td>
-<?php echo $this->Form->input('OrderDetail.lining_id', array ('label' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList10, 'class' => 'styledselect_form_1') ); ?>
+<?php echo $this->Form->input('OrderDetail.lining_id', array ('label' => false, 'div' => false, 'type' => 'select', 'empty' => '------', 'options' => $parentList10, 'class' => 'styledselect_form_1') ); ?>
 </td>
 <td></td>
 </tr> 
@@ -252,7 +252,7 @@ for($i = 0; $i < sizeof ( $survey ['Question'] ); $i ++) {
 <th>&nbsp;</th>
 <td valign="top">
 <?php echo $this->Form->submit('', array('class' => 'form-update'))?>
-<a href="javascript:void(0)" onclick="doPrint();"><input type="button" value="" class="btn-print" /></a>
+<a href="javascript:void(0)" onclick="print();"><input type="button" value="" class="btn-print" /></a>
 </td>
 <td></td>
 </tr>
@@ -273,6 +273,14 @@ for($i = 0; $i < sizeof ( $survey ['Question'] ); $i ++) {
 <td></td>
 </tr>
 </table>
+
+<div id="sign">
+<dl>
+<dt>納品予定日</dt><dd></dd>	
+<dt>サイン</dt><dd></dd>
+</dl>
+</div>
+
 <div class="clear"></div>
 
 
@@ -287,16 +295,6 @@ for($i = 0; $i < sizeof ( $survey ['Question'] ); $i ++) {
 <th class="sized bottomright"></th>
 </tr>
 </table>
-
-
-
-
-
-
-
-
-
-
 
 
 

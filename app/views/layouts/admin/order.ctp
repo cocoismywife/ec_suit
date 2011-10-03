@@ -14,7 +14,10 @@
 <?php echo $this->Html->css('print', null, array('media' => 'print')) ?>
 </head>
 
-<body class="<?php echo $body_class?>">
+<body class="<?php
+if (isset($body_class)) 
+echo $body_class;
+?>">
 <div id="layout">
 
 <?php echo $content_for_layout; ?>

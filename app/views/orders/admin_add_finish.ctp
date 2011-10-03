@@ -3,7 +3,7 @@
 setTimeout(jumpToFlashClient,"5000");//三秒后执行
 //func函数定义
 function jumpToFlashClient() {
-	 location.href = '/ec_suits_client/suitsFlash.swf'; 
+	 location.href = '/ec_suits_client/index.html'; 
 }
 //-->
 </script>

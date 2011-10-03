@@ -4,14 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>仕立館</title>
 <?php echo $this->Html->css('screen', null, array('media' => 'screen, print', 'title' => 'default')) ?>
-<?php echo $this->Html->css('print', null, array('media' => 'print', 'title' => 'default')) ?>
+<?php echo $this->Html->css('print', null, array('media' => 'print')) ?>
 <!--[if IE]>
 <?php echo $this->Html->css('pro_dropline_ie', null, array('media' => 'screen')) ?>
-<?php echo $this->Html->css('pro_dropline_ie', null, array('media' => 'print')) ?>
 <![endif]-->
 
 <!--  jquery core -->
-<?php echo $this->Javascript->link(array('jquery/jquery-1.4.2.min'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery-1.4.1.min'), true) ?>
 
 <!--  checkbox styling script -->
 <?php echo $this->Javascript->link(array('jquery/ui.core', 'jquery/ui.checkbox', 'jquery/jquery.bind'), true) ?>
@@ -166,17 +165,6 @@ $('#d').trigger('change');
 $(document).ready(function(){
 $(document).pngFix( );
 });
-</script>
-<script type="text/javascript">
-function doPrint() {    
-    bdhtml=window.document.body.innerHTML;    
-    sprnstr="<!-- start content-outer -->";    
-    eprnstr="<!-- end footer -->";    
-    prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+sprnstr.length);    
-    prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));    
-    window.document.body.innerHTML=prnhtml;    
-    window.print();    
-}    
 </script>
 </head>
 <body> 

@@ -9,6 +9,10 @@ class OrdersController extends AppController {
         'DISTINCT id', 'first_name', 'last_name', 'email', 'purchase_date'), 'limit' => 10, 'page' => 1, 'order' => array(
         'id' => 'desc'));
     
+    function beforeFilter() {
+        $this->Auth->allow('admin_add', 'admin_add_confirm', 'admin_add_survey', 'admin_add_finish');
+    }
+    
     function admin_all() {
         $this->log($this->modelClass);
         $this->_all();
@@ -345,12 +349,12 @@ class OrdersController extends AppController {
             $currentModel->Answer->saveAll($this->data['Answer']);
             $this->Session->setFlash('Your post has been saved.');
         } else {
-                      $order = $currentModel->read();
-                      $allAnswers = $order['Answer'];
-//            $allAnswers = ClassRegistry::init('Answer')->find('all', 
-//                    array(
-//                        'conditions' => array(
-//                        'Answer.order_id' => $id), 'order' => 'Answer.id'));
+            $order = $currentModel->read();
+            $allAnswers = $order['Answer'];
+            //            $allAnswers = ClassRegistry::init('Answer')->find('all', 
+            //                    array(
+            //                        'conditions' => array(
+            //                        'Answer.order_id' => $id), 'order' => 'Answer.id'));
             $this->log($allAnswers);
         }
         

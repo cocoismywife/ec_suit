@@ -2,15 +2,21 @@
 class UsersController extends AppController {
     var $helpers = array(
         'Html', 'Javascript');
-    var $components = array(
-        'Session', 'Auth');
-    
-    function beforeFilter() {
-        $this->Auth->autoRedirect = false;
-    }
     
     function index() {
 
+    }
+    
+    function admin_login() {
+        if (isset($this->data)) {
+            if ($this->Auth->login($this->data)) {
+                $this->redirect('/admin/fabrics/all');
+            } else {
+                $this->redirect('/users/login');
+            }
+        } else {
+            $this->redirect('/users/login');
+        }
     }
     
     function login() {
