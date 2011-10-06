@@ -204,6 +204,7 @@
 </tr>
 </table>
 
+<div id="questionnaire">
 <h2 class="mhOrder">アンケート</h2>
 <table border="0" width="100%" cellpadding="0" cellspacing="0">
 <tr valign="top">
@@ -253,6 +254,7 @@ for($i = 0; $i < sizeof ( $survey ['Question'] ); $i ++) {
 <td></td>
 </tr>
 </table>
+</div>
 
 <div id="sign">
 <dl>

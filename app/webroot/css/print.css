@@ -1,16 +1,26 @@
 @charset "utf-8";
 /* CSS Document */
 
-div#page-top-outer {
+body {
+	background:#000;
+}
+
+h1,
+div#page-top-outer,
+div#questionnaire,
+div.nav-outer-repeat,
+input.btn-print,
+#content-table th.sized	img,
+div#footer {
 	display: none;
 }
 
-div.nav-outer-repeat {
-	display: none;
+table#id-form th {
+	padding-bottom: 7px!important;
 }
 
-input.btn-print {
-	display: none;
+div#content {
+	padding: 0;
 }
 
 div#sign {
@@ -34,13 +44,14 @@ div#sign dt {
 
 div#sign dd {
 	border-bottom: 1px solid #ccc;
-	height: 2em;
+	height: 3em;
 }
 
-#content-table th.sized	img {
-	display: none;
+.inp-form {
+	height: auto;
 }
 
-div#footer {
-	display: none;
+h2.mhOrder {
+	color: #000;
 }
+
