@@ -220,6 +220,7 @@ class OrdersController extends AppController {
             $this->data[$this->modelClass]['purchase_date'] = $order[$this->modelClass]['purchase_date'];
             $this->data['OrderDetail']['Fabric'] = $order['OrderDetail']['Fabric'];
             $this->init_option();
+            $this->set('validate_fail', 'fail');
             $this->render('admin_add');
             return;
         }

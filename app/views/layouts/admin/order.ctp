@@ -10,8 +10,11 @@
 <meta name="format-detection" content="telephone=no" />
 <title>仕立館オーダーメイドスーツAPP</title>
 <script src="http://ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/ajaxzip3.js" charset="UTF-8"></script>
+<?php echo $this->Javascript->link(array('jquery/jquery-1.6.2.min'), true) ?>
+<?php echo $this->Javascript->link(array('jquery/jquery-ui-1.8.16.custom.dialog.min'), true) ?>
 <?php echo $this->Html->css('import', null, array('media' => 'screen, print')) ?>
 <?php echo $this->Html->css('print', null, array('media' => 'print')) ?>
+<?php echo $this->Html->css('themes/ui-darkness/jquery-ui-1.8.16.custom', null, array('media' => 'screen')) ?>
 </head>
 
 <body class="<?php

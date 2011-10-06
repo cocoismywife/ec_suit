@@ -1,4 +1,25 @@
 <div id="pageBody">
+<?php 
+    if (isset($validate_fail)) {
+?>
+<script>
+	$(function() {
+		// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+		$( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+		$( "#dialog-message" ).dialog({
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	});
+	</script>
+<?php 
+    }
+?>
 <div id="content">
 <dl class="qaSet">
 <dt><?php echo $this->Html->image('/images/order/img_check1.gif', array('alt'=> __('購入日', true))) ?></dt>
@@ -74,10 +95,13 @@
 <dt><?php echo $this->Html->image('/images/order/img_q5.gif', array('alt'=> __('メールアドレス', true))) ?></dt>
 <dd><?php echo $this->Form->input ( 'email', array ('label' => false, 'size' => 40 ) );?></dd>
 <!-- / class qaSet --></dl>
-<?php echo $this->Form->error('first_name', '「氏名が入力されていません。」', array('class' => 'error-message'));?>
 <p class="alignCenter"><a href="javascript:document.forms[0].submit();"><?php echo $this->Html->image('/images/order/btn_next.gif', array('alt'=> __('次へ', true)));?></a></p>
 
 <?php echo $this->Form->end()?>
+
+<div id="dialog-message" title="注意" style="display:none">
+	氏名が入力されていません。
+</div>
 <!-- / id content --></div>
 <!-- / id pageBody --></div>
 
