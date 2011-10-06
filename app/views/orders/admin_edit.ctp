@@ -35,22 +35,12 @@
 <table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 <tr>
 <th valign="top">氏名:</th>
-<td><?php echo $this->Form->input('last_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
-<td></td>
-</tr>
-<tr>
-<th valign="top"></th>
-<td><?php echo $this->Form->input('first_name', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
+<td><?php echo $this->Form->input('last_name', array('label' => false, 'div' => false, 'class' => 'half-inp-form'));?> - <?php echo $this->Form->input('first_name', array('label' => false, 'div' => false, 'class' => 'half-inp-form'));?></td>
 <td></td>
 </tr>
 <tr>
 <th valign="top">氏名（フリガナ）:</th>
-<td><?php echo $this->Form->input('last_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
-<td></td>
-</tr>
-<tr>
-<th valign="top">氏名（フリガナ）:</th>
-<td><?php echo $this->Form->input('first_name_kana', array('label' => false, 'div' => false, 'class' => 'inp-form'));?></td>
+<td><?php echo $this->Form->input('last_name_kana', array('label' => false, 'div' => false, 'class' => 'half-inp-form'));?> - <?php echo $this->Form->input('first_name_kana', array('label' => false, 'div' => false, 'class' => 'half-inp-form'));?></td>
 <td></td>
 </tr>
 <tr>
@@ -91,7 +81,7 @@
 </td>
 </tr>
 <tr>
-<td><img src="images/shared/blank.gif" width="695" height="1" alt="blank" /></td>
+<td><?php echo $this->Html->image('/images/shared/blank.gif', array('width' => 695, 'height' => 1, 'alt' => 'blank'))?></td>
 <td></td>
 </tr>
 </table>
@@ -209,7 +199,7 @@
 </td>
 </tr>
 <tr>
-<td><img src="images/shared/blank.gif" width="695" height="1" alt="blank" /></td>
+<td><?php echo $this->Html->image('/images/shared/blank.gif', array('width' => 695, 'height' => 1, 'alt' => 'blank'))?></td>
 <td></td>
 </tr>
 </table>
@@ -259,7 +249,7 @@ for($i = 0; $i < sizeof ( $survey ['Question'] ); $i ++) {
 </td>
 </tr>
 <tr>
-<td><img src="images/shared/blank.gif" width="695" height="1" alt="blank" /></td>
+<td><?php echo $this->Html->image('/images/shared/blank.gif', array('width' => 695, 'height' => 1, 'alt' => 'blank'))?></td>
 <td></td>
 </tr>
 </table>

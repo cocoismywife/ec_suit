@@ -40,10 +40,27 @@ class AppController extends Controller {
         'Session', 'Auth');
     
     function beforeFilter() {
+        if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
+            $this->Auth->autoRedirect = true;
+        } else {
+            $this->Auth->autoRedirect = false;
+        }
         $this->Auth->allow('all', 'query', 'view', 'index');
         $users = $this->Session->read('Auth.User');
         $this->log('User Logging.');
         $this->log($users);
+    }
+    
+    function admin_login() {
+        if (isset($this->data)) {
+            if ($this->Auth->login($this->data)) {
+                $this->redirect('/admin/fabrics/all');
+            } else {
+                $this->redirect('/users/login');
+            }
+        } else {
+            $this->redirect('/users/login');
+        }
     }
     
     function login() {
@@ -51,8 +68,6 @@ class AppController extends Controller {
             if ($this->Auth->login($this->data)) {
                 $this->redirect('/admin/fabrics/all');
             }
-        } else {
-            //$this->redirect('/users/login');
         }
     }
     

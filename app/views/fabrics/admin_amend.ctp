@@ -134,7 +134,7 @@
 </td>
 </tr>
 <tr>
-<td><img src="images/shared/blank.gif" width="695" height="1" alt="blank" /></td>
+<td><?php echo $this->Html->image('/images/shared/blank.gif', array('width' => 695, 'height' => 1, 'alt' => 'blank'))?></td>
 <td></td>
 </tr>
 </table>
