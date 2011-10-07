@@ -25,7 +25,7 @@ $(document).pngFix( );
 
 	<!-- start logo -->
 	<div id="logo-login">
-		<a href="index.html"><?php echo $this->Html->image('/images/shared/logo.png', array('alt'=> '')); ?></a>
+		<?php echo $this->Html->image('/images/shared/logo.png', array('alt'=> '')); ?>
 	</div>
 	<!-- end logo -->
 	
